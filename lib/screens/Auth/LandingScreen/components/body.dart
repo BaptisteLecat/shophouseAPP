@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'background.dart';
+import '../../../../common/widgets/buttons/cta_button.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -45,10 +46,55 @@ class Body extends StatelessWidget {
               fontFamily: 'Poppins',
               color: const Color(0x993D5382),
               fontSize: 18,
-              fontWeight: FontWeight.normal,
+              fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,
           ),
+        ],
+      ),
+    );
+  }
+
+  Container _buildAuthButtons(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CTAButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/test',
+                  arguments: "Voila un contenu envoyer par la HomePage.");
+            },
+            content: Text(
+              "Connexion",
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: const Color(0xffFFFFFF),
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            height: 6,
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/test',
+                  arguments: "Voila un contenu envoyer par la HomePage.");
+            },
+            child: Text(
+              "Enregistrement",
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: const Color(0xff3D5382),
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          )
         ],
       ),
     );
@@ -68,13 +114,7 @@ class Body extends StatelessWidget {
               _buildTitleText(
                   "SHOP", "HOUSE", Color(0xffFDAB53), Color(0xff3D5382)),
               _buildInfoText(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/test',
-                      arguments: "Voila un contenu envoyer par la HomePage.");
-                },
-                child: const Text('Enabled'),
-              ),
+              _buildAuthButtons(context),
             ],
           ),
         ),
