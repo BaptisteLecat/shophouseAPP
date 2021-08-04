@@ -109,6 +109,11 @@ flutter:
         - asset: assets/fonts/Poppins-BlackItalic.ttf
           style: italic
           weight: 900
+    - family: LilitaOne
+      fonts:
+        - asset: assets/fonts/LilitaOne-Regular.ttf
+          weight: 400
+          
           
   #   - family: Trajan Pro
   #     fonts:
