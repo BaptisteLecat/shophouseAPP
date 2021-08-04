@@ -20,18 +20,27 @@ class Background extends StatelessWidget {
           Positioned(
             top: 0,
             right: 0,
-            child: SvgPicture.asset(
-              "assets/images/background/landing_top.svg",
-              height: size.height * 0.6,
-              width: size.width * 0.8,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: size.height * 0.6),
+              child: SvgPicture.asset(
+                "assets/images/background/landing_top.svg",
+                width: size.width * 0.5,
+                fit: BoxFit.fill,
+                clipBehavior: Clip.hardEdge,
+              ),
             ),
           ),
           Positioned(
             bottom: 0,
             right: 0,
-            child: SvgPicture.asset(
-              "assets/images/background/landing_bottom.svg",
-              width: size.width,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: size.height * 0.5),
+              child: SvgPicture.asset(
+                "assets/images/background/landing_bottom.svg",
+                width: size.width * 1,
+                fit: BoxFit.fill,
+                clipBehavior: Clip.hardEdge,
+              ),
             ),
           ),
           child,
