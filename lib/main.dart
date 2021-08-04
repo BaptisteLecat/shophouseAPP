@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shophouse/screens/home/HomePage.dart';
-import 'package:shophouse/screens/test/TestPage.dart';
+import 'package:shophouse/screens/Auth/LandingScreen/landing_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,10 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        initialRoute: '/',
+        initialRoute: '/auth',
         onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          fontFamily: 'Poppins',
           primarySwatch: Colors.red,
         ));
   }
@@ -26,15 +27,12 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (context) => HomePage());
-      case '/test':
+      case '/auth':
         var arguments = settings.arguments;
         if (arguments != null) {
-          return MaterialPageRoute(
-              builder: (context) => TestPage(
-                    content: arguments as String,
-                  ));
+          return MaterialPageRoute(builder: (context) => LandingScreen());
         } else {
-          return pageNotFound();
+          return MaterialPageRoute(builder: (context) => LandingScreen());
         }
       default:
         return pageNotFound();
