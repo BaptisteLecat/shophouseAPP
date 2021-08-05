@@ -15,10 +15,13 @@ class Body extends StatelessWidget {
         children: [
           Flexible(flex: 2, child: _headerBuilder()),
           Flexible(
-              flex: 4,
-              child: Container(
-                color: Colors.blueAccent,
-              )),
+            flex: 4,
+            child: Flex(
+              children: [Expanded(child: LoginForm())],
+              direction: Axis.vertical,
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
+          ),
           Flexible(flex: 2, child: _footerBuilder()),
           //LoginForm()
         ],
