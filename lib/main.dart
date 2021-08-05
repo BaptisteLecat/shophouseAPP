@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/screens/Auth/Login/login_screen.dart';
 
 import 'package:shophouse/screens/home/HomePage.dart';
 import 'package:shophouse/screens/Auth/LandingScreen/landing_screen.dart';
@@ -27,6 +28,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (context) => HomePage());
+      case '/login':
+        return MaterialPageRoute(builder: (context) => LoginScreen());
       case '/auth':
         var arguments = settings.arguments;
         if (arguments != null) {
