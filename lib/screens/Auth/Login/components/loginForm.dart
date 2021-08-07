@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/widgets/inputs/input_password.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  const LoginForm(
+      {Key? key,
+      required this.formKey,
+      required this.emailController,
+      required this.passwordController})
+      : super(key: key);
 
   @override
   _LoginFormState createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    widget.emailController.dispose();
+    widget.passwordController.dispose();
     super.dispose();
   }
 
@@ -49,11 +54,11 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: ListView(
         children: [
           TextFormField(
-            controller: emailController,
+            controller: widget.emailController,
             autofocus: true,
             cursorColor: const Color(0xff3D5382),
             style: TextStyle(
@@ -66,17 +71,8 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(
             height: 10,
           ),
-          TextFormField(
-            controller: passwordController,
-            obscureText: true,
-            cursorColor: const Color(0xff3D5382),
-            style: TextStyle(
-              color: const Color(0x993D5382),
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
-            ),
-            decoration: _inputDecorationBuilder(hintText: 'Mot de Passe'),
-          ),
+          InputPassword(
+              controller: widget.passwordController, hintText: "Mot de Passe")
         ],
       ),
     );

@@ -1,32 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/widgets/loading.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
+import 'package:shophouse/services/authentication.dart';
 import 'loginForm.dart';
 
-class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+class Body extends StatefulWidget {
+  final AuthenticationService _auth = AuthenticationService();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool loading = false;
+  String error = "";
+  Body({Key? key}) : super(key: key);
 
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      height: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 25),
-      child: Column(
-        children: [
-          Flexible(flex: 2, child: _headerBuilder()),
-          Flexible(
-            flex: 4,
-            child: Flex(
-              children: [Expanded(child: LoginForm())],
-              direction: Axis.vertical,
-              mainAxisAlignment: MainAxisAlignment.center,
+    return widget.loading
+        ? Loading()
+        : Container(
+            height: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: [
+                Flexible(flex: 2, child: _headerBuilder()),
+                Flexible(
+                  flex: 4,
+                  child: Flex(
+                    children: [
+                      Expanded(
+                        child: LoginForm(
+                            formKey: widget.formKey,
+                            emailController: widget.emailController,
+                            passwordController: widget.passwordController),
+                      )
+                    ],
+                    direction: Axis.vertical,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                ),
+                Flexible(flex: 2, child: _footerBuilder()),
+              ],
             ),
-          ),
-          Flexible(flex: 2, child: _footerBuilder()),
-          //LoginForm()
-        ],
-      ),
-    );
+          );
   }
 
   Container _headerBuilder() {
@@ -65,7 +86,22 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           CTAButton(
-              onPressed: () {},
+              onPressed: () async {
+                if (widget.formKey.currentState?.validate() == true) {
+                  //setState(() => this.loading = true);
+                  var password = widget.passwordController.value.text;
+                  var email = widget.emailController.value.text;
+
+                  dynamic result = await widget._auth
+                      .signInWithEmailAndPassword(email, password);
+                  if (result == null) {
+                    setState(() {
+                      widget.loading = false;
+                      widget.error = 'Merci de renseigner une email valide.';
+                    });
+                  }
+                }
+              },
               content: Text(
                 "Connexion",
                 style: TextStyle(color: Colors.white, fontSize: 22),
