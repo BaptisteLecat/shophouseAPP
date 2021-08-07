@@ -1,10 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shophouse/screens/Auth/Login/login_screen.dart';
+import 'package:flutter/foundation.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:shophouse/services/authentication.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shophouse/screens/home/HomePage.dart';
 import 'package:shophouse/screens/Auth/LandingScreen/landing_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  if (!kIsWeb) {
+    await FirebaseCrashlytics.instance
+        .setCrashlyticsCollectionEnabled(kDebugMode ? false : true);
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  }
   runApp(MyApp());
 }
 
