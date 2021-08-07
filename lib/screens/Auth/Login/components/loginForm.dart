@@ -69,6 +69,7 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             controller: passwordController,
             obscureText: true,
+            cursorColor: const Color(0xff3D5382),
             style: TextStyle(
               color: const Color(0x993D5382),
               fontSize: 18,

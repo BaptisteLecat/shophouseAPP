@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "80144749575",
+    "project_id": "shophouse-210f9",
+    "storage_bucket": "shophouse-210f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80144749575:android:c91a4720b1e8713ff346a2",
+        "android_client_info": {
+          "package_name": "com.blecat.shophouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80144749575-q1ko6pd5hn4jg4nu6chk0cq56asdmu0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANcl3qxjMb1EVnnsWhJkk8xeOFbSuUtlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80144749575-q1ko6pd5hn4jg4nu6chk0cq56asdmu0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
