@@ -67,7 +67,7 @@ class _BodyState extends State<Body> {
           ),
           SizedBox(height: 6),
           Text(
-            "Ravi de vous retrouver. Connecter vous pour reprendre vos courses.",
+            "Ravi de vous retrouver. Connectez-vous pour reprendre vos courses.",
             textAlign: TextAlign.start,
             style: TextStyle(
                 color: const Color(0x993D5382),
