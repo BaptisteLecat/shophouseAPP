@@ -72,7 +72,7 @@ class _LoginFormState extends State<LoginForm> {
             height: 10,
           ),
           InputPassword(
-              controller: widget.passwordController, hintText: "Mot de Passe")
+              controller: widget.passwordController, hintText: "Mot de Passe"),
         ],
       ),
     );
