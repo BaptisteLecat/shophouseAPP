@@ -55,6 +55,8 @@ flutter:
     - assets/images/background/landing_bottom.svg
     - assets/images/background/landing_top.svg
 
+    - assets/icons/hide.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
