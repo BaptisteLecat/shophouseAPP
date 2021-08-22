@@ -3,6 +3,9 @@ import 'package:shophouse/common/widgets/loading.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 import '../../../../services/authentication.dart';
 import 'loginForm.dart';
+import 'package:shophouse/common/const/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shophouse/common/error/AuthException.dart';
 
 class Body extends StatefulWidget {
   final AuthenticationService _auth = AuthenticationService();
@@ -38,6 +41,9 @@ class _BodyState extends State<Body> {
                             formKey: widget.formKey,
                             emailController: widget.emailController,
                             passwordController: widget.passwordController),
+                      ),
+                      Center(
+                        child: _errorMessage(widget.error),
                       )
                     ],
                     direction: Axis.vertical,
@@ -94,10 +100,16 @@ class _BodyState extends State<Body> {
 
                   dynamic result = await widget._auth
                       .signInWithEmailAndPassword(email, password);
-                  if (result == null) {
+                  if (!(result is User)) {
                     setState(() {
                       widget.loading = false;
-                      widget.error = 'Merci de renseigner une email valide.';
+                      widget.error =
+                          AuthException.generateExceptionMessage(result);
+                    });
+                  } else {
+                    setState(() {
+                      widget.loading = false;
+                      widget.error = '';
                     });
                   }
                 }
@@ -118,6 +130,17 @@ class _BodyState extends State<Body> {
               ))
         ],
       ),
+    );
+  }
+
+  Text _errorMessage(String errorMessage) {
+    return Text(
+      errorMessage,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: errorMessageColor,
+          fontSize: 16,
+          fontWeight: FontWeight.normal),
     );
   }
 }
