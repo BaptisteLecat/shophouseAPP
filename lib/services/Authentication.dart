@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shophouse/common/error/AuthException.dart';
 
 class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -9,9 +10,9 @@ class AuthenticationService {
           email: email, password: password);
       User? user = result.user;
       return user;
-    } catch (exception) {
-      print(exception.toString());
-      return null;
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      return AuthException.handleException(e);
     }
   }
 
