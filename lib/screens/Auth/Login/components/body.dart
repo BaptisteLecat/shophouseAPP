@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/widgets/loading.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
-import 'package:shophouse/services/authentication.dart';
+import '../../../../services/authentication.dart';
 import 'loginForm.dart';
 
 class Body extends StatefulWidget {
