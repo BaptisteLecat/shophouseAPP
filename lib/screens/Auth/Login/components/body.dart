@@ -94,7 +94,6 @@ class _BodyState extends State<Body> {
           CTAButton(
               onPressed: () async {
                 if (widget.formKey.currentState?.validate() == true) {
-                  //setState(() => this.loading = true);
                   var password = widget.passwordController.value.text;
                   var email = widget.emailController.value.text;
 
@@ -108,7 +107,7 @@ class _BodyState extends State<Body> {
                     });
                   } else {
                     setState(() {
-                      widget.loading = false;
+                      widget.loading = true;
                       widget.error = '';
                     });
                   }
