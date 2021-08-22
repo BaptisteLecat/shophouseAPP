@@ -49,29 +49,29 @@ class AuthException {
     String errorMessage;
     switch (exceptionCode) {
       case AuthResultStatus.invalidEmail:
-        errorMessage = "Your email address appears to be malformed.";
+        errorMessage = "Le format de l'adresse mail semble incorrect.";
         break;
       case AuthResultStatus.wrongPassword:
-        errorMessage = "Your password is wrong.";
+        errorMessage = "Identifiant ou mot de passe incorrect.";
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = "User with this email doesn't exist.";
+        errorMessage = "Aucun utilisateur correspondant à cet email.";
         break;
       case AuthResultStatus.userDisabled:
-        errorMessage = "User with this email has been disabled.";
+        errorMessage = "L'utilisateur de cet email a été désactivé.";
         break;
       case AuthResultStatus.tooManyRequests:
-        errorMessage = "Too many requests. Try again later.";
+        errorMessage = "Trop de requêtes. Réessayez plus tard.";
         break;
       case AuthResultStatus.operationNotAllowed:
-        errorMessage = "Signing in with Email and Password is not enabled.";
+        errorMessage = "Cette méthode d'authentification n'est pas autorisée.";
         break;
       case AuthResultStatus.emailAlreadyExists:
         errorMessage =
-            "The email has already been registered. Please login or reset your password.";
+            "Cet email est déjà utilisé. Veuillez vous connecter ou réinitialiser votre mot de passe.";
         break;
       default:
-        errorMessage = "Informations incomplètes.";
+        errorMessage = "Certaines informations sont incomplètes.";
     }
 
     return errorMessage;
