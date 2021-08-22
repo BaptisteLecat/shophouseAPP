@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/widgets/buttons/hidePassword_button.dart';
 import 'package:shophouse/common/widgets/inputs/input_password.dart';
 
 class LoginForm extends StatefulWidget {
@@ -57,22 +58,54 @@ class _LoginFormState extends State<LoginForm> {
       key: widget.formKey,
       child: ListView(
         children: [
-          TextFormField(
-            controller: widget.emailController,
-            autofocus: true,
-            cursorColor: const Color(0xff3D5382),
-            style: TextStyle(
-              color: const Color(0xff3D5382),
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
+          Container(
+            height: 60,
+            child: TextFormField(
+              controller: widget.emailController,
+              autofocus: true,
+              cursorColor: const Color(0xff3D5382),
+              style: TextStyle(
+                color: const Color(0xff3D5382),
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
+              decoration: _inputDecorationBuilder(hintText: 'Email'),
             ),
-            decoration: _inputDecorationBuilder(hintText: 'Email'),
           ),
           SizedBox(
             height: 10,
           ),
-          InputPassword(
-              controller: widget.passwordController, hintText: "Mot de Passe"),
+          LayoutBuilder(
+            builder:
+                (BuildContext context, BoxConstraints viewportConstraints) {
+              return ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: viewportConstraints.maxWidth,
+                ),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                        flex: 5,
+                        child: Container(
+                          height: 60,
+                          child: InputPassword(
+                              controller: widget.passwordController,
+                              hintText: "Mot de Passe"),
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: HidePasswordButton(),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
