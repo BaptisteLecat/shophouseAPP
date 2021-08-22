@@ -4,6 +4,7 @@ import 'package:shophouse/screens/Auth/Login/login_screen.dart';
 import 'package:flutter/foundation.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:shophouse/services/authentication.dart';
+import 'package:shophouse/common/const/colors.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shophouse/screens/home/HomePage.dart';
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor: primaryColor, selectionColor: primaryColor),
           fontFamily: 'Poppins',
           primarySwatch: Colors.red,
         ));
