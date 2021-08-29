@@ -75,11 +75,8 @@ class _BodyState extends State<Body> {
           Text(
             "Ravi de vous retrouver. Connectez-vous pour reprendre vos courses.",
             textAlign: TextAlign.start,
-            style: TextStyle(
-                color: const Color(0x993D5382),
-                fontSize: 18,
-                fontWeight: FontWeight.w400),
-          ),
+            style: Theme.of(context).textTheme.headline6,
+          )
         ],
       ),
     );
