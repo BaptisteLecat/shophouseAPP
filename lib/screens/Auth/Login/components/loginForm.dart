@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/widgets/buttons/hidePassword_button.dart';
 import 'package:shophouse/common/widgets/inputs/input_password.dart';
+import 'package:shophouse/screens/auth/Login/components/passwordHandler.dart';
 
 class LoginForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -75,37 +76,7 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(
             height: 10,
           ),
-          LayoutBuilder(
-            builder:
-                (BuildContext context, BoxConstraints viewportConstraints) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: viewportConstraints.maxWidth,
-                ),
-                child: Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                        flex: 5,
-                        child: Container(
-                          height: 60,
-                          child: InputPassword(
-                              controller: widget.passwordController,
-                              hintText: "Mot de Passe"),
-                        )),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: HidePasswordButton(),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
+          PasswordHandler(passwordController: widget.passwordController)
         ],
       ),
     );
