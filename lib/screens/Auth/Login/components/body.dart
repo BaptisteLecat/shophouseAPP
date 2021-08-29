@@ -3,7 +3,7 @@ import 'package:shophouse/common/widgets/loading.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 import '../../../../services/authentication.dart';
 import 'loginForm.dart';
-import 'package:shophouse/common/const/colors.dart';
+import 'package:shophouse/common/constant/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shophouse/common/error/AuthException.dart';
 
