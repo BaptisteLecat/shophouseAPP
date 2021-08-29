@@ -30,8 +30,12 @@ class _HidePasswordButtonState extends State<HidePasswordButton> {
                     borderRadius: BorderRadius.circular(8.0)))),
             onPressed: () {
               widget.callback(!this.hidePassword);
-              hidePassword = !this.hidePassword;
+              setState(() {
+                hidePassword = !this.hidePassword;
+              });
             },
-            child: Image.asset("assets/icons/hide.png")));
+            child: hidePassword
+                ? Image.asset("assets/icons/hide.png")
+                : Image.asset("assets/icons/show.png")));
   }
 }
