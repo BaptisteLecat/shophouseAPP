@@ -84,14 +84,15 @@ class _LoginFormState extends State<LoginForm> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Mot de passe oublié",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(color: secondaryColor),
-                  ))
+                onPressed: () {},
+                child: Text(
+                  "Mot de passe oublié",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6!
+                      .copyWith(color: secondaryColor),
+                ),
+              )
             ],
           )
         ],
