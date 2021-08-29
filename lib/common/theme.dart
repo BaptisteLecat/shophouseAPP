@@ -30,10 +30,10 @@ ThemeData basicTheme() {
         color: secondaryColor,
       ),
       headline6: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 18.0,
-        color: secondaryColor,
-      ),
+          fontFamily: 'Poppins',
+          fontSize: 18,
+          color: secondaryColorLessOpacity,
+          fontWeight: FontWeight.w400),
       bodyText1: TextStyle(
         fontFamily: 'Poppins',
         fontSize: 14.0,
@@ -43,6 +43,11 @@ ThemeData basicTheme() {
         fontFamily: 'Poppins',
         fontSize: 12.0,
         color: bodyTextColor,
+      ),
+      button: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 16.0,
+        color: primaryColor,
       ),
     );
   }
