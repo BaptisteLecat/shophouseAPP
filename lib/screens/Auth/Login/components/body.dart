@@ -66,10 +66,7 @@ class _BodyState extends State<Body> {
           Text(
             "Vous revoilà !",
             textAlign: TextAlign.start,
-            style: TextStyle(
-                color: const Color(0xff3D5382),
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline1,
           ),
           SizedBox(height: 6),
           Text(
