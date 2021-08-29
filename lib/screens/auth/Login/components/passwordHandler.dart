@@ -23,6 +23,7 @@ class _PasswordHandlerState extends State<PasswordHandler> {
         HidePasswordButton(callback: this._updatePasswordState);
   }
 
+  ///This function will be given to the child widget. It will update the value troughout the function.
   _updatePasswordState(bool hidePassword) {
     setState(() {
       this.hidePassword = hidePassword;
