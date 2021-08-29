@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shophouse/common/widgets/buttons/hidePassword_button.dart';
-import 'package:shophouse/common/widgets/inputs/input_password.dart';
+import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/auth/Login/components/passwordHandler.dart';
 
 class LoginForm extends StatefulWidget {
@@ -76,7 +75,25 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(
             height: 10,
           ),
-          PasswordHandler(passwordController: widget.passwordController)
+          PasswordHandler(passwordController: widget.passwordController),
+          SizedBox(
+            height: 10,
+          ),
+          Flex(
+            direction: Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Mot de passe oublié",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: secondaryColor),
+                  ))
+            ],
+          )
         ],
       ),
     );
