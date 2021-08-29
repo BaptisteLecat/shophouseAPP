@@ -4,8 +4,12 @@ import 'inputDecoration/defaultDecoration.dart';
 class InputPassword extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
-  const InputPassword(
-      {Key? key, required this.controller, required this.hintText})
+  bool hidePassword;
+  InputPassword(
+      {Key? key,
+      required this.controller,
+      required this.hintText,
+      required this.hidePassword})
       : super(key: key);
 
   @override
@@ -17,7 +21,7 @@ class _InputPasswordState extends State<InputPassword> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: true,
+      obscureText: widget.hidePassword,
       cursorColor: const Color(0xff3D5382),
       style: TextStyle(
         color: const Color(0x993D5382),
