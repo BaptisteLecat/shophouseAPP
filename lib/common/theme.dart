@@ -5,10 +5,10 @@ ThemeData basicTheme() {
   TextTheme _basicTextTheme(TextTheme base) {
     return base.copyWith(
       headline1: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 28.0,
-        color: secondaryColor,
-      ),
+          fontFamily: 'Poppins',
+          color: const Color(0xff3D5382),
+          fontSize: 24,
+          fontWeight: FontWeight.bold),
       headline2: TextStyle(
         fontFamily: 'Poppins',
         fontSize: 26.0,
@@ -57,6 +57,7 @@ ThemeData basicTheme() {
       textTheme: _basicTextTheme(base.textTheme),
       //textTheme: Typography().white,
       primaryColor: primaryColor,
+      appBarTheme: AppBarTheme(backgroundColor: primaryColor),
       textSelectionTheme: TextSelectionThemeData(
           cursorColor: primaryColor, selectionColor: primaryColor),
       //primaryColor: Color(0xff4829b2),
