@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/widgets/loading.dart';
+import 'package:shophouse/screens/auth/Register/components/registerForm.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 import '../../../../services/authentication.dart';
 //import 'loginForm.dart';
@@ -39,12 +40,14 @@ class _BodyState extends State<Body> {
                   flex: 4,
                   child: Flex(
                     children: [
-                      /*Expanded(
-                        child: LoginForm(
+                      Expanded(
+                        child: RegisterForm(
                             formKey: widget.formKey,
+                            nameController: widget.nameController,
+                            firstNameController: widget.firstNameController,
                             emailController: widget.emailController,
                             passwordController: widget.passwordController),
-                      ),*/
+                      ),
                       Center(
                         child: _errorMessage(widget.error),
                       )
