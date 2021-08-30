@@ -7,6 +7,7 @@ enum AuthResultStatus {
   userDisabled,
   operationNotAllowed,
   tooManyRequests,
+  emailNotVerified,
   unknown,
 }
 
@@ -35,6 +36,9 @@ class AuthException {
         break;
       case "email-already-in-use":
         status = AuthResultStatus.emailAlreadyExists;
+        break;
+      case "email-not-verified":
+        status = AuthResultStatus.emailNotVerified;
         break;
       default:
         status = AuthResultStatus.unknown;
@@ -69,6 +73,9 @@ class AuthException {
       case AuthResultStatus.emailAlreadyExists:
         errorMessage =
             "Cet email est déjà utilisé. Veuillez vous connecter ou réinitialiser votre mot de passe.";
+        break;
+      case AuthResultStatus.emailNotVerified:
+        errorMessage = "Merci de valider votre email avant de vous connecter.";
         break;
       default:
         errorMessage = "Certaines informations sont incomplètes.";

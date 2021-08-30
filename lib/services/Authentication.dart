@@ -9,6 +9,9 @@ class AuthenticationService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+      if (!user!.emailVerified) {
+        throw new FirebaseAuthException(code: "email-not-verified");
+      }
       return user;
     } on FirebaseAuthException catch (e) {
       print(e.code);
@@ -22,12 +25,15 @@ class AuthenticationService {
           email: email, password: password);
       User? user = result.user;
 
+      if (user != null) {
+        await user.sendEmailVerification();
+      }
       //TODO créer un nouveau user dans firestore
 
       return user;
-    } catch (exception) {
-      print(exception.toString());
-      return null;
+    } catch (e) {
+      print(e.toString());
+      return AuthException.handleException(e);
     }
   }
 
