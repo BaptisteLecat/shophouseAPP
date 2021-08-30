@@ -112,7 +112,9 @@ class _BodyState extends State<Body> {
                 style: TextStyle(color: Colors.white, fontSize: 22),
               )),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/register");
+              },
               child: Text(
                 "Vous n’avez pas encore de compte?",
                 textAlign: TextAlign.center,

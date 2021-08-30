@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shophouse/screens/Auth/Login/login_screen.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shophouse/screens/auth/Register/register_screen.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:shophouse/services/authentication.dart';
 import 'package:shophouse/common/constant/colors.dart';
@@ -37,6 +38,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => HomePage());
       case '/login':
         return MaterialPageRoute(builder: (context) => LoginScreen());
+      case '/register':
+        return MaterialPageRoute(builder: (context) => RegisterScreen());
       case '/auth':
         var arguments = settings.arguments;
         if (arguments != null) {
