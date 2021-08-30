@@ -62,8 +62,7 @@ class Body extends StatelessWidget {
         children: [
           CTAButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/login',
-                  arguments: "Voila un contenu envoyer par la HomePage.");
+              Navigator.pushNamed(context, '/login');
             },
             content: Text(
               "Connexion",
@@ -81,8 +80,7 @@ class Body extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/register',
-                  arguments: "Voila un contenu envoyer par la HomePage.");
+              Navigator.pushNamed(context, '/register');
             },
             child: Text(
               "Enregistrement",
