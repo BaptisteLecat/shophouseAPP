@@ -55,7 +55,7 @@ class AuthException {
         errorMessage = "Identifiant ou mot de passe incorrect.";
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = "Aucun utilisateur correspondant à cet email.";
+        errorMessage = "Identifiant ou mot de passe incorrect.";
         break;
       case AuthResultStatus.userDisabled:
         errorMessage = "L'utilisateur de cet email a été désactivé.";
