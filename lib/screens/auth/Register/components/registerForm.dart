@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/auth/Login/components/passwordHandler.dart';
+import 'package:shophouse/screens/auth/Register/components/CGU.dart';
 
 class RegisterForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -8,6 +9,7 @@ class RegisterForm extends StatefulWidget {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isAcceptedCGU = false;
   RegisterForm(
       {Key? key,
       required this.formKey,
@@ -27,6 +29,14 @@ class _RegisterFormState extends State<RegisterForm> {
     widget.emailController.dispose();
     widget.passwordController.dispose();
     super.dispose();
+  }
+
+  ///This function will be given to the child widget. It will update the value troughout the function.
+  _updateCGUState(bool isAcceptedCGU) {
+    setState(() {
+      widget.isAcceptedCGU = isAcceptedCGU;
+      print(widget.isAcceptedCGU);
+    });
   }
 
   @override
@@ -109,16 +119,9 @@ class _RegisterFormState extends State<RegisterForm> {
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Mot de passe oublié",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: secondaryColor),
-                ),
-              )
+              CGU(
+                  isAcceptedCGU: widget.isAcceptedCGU,
+                  callback: _updateCGUState)
             ],
           )
         ],
