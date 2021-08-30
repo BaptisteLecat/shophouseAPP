@@ -5,19 +5,22 @@ import '../../../../common/widgets/buttons/cta_button.dart';
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
-  RichText _buildTitleText(String firstText, String secondText,
-      Color firstColor, Color secondColor) {
-    return RichText(
-      text: TextSpan(
-        text: firstText,
-        style:
-            TextStyle(fontFamily: 'LilitaOne', fontSize: 54, color: firstColor),
-        children: <TextSpan>[
-          TextSpan(
-            text: secondText,
-            style: TextStyle(color: secondColor),
-          )
-        ],
+  Widget _buildTitleText(String firstText, String secondText, Color firstColor,
+      Color secondColor) {
+    return FittedBox(
+      fit: BoxFit.fitWidth ,
+      child: RichText(
+        text: TextSpan(
+          text: firstText,
+          style: TextStyle(
+              fontFamily: 'LilitaOne', fontSize: 54, color: firstColor),
+          children: <TextSpan>[
+            TextSpan(
+              text: secondText,
+              style: TextStyle(color: secondColor),
+            )
+          ],
+        ),
       ),
     );
   }

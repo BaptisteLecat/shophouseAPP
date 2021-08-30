@@ -31,9 +31,9 @@ class _BodyState extends State<Body> {
             margin: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
-                Flexible(flex: 2, child: _headerBuilder()),
+                Flexible(flex: 3, child: _headerBuilder()),
                 Flexible(
-                  flex: 4,
+                  flex: 5,
                   child: Flex(
                     children: [
                       Expanded(
@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
                 ),
-                Flexible(flex: 2, child: _footerBuilder()),
+                Flexible(flex: 3, child: _footerBuilder()),
               ],
             ),
           );
