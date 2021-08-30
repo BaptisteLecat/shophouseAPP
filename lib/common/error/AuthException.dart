@@ -61,7 +61,7 @@ class AuthException {
         errorMessage = "L'utilisateur de cet email a été désactivé.";
         break;
       case AuthResultStatus.tooManyRequests:
-        errorMessage = "Trop de requêtes. Réessayez plus tard.";
+        errorMessage = "Activité suspecte. Réessayez plus tard.";
         break;
       case AuthResultStatus.operationNotAllowed:
         errorMessage = "Cette méthode d'authentification n'est pas autorisée.";
