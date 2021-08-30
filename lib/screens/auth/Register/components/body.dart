@@ -124,7 +124,9 @@ class _BodyState extends State<Body> {
                 style: TextStyle(color: Colors.white, fontSize: 22),
               )),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/login");
+              },
               child: Text(
                 "Vous avez déjà un compte?",
                 textAlign: TextAlign.center,
