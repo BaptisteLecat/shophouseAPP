@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/constant/colors.dart';
 
 class CGU extends StatefulWidget {
   bool isAcceptedCGU;
@@ -31,13 +32,26 @@ class _CGUState extends State<CGU> {
                   })
             ],
           ),
-          /*RichText(
-              text: TextSpan(style: TextStyle(fontSize: 12), children: [
-            TextSpan(text: "J'accepte les "),
-            TextSpan(text: "Conditions d'Utilisations "),
-            TextSpan(text: "et la "),
-            TextSpan(text: "Politique de Confidentialité."),
-          ]))*/
+          Expanded(
+              child: RichText(
+                  text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: [
+                TextSpan(text: "J'accepte les "),
+                TextSpan(
+                    text: "Conditions d'Utilisations ",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(color: primaryColor, decoration: TextDecoration.underline)),
+                TextSpan(text: "et la "),
+                TextSpan(
+                    text: "Politique de Confidentialité.",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(color: primaryColor, decoration: TextDecoration.underline)),
+              ]))),
         ],
       ),
     );

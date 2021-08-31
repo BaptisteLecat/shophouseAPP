@@ -115,15 +115,7 @@ class _RegisterFormState extends State<RegisterForm> {
           SizedBox(
             height: 10,
           ),
-          Flex(
-            direction: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              CGU(
-                  isAcceptedCGU: widget.isAcceptedCGU,
-                  callback: _updateCGUState)
-            ],
-          )
+          CGU(isAcceptedCGU: widget.isAcceptedCGU, callback: _updateCGUState)
         ],
       ),
     );
