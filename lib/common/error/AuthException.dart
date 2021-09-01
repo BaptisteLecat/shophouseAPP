@@ -8,6 +8,7 @@ enum AuthResultStatus {
   operationNotAllowed,
   tooManyRequests,
   emailNotVerified,
+  cguNotAccepted,
   unknown,
 }
 
@@ -40,6 +41,9 @@ class AuthException {
       case "email-not-verified":
         status = AuthResultStatus.emailNotVerified;
         break;
+      case "cgu-not-accepted":
+        status = AuthResultStatus.cguNotAccepted;
+        break;
       default:
         status = AuthResultStatus.unknown;
     }
@@ -51,6 +55,8 @@ class AuthException {
   ///
   static generateExceptionMessage(exceptionCode) {
     String errorMessage;
+    print(exceptionCode);
+    print(AuthResultStatus.cguNotAccepted);
     switch (exceptionCode) {
       case AuthResultStatus.invalidEmail:
         errorMessage = "Le format de l'adresse mail semble incorrect.";
@@ -76,6 +82,9 @@ class AuthException {
         break;
       case AuthResultStatus.emailNotVerified:
         errorMessage = "Merci de valider votre email avant de vous connecter.";
+        break;
+      case AuthResultStatus.cguNotAccepted:
+        errorMessage = "Merci d'accepter les conditions d'utilisations.";
         break;
       default:
         errorMessage = "Certaines informations sont incomplètes.";

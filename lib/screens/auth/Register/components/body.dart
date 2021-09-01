@@ -25,6 +25,14 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  ///This function will be given to the child widget. It will update the value troughout the function.
+  _updateErrorCodeState(String errorCode) {
+    setState(() {
+      widget.error = AuthException.generateExceptionMessage(errorCode);
+      print(widget.error);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -46,7 +54,8 @@ class _BodyState extends State<Body> {
                             nameController: widget.nameController,
                             firstNameController: widget.firstNameController,
                             emailController: widget.emailController,
-                            passwordController: widget.passwordController),
+                            passwordController: widget.passwordController,
+                            errorCodeCallback: _updateErrorCodeState,),
                       ),
                       Center(
                         child: _errorMessage(widget.error),
@@ -99,7 +108,7 @@ class _BodyState extends State<Body> {
         children: [
           CTAButton(
               onPressed: () async {
-                if (widget.formKey.currentState?.validate() == true) {
+                if (widget.formKey.currentState?.validate() == true && widget.isAcceptedCGU) {
                   var password = widget.passwordController.value.text;
                   var email = widget.emailController.value.text;
 
