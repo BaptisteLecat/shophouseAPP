@@ -23,6 +23,8 @@ class _CGUState extends State<CGU> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Checkbox(
+                activeColor: primaryColor,
+                shape: RoundedRectangleBorder(side: BorderSide(color: inputBorder), borderRadius: BorderRadius.all(Radius.circular(6))),
                   value: widget.isAcceptedCGU,
                   onChanged: (value) {
                     setState(() {
@@ -35,21 +37,21 @@ class _CGUState extends State<CGU> {
           Expanded(
               child: RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyText1,
                       children: [
                 TextSpan(text: "J'accepte les "),
                 TextSpan(
                     text: "Conditions d'Utilisations ",
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2!
+                        .bodyText1!
                         .copyWith(color: primaryColor, decoration: TextDecoration.underline)),
                 TextSpan(text: "et la "),
                 TextSpan(
                     text: "Politique de Confidentialité.",
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2!
+                        .bodyText1!
                         .copyWith(color: primaryColor, decoration: TextDecoration.underline)),
               ]))),
         ],
