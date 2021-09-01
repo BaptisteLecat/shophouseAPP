@@ -19,6 +19,22 @@ class AuthenticationService {
     }
   }
 
+  bool emailIsVerified() {
+    bool isVerified = false;
+    if (_auth.currentUser!.emailVerified) {
+      isVerified = true;
+    }
+    return isVerified;
+  }
+
+  Future<void> reloadUser() async {
+    return _auth.currentUser!.reload();
+  }
+
+  String? userEmail() {
+    return _auth.currentUser!.email;
+  }
+
   Future registerInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(

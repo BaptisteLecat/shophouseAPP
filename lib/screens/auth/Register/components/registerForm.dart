@@ -10,7 +10,8 @@ class RegisterForm extends StatefulWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   ValueChanged<String> errorCodeCallback;
-  bool isAcceptedCGU = false;
+  ValueChanged<bool> checkBoxCallback;
+  bool isAcceptedCGU;
   RegisterForm(
       {Key? key,
       required this.formKey,
@@ -18,6 +19,8 @@ class RegisterForm extends StatefulWidget {
       required this.firstNameController,
       required this.emailController,
       required this.passwordController,
+      required this.isAcceptedCGU,
+      required this.checkBoxCallback,
       required this.errorCodeCallback})
       : super(key: key);
 
@@ -28,8 +31,6 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   @override
   void dispose() {
-    widget.emailController.dispose();
-    widget.passwordController.dispose();
     super.dispose();
   }
 
@@ -37,8 +38,8 @@ class _RegisterFormState extends State<RegisterForm> {
   _updateCGUState(bool isAcceptedCGU) {
     setState(() {
       widget.isAcceptedCGU = isAcceptedCGU;
-      print(widget.isAcceptedCGU);
     });
+    widget.checkBoxCallback(isAcceptedCGU);
   }
 
   ///This function will be given to the child widget. It will update the value troughout the function.
@@ -124,7 +125,11 @@ class _RegisterFormState extends State<RegisterForm> {
           SizedBox(
             height: 10,
           ),
-          CGU(isAcceptedCGU: widget.isAcceptedCGU, checkBoxCallback: _updateCGUState, errorCodeCallback: _updateErrorCodeState,)
+          CGU(
+            isAcceptedCGU: widget.isAcceptedCGU,
+            checkBoxCallback: _updateCGUState,
+            errorCodeCallback: _updateErrorCodeState,
+          )
         ],
       ),
     );

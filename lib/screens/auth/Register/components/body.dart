@@ -34,6 +34,13 @@ class _BodyState extends State<Body> {
     });
   }
 
+  ///This function will be given to the child widget. It will update the value troughout the function.
+  _updateCGUState(bool isAcceptedCGU) {
+    setState(() {
+      widget.isAcceptedCGU = isAcceptedCGU;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -56,6 +63,8 @@ class _BodyState extends State<Body> {
                           firstNameController: widget.firstNameController,
                           emailController: widget.emailController,
                           passwordController: widget.passwordController,
+                          isAcceptedCGU: widget.isAcceptedCGU,
+                          checkBoxCallback: _updateCGUState,
                           errorCodeCallback: _updateErrorCodeState,
                         ),
                       ),
@@ -112,6 +121,9 @@ class _BodyState extends State<Body> {
               onPressed: () async {
                 if (widget.formKey.currentState?.validate() == true &&
                     widget.isAcceptedCGU) {
+                  setState(() {
+                    widget.loading = true;
+                  });
                   var password = widget.passwordController.value.text;
                   var email = widget.emailController.value.text;
 
@@ -124,11 +136,11 @@ class _BodyState extends State<Body> {
                           AuthException.generateExceptionMessage(result);
                     });
                   } else {
-                    setState(() {
-                      widget.loading = true;
-                      widget.error = '';
-                    });
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/emailVerified", (route) => false);
                   }
+                } else {
+                  FocusScope.of(context).requestFocus(new FocusNode());
                 }
               },
               content: Text(
