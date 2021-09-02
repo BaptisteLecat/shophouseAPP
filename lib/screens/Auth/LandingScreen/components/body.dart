@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/screens/auth/Login/login_screen.dart';
+import 'package:shophouse/screens/auth/Register/register_screen.dart';
 import 'background.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 
@@ -8,7 +10,7 @@ class Body extends StatelessWidget {
   Widget _buildTitleText(String firstText, String secondText, Color firstColor,
       Color secondColor) {
     return FittedBox(
-      fit: BoxFit.fitWidth ,
+      fit: BoxFit.fitWidth,
       child: RichText(
         text: TextSpan(
           text: firstText,
@@ -65,7 +67,8 @@ class Body extends StatelessWidget {
         children: [
           CTAButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/login');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
             },
             content: Text(
               "Connexion",
@@ -83,7 +86,8 @@ class Body extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/register');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()));
             },
             child: Text(
               "Enregistrement",

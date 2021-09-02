@@ -1,12 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shophouse/Model/AppUser.dart';
 import 'package:shophouse/common/error/AuthException.dart';
 
 class AuthenticationService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Stream<User?> get authStateChanges => auth.idTokenChanges();
+
+  AppUser? _userFromFirebaseUser(User? user) {
+    return user != null ? AppUser(user.uid) : null;
+  }
+
+  Stream<AppUser?>? get user {
+    return auth.authStateChanges().map(_userFromFirebaseUser);
+  }
+
+  Stream<User?> authStream() {
+    return auth.authStateChanges();
+  }
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
+      UserCredential result = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
       if (!user!.emailVerified) {
@@ -21,23 +36,23 @@ class AuthenticationService {
 
   bool emailIsVerified() {
     bool isVerified = false;
-    if (_auth.currentUser!.emailVerified) {
+    if (auth.currentUser!.emailVerified) {
       isVerified = true;
     }
     return isVerified;
   }
 
   Future<void> reloadUser() async {
-    return _auth.currentUser!.reload();
+    return auth.currentUser!.reload();
   }
 
   String? userEmail() {
-    return _auth.currentUser!.email;
+    return auth.currentUser!.email;
   }
 
   Future registerInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
+      UserCredential result = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
 
@@ -55,7 +70,7 @@ class AuthenticationService {
 
   Future signOut() async {
     try {
-      return await _auth.signOut();
+      return await auth.signOut();
     } catch (exception) {
       print(exception.toString());
       return null;

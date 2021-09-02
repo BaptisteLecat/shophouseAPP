@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/widgets/loading.dart';
+import 'package:shophouse/screens/auth/EmailVerified/emailVerified_screen.dart';
+import 'package:shophouse/screens/auth/Login/login_screen.dart';
 import 'package:shophouse/screens/auth/Register/components/registerForm.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 import '../../../../services/authentication.dart';
@@ -136,8 +138,10 @@ class _BodyState extends State<Body> {
                           AuthException.generateExceptionMessage(result);
                     });
                   } else {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, "/emailVerified", (route) => false);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EmailVerifiedScreen()));
                   }
                 } else {
                   FocusScope.of(context).requestFocus(new FocusNode());
@@ -149,7 +153,8 @@ class _BodyState extends State<Body> {
               )),
           TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/login");
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               child: Text(
                 "Vous avez déjà un compte?",
