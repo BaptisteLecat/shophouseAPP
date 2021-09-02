@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/AppUser.dart';
 import 'package:shophouse/screens/Auth/Login/login_screen.dart';
-import 'package:flutter/foundation.dart';
+import 'package:shophouse/screens/SplashScreenWrapper.dart';
 import 'package:shophouse/screens/auth/EmailVerified/emailVerified_screen.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:shophouse/services/authentication.dart';
-import 'package:shophouse/common/constant/colors.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shophouse/screens/home/HomePage.dart';
@@ -23,12 +23,16 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        initialRoute: '/auth',
-        onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
-        debugShowCheckedModeBanner: false,
-        theme: basicTheme());
+    return StreamProvider<AppUser?>.value(
+      value: AuthenticationService().user,
+      initialData: null,
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          initialRoute: '/auth',
+          onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
+          debugShowCheckedModeBanner: false,
+          theme: basicTheme()),
+    );
   }
 }
 
@@ -36,6 +40,8 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
+        return MaterialPageRoute(builder: (context) => SplashScreenWrapper());
+      case '/home':
         return MaterialPageRoute(builder: (context) => HomePage());
       case '/login':
         return MaterialPageRoute(builder: (context) => LoginScreen());

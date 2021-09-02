@@ -1,8 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shophouse/Model/AppUser.dart';
 import 'package:shophouse/common/error/AuthException.dart';
 
 class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  AppUser? _userFromFirebaseUser(User? user) {
+    return user != null ? AppUser(user.uid) : null;
+  }
+
+  Stream<AppUser?> get user {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
