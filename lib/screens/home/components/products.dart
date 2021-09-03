@@ -15,51 +15,55 @@ class _ProductsState extends State<Products> {
         child: Column(
       children: [
         Expanded(
-            flex: 1,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Text(
-                    "Produits",
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                  margin: EdgeInsets.only(left: 20, top: 20),
-                )
-              ],
-            )),
+          children: [
+            Container(
+              child: Text(
+                "Produits",
+                style: Theme.of(context).textTheme.headline3,
+              ),
+              margin: EdgeInsets.only(left: 20),
+            )
+          ],
+        )),
         Expanded(
             flex: 4,
-            child: Padding(
-                padding: EdgeInsets.only(left: 30, right: 20),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (constraints.maxWidth <= 380) {
-                      return GridView.builder(
-                          itemCount: 4,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 20,
-                            childAspectRatio: 0.75,
-                          ),
-                          itemBuilder: (context, index) => ProductCards());
-                    } else {
-                      return GridView.builder(
-                          itemCount: 4,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 20,
-                            childAspectRatio: 0.75,
-                          ),
-                          itemBuilder: (context, index) => ProductCards());
-                    }
-                  },
-                ))),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth <= 420) {
+                  return GridView.builder(
+                      padding: EdgeInsets.only(
+                          top: 10, bottom: 30, left: 20, right: 20),
+                      itemCount: 4,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.80,
+                      ),
+                      itemBuilder: (context, index) => ProductCards());
+                } else {
+                  return GridView.builder(
+                      padding: EdgeInsets.only(
+                          top: 10, bottom: 30, left: 20, right: 20),
+                      itemCount: 4,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.75,
+                      ),
+                      itemBuilder: (context, index) => ProductCards());
+                }
+              },
+            ))
       ],
     ));
   }
 }
+
+/*
+
+
+        Flexible(
+            ),*/

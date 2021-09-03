@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
 
   Container _generateHeader() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,12 +135,12 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Expanded(flex: 2, child: _generateHeader()),
-          Expanded(flex: 1, child: _generateSearchBar()),
-          Expanded(flex: 3, child: Categories()),
-          Expanded(flex: 4, child: Products())
+          Expanded(flex: 3, child: _generateHeader()),
+          Expanded(flex: 2, child: _generateSearchBar()),
+          Expanded(flex: 4, child: Categories()),
+          Expanded(flex: 5, child: Products())
         ],
       ),
     );

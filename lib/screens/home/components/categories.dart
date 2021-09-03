@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 
@@ -21,26 +23,24 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Flexible(
-              flex: 1,
+          Expanded(
               child: Row(
-                children: [
-                  Container(
-                    child: Text(
-                      "Catégories",
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                    margin: EdgeInsets.only(left: 20, top: 20),
-                  )
-                ],
-              )),
-          Flexible(
-              flex: 3,
+            children: [
+              Container(
+                child: Text(
+                  "Catégories",
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                margin: EdgeInsets.only(left: 20),
+              )
+            ],
+          )),
+          Expanded(
+              flex: 4,
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -49,11 +49,11 @@ class _CategoriesState extends State<Categories> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 2, vertical: 20),
                         child: Container(
-                          width: 80,
+                          width: 88,
                           padding:
                               EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            borderRadius: BorderRadius.all(Radius.circular(34)),
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
@@ -70,12 +70,15 @@ class _CategoriesState extends State<Categories> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                height: 54,
-                                width: 54,
+                                padding: EdgeInsets.all(10),
+                                height: 64,
+                                width: 64,
                                 decoration: BoxDecoration(
                                     color: Color(0xffF0F4F9),
                                     shape: BoxShape.circle),
-                                child: Icon(Icons.home),
+                                child: Image.asset(
+                                  "assets/images/test/030-beef-2.png",
+                                ),
                               ),
                               Text(
                                 "Légumes",
