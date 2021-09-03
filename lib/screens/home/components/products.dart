@@ -42,7 +42,7 @@ class _ProductsState extends State<Products> {
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 20,
-                            childAspectRatio: 0.65,
+                            childAspectRatio: 0.75,
                           ),
                           itemBuilder: (context, index) => ProductCards());
                     } else {
@@ -53,7 +53,7 @@ class _ProductsState extends State<Products> {
                             crossAxisCount: 3,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 20,
-                            childAspectRatio: 0.65,
+                            childAspectRatio: 0.75,
                           ),
                           itemBuilder: (context, index) => ProductCards());
                     }
