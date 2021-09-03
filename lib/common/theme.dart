@@ -17,6 +17,7 @@ ThemeData basicTheme() {
       headline3: TextStyle(
         fontFamily: 'Poppins',
         fontSize: 24.0,
+        fontWeight: FontWeight.w600,
         color: secondaryColor,
       ),
       headline4: TextStyle(
