@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
+import 'package:shophouse/screens/home/components/products.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -95,37 +96,51 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 50,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.home,
+                  size: 26,
+                  color: Colors.black,
+                ),
+                Icon(
+                  Icons.business,
+                  size: 26,
+                  color: Colors.black,
+                ),
+              ]),) ,
+        notchMargin: 8,
+        shape: const CircularNotchedRectangle(),
+      ),
+      floatingActionButton: Container(
+        width: 80.0,
+        height: 80.0,
+        child: new FloatingActionButton(
+          backgroundColor: primaryColor,
+          shape: new CircleBorder(),
+          elevation: 0.0,
+          child: Icon(
+            Icons.search_rounded,
+            color: Colors.white,
+            size: 50,
+          ),
+          onPressed: () {},
+        ),
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(flex: 2, child: _generateHeader()),
           Expanded(flex: 1, child: _generateSearchBar()),
           Expanded(flex: 3, child: Categories()),
-          Expanded(
-              flex: 4,
-              child: Container(
-                color: Colors.red,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20),
-                        child: GridView.builder(
-                            itemCount: 4,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 20,
-                              childAspectRatio: 0.75,
-                            ),
-                            itemBuilder: (context, index) => Container(color: Colors.teal,)),
-                      ),
-                    ),
-                  ],
-                ),
-              ))
+          Expanded(flex: 4, child: Products())
         ],
       ),
     );
