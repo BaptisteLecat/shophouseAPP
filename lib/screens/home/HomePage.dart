@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
@@ -103,16 +105,18 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.home,
-                  size: 30,
-                  color: Colors.black,
-                ),
-                Icon(
-                  Icons.business,
-                  size: 30,
-                  color: Colors.black,
-                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Image.asset("assets/icons/menu/home.png")),
+                IconButton(
+                    onPressed: () {},
+                    icon: Image.asset("assets/icons/menu/shopping-cart.png")),
+                IconButton(
+                    onPressed: () {},
+                    icon: Image.asset("assets/icons/menu/family.png")),
+                IconButton(
+                    onPressed: () {},
+                    icon: Image.asset("assets/icons/menu/user.png")),
               ]),
         ),
         notchMargin: 8,
@@ -125,11 +129,9 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: primaryColor,
           shape: new CircleBorder(),
           elevation: 0.0,
-          child: Icon(
-            Icons.search_rounded,
-            color: Colors.white,
-            size: 50,
-          ),
+          child: Padding(
+              padding: EdgeInsets.all(14),
+              child: Image.asset("assets/icons/menu/search.png")),
           onPressed: () {},
         ),
       ),
