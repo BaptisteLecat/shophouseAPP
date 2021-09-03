@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 
@@ -13,8 +15,9 @@ class _ProductCardsState extends State<ProductCards> {
     return Container(
       height: 46,
       width: 46,
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
-      child: Icon(Icons.home),
+      child: Image.asset("assets/icons/shopping.png"),
     );
   }
 
