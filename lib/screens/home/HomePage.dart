@@ -105,21 +105,22 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Icon(
                   Icons.home,
-                  size: 26,
+                  size: 30,
                   color: Colors.black,
                 ),
                 Icon(
                   Icons.business,
-                  size: 26,
+                  size: 30,
                   color: Colors.black,
                 ),
-              ]),) ,
+              ]),
+        ),
         notchMargin: 8,
         shape: const CircularNotchedRectangle(),
       ),
       floatingActionButton: Container(
-        width: 80.0,
-        height: 80.0,
+        width: 64.0,
+        height: 64.0,
         child: new FloatingActionButton(
           backgroundColor: primaryColor,
           shape: new CircleBorder(),
@@ -132,8 +133,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {},
         ),
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
