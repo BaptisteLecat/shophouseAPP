@@ -31,7 +31,7 @@ class _ProductsState extends State<Products> {
         Expanded(
             flex: 4,
             child: Padding(
-                padding: EdgeInsets.only(top: 30, left: 30, right: 20),
+                padding: EdgeInsets.only(left: 30, right: 20),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     if (constraints.maxWidth <= 380) {
