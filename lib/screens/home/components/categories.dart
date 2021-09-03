@@ -21,7 +21,7 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, top: 20),
+      margin: EdgeInsets.only(top: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -30,23 +30,28 @@ class _CategoriesState extends State<Categories> {
               flex: 1,
               child: Row(
                 children: [
-                  Text(
-                    "Catégories",
-                    style: Theme.of(context).textTheme.headline3,
+                  Container(
+                    child: Text(
+                      "Catégories",
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    margin: EdgeInsets.only(left: 20, top: 20),
                   )
                 ],
               )),
           Flexible(
-            flex: 4,
+              flex: 3,
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: 30,
                   itemBuilder: (BuildContext context, int index) => Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 25),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 2, vertical: 20),
                         child: Container(
-                          width: 74,
-                          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                          width: 80,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: Colors.white,
@@ -60,19 +65,25 @@ class _CategoriesState extends State<Categories> {
                               ),
                             ],
                           ),
-                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 8),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                height: 48,
-                                width: 48,
+                                height: 54,
+                                width: 54,
                                 decoration: BoxDecoration(
                                     color: Color(0xffF0F4F9),
                                     shape: BoxShape.circle),
                                 child: Icon(Icons.home),
                               ),
-                              Text("Légumes", style: Theme.of(context).textTheme.bodyText1!.copyWith(color: secondaryColor),)
+                              Text(
+                                "Légumes",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(color: secondaryColor),
+                              )
                             ],
                           ),
                         ),

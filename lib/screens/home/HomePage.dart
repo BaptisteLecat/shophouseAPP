@@ -12,67 +12,70 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  Container _generateSearchBar() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 6),
-      decoration: BoxDecoration(
-          color: const Color(0xffF0F4F9),
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-          border: Border.all(width: 1.5, color: const Color(0xffC5CCDA))),
-      child: Form(
-          key: formKey,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Flexible(
-                flex: 5,
-                child: Container(
-                  height: 46,
-                  child: TextField(
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .copyWith(color: const Color(0xff5E709A)),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.only(left: 12, bottom: 11, top: 14),
-                        filled: true,
-                        fillColor: const Color(0xffF0F4F9),
-                        hintText: "Rechercher un produit",
-                        hintStyle: Theme.of(context)
+  Widget _generateSearchBar() {
+    return Center(
+      child: Container(
+        constraints: BoxConstraints(minHeight: 50, maxHeight: 60),
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 6),
+        decoration: BoxDecoration(
+            color: const Color(0xffF0F4F9),
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            border: Border.all(width: 1.5, color: const Color(0xffC5CCDA))),
+        child: Form(
+            key: formKey,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Flexible(
+                  flex: 5,
+                  child: Container(
+                    height: 46,
+                    child: TextField(
+                        style: Theme.of(context)
                             .textTheme
                             .headline6!
                             .copyWith(color: const Color(0xff5E709A)),
-                      )),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          contentPadding:
+                              EdgeInsets.only(left: 12, bottom: 11, top: 14),
+                          filled: true,
+                          fillColor: const Color(0xffF0F4F9),
+                          hintText: "Rechercher un produit",
+                          hintStyle: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(color: const Color(0xff5E709A)),
+                        )),
+                  ),
                 ),
-              ),
-              Flexible(
-                  flex: 1,
-                  child: Container(
-                    height: 38,
-                    width: 38,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: primaryColor),
-                    child:
-                        IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                  ))
-            ],
-          )),
+                Flexible(
+                    flex: 1,
+                    child: Container(
+                      height: 38,
+                      width: 38,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: primaryColor),
+                      child: IconButton(
+                          onPressed: () {}, icon: Icon(Icons.search)),
+                    ))
+              ],
+            )),
+      ),
     );
   }
 
   Container _generateHeader() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -98,7 +101,31 @@ class _HomePageState extends State<HomePage> {
           Expanded(flex: 2, child: _generateHeader()),
           Expanded(flex: 1, child: _generateSearchBar()),
           Expanded(flex: 3, child: Categories()),
-          Expanded(flex: 4, child: Container(color: Colors.red))
+          Expanded(
+              flex: 4,
+              child: Container(
+                color: Colors.red,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20),
+                        child: GridView.builder(
+                            itemCount: 4,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 20,
+                              childAspectRatio: 0.75,
+                            ),
+                            itemBuilder: (context, index) => Container(color: Colors.teal,)),
+                      ),
+                    ),
+                  ],
+                ),
+              ))
         ],
       ),
     );
