@@ -19,7 +19,9 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Container(
         constraints: BoxConstraints(minHeight: 50, maxHeight: 60),
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.02,
+            horizontal: 20),
         padding: EdgeInsets.symmetric(vertical: 6),
         decoration: BoxDecoration(
             color: const Color(0xffF0F4F9),
@@ -139,6 +141,7 @@ class _HomePageState extends State<HomePage> {
         body: LayoutBuilder(
           builder: (context, constraint) {
             return SingleChildScrollView(
+              padding: EdgeInsets.only(top: 60),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
