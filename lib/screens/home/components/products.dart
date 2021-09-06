@@ -14,8 +14,7 @@ class _ProductsState extends State<Products> {
     return Container(
         child: Column(
       children: [
-        Expanded(
-            child: Row(
+        Row(
           children: [
             Container(
               child: Text(
@@ -25,38 +24,23 @@ class _ProductsState extends State<Products> {
               margin: EdgeInsets.only(left: 20),
             )
           ],
-        )),
-        Expanded(
-            flex: 4,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                if (constraints.maxWidth <= 420) {
-                  return GridView.builder(
-                      padding: EdgeInsets.only(
-                          top: 10, bottom: 30, left: 20, right: 20),
-                      itemCount: 4,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 20,
-                        childAspectRatio: 0.80,
-                      ),
-                      itemBuilder: (context, index) => ProductCards());
-                } else {
-                  return GridView.builder(
-                      padding: EdgeInsets.only(
-                          top: 10, bottom: 30, left: 20, right: 20),
-                      itemCount: 4,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 20,
-                        childAspectRatio: 0.75,
-                      ),
-                      itemBuilder: (context, index) => ProductCards());
-                }
-              },
-            ))
+        ),
+        Container(
+          child: GridView.builder(
+              primary: false,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              padding:
+                  EdgeInsets.only(top: 10, bottom: 30, left: 20, right: 20),
+              itemCount: 30,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 20,
+                childAspectRatio: 0.80,
+              ),
+              itemBuilder: (context, index) => ProductCards()),
+        )
       ],
     ));
   }

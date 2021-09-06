@@ -98,45 +98,72 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 50,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/icons/menu/home.png")),
-                IconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/icons/menu/shopping-cart.png")),
-                IconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/icons/menu/family.png")),
-                IconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/icons/menu/user.png")),
-              ]),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 50,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {},
+                      icon: Image.asset("assets/icons/menu/home.png")),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Image.asset("assets/icons/menu/shopping-cart.png")),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Image.asset("assets/icons/menu/family.png")),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Image.asset("assets/icons/menu/user.png")),
+                ]),
+          ),
+          notchMargin: 8,
+          shape: const CircularNotchedRectangle(),
         ),
-        notchMargin: 8,
-        shape: const CircularNotchedRectangle(),
-      ),
-      floatingActionButton: Container(
-        width: 64.0,
-        height: 64.0,
-        child: new FloatingActionButton(
-          backgroundColor: primaryColor,
-          shape: new CircleBorder(),
-          elevation: 0.0,
-          child: Padding(
-              padding: EdgeInsets.all(14),
-              child: Image.asset("assets/icons/menu/search.png")),
-          onPressed: () {},
+        floatingActionButton: Container(
+          width: 64.0,
+          height: 64.0,
+          child: new FloatingActionButton(
+            backgroundColor: primaryColor,
+            shape: new CircleBorder(),
+            elevation: 0.0,
+            child: Padding(
+                padding: EdgeInsets.all(14),
+                child: Image.asset("assets/icons/menu/search.png")),
+            onPressed: () {},
+          ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: Column(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: LayoutBuilder(
+          builder: (context, constraint) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: _generateHeader(),
+                  ),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: _generateSearchBar(),
+                  ),
+                  Categories(),
+                  Products()
+                ],
+              ),
+            );
+          },
+        ));
+  }
+}
+
+
+/*
+Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Expanded(flex: 3, child: _generateHeader()),
@@ -144,7 +171,4 @@ class _HomePageState extends State<HomePage> {
           Expanded(flex: 4, child: Categories()),
           Expanded(flex: 5, child: Products())
         ],
-      ),
-    );
-  }
-}
+      )*/

@@ -91,8 +91,7 @@ class _CategoriesState extends State<Categories> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-              child: Row(
+          Row(
             children: [
               Container(
                 child: Text(
@@ -102,16 +101,17 @@ class _CategoriesState extends State<Categories> {
                 margin: EdgeInsets.only(left: 20),
               )
             ],
-          )),
-          Expanded(
-            flex: 4,
-            child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return _generateCategoryCard(index);
-                }),
+          ),
+          Flexible(
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.22,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _generateCategoryCard(index);
+                    })),
           )
         ],
       ),
