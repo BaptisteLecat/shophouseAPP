@@ -1,20 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shophouse/Model/AppUser.dart';
 import 'package:shophouse/common/error/AuthException.dart';
+import 'SharedPreferences.dart';
 
 class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User? getCurrentUser() {
-    return FirebaseAuth.instance.currentUser;
-  }
-
-  AppUser? _userFromFirebaseUser(User? user) {
-    return user != null ? AppUser(user.uid) : null;
-  }
-
-  Stream<AppUser?> get user {
-    return _auth.authStateChanges().map(_userFromFirebaseUser);
+  AppUser? getCurrentUser() {
+    SharedPreferencesUser().getUserId().then((uid) {
+      ///Temporary connection
+      if (uid == "fi2n5a3QGadpdblSHKF53ALiyuG3") {
+        return AppUser(
+            uid: uid!,
+            name: "Lecat",
+            firstName: "Baptiste",
+            email: "baptiste.lecat44@gmail.com");
+      }
+    });
+    return null;
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {
@@ -24,6 +27,9 @@ class AuthenticationService {
       User? user = result.user;
       if (!user!.emailVerified) {
         throw new FirebaseAuthException(code: "email-not-verified");
+      } else {
+        ///Save user ID in shared_preferences
+        SharedPreferencesUser().setUserId(user.uid);
       }
       return user;
     } on FirebaseAuthException catch (e) {
