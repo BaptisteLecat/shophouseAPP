@@ -4,7 +4,7 @@ import 'package:shophouse/screens/auth/EmailVerified/emailVerified_screen.dart';
 import 'package:shophouse/screens/auth/Login/login_screen.dart';
 import 'package:shophouse/screens/auth/Register/components/registerForm.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
-import '../../../../services/authentication.dart';
+import '../../../../services/auth/authentication.dart';
 //import 'loginForm.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';

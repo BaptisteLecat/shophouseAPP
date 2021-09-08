@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
-import 'package:shophouse/services/Authentication.dart';
+import 'package:shophouse/services/Auth/Authentication.dart';
 
 class EmailVerifiedScreen extends StatefulWidget {
   @override

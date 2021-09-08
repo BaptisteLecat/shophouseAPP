@@ -3,7 +3,7 @@ import 'package:shophouse/common/widgets/loading.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
-import '../../../../services/authentication.dart';
+import '../../../../services/auth/authentication.dart';
 import 'loginForm.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';

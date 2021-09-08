@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
 import 'package:shophouse/screens/Auth/LandingScreen/landing_screen.dart';
 import 'package:shophouse/common/theme.dart';
-import 'package:shophouse/services/Authentication.dart';
+import 'package:shophouse/services/Auth/Authentication.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
