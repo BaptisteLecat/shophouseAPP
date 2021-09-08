@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/menu/fab_bottom_app_bar.dart';
-import 'package:shophouse/screens/CartPage.dart';
+import 'package:shophouse/screens/account/AccountPage.dart';
+import 'package:shophouse/screens/cart/CartPage.dart';
+import 'package:shophouse/screens/family/FamilyPage.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
 import 'package:shophouse/screens/home/components/products.dart';
@@ -35,6 +37,12 @@ class _RootPageState extends State<RootPage> {
         break;
       case 1:
         page = CartPage();
+        break;
+      case 2:
+        page = FamilyPage();
+        break;
+      case 3:
+        page = AccountPage();
         break;
       default:
         page = HomePage();
