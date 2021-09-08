@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/AppUser.dart';
+import 'package:shophouse/screens/RootPage.dart';
 import 'package:shophouse/screens/auth/LandingScreen/landing_screen.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
@@ -24,7 +25,7 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
             if (snapshot.data!.uid == null) {
               returnedWidget = LandingScreen();
             } else {
-              returnedWidget = HomePage();
+              returnedWidget = RootPage();
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             returnedWidget = Center(
