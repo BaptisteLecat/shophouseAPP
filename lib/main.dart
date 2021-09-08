@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/AppUser.dart';
@@ -25,14 +26,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(
-      value: AuthenticationService().user,
-      initialData: null,
-      child: MaterialApp(
-          title: 'Flutter Demo',
-          home: SplashScreenWrapper(),
-          debugShowCheckedModeBanner: false,
-          theme: basicTheme()),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: SplashScreenWrapper(),
+      debugShowCheckedModeBanner: false,
+      theme: basicTheme(),
     );
   }
 }

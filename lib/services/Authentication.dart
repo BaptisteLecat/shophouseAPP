@@ -5,16 +5,16 @@ import 'package:shophouse/common/error/AuthException.dart';
 class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  User? getCurrentUser() {
+    return FirebaseAuth.instance.currentUser;
+  }
+
   AppUser? _userFromFirebaseUser(User? user) {
     return user != null ? AppUser(user.uid) : null;
   }
 
-  Stream<AppUser?>? get user {
+  Stream<AppUser?> get user {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
-  }
-
-  Stream<User?> authStream() {
-    return _auth.authStateChanges();
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {
