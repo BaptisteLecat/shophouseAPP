@@ -6,18 +6,22 @@ import 'SharedPreferences.dart';
 class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  AppUser? getCurrentUser() {
-    SharedPreferencesUser().getUserId().then((uid) {
+  Future<AppUser?> getCurrentUser() async {
+    return await SharedPreferencesUser().getUserId().then((uid) {
       ///Temporary connection
       if (uid == "fi2n5a3QGadpdblSHKF53ALiyuG3") {
-        return AppUser(
+        print("uid: $uid");
+        AppUser user = AppUser(
             uid: uid!,
             name: "Lecat",
             firstName: "Baptiste",
             email: "baptiste.lecat44@gmail.com");
+        print(user.email);
+        return user;
+      } else {
+        return null;
       }
     });
-    return null;
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {
@@ -30,6 +34,7 @@ class AuthenticationService {
       } else {
         ///Save user ID in shared_preferences
         SharedPreferencesUser().setUserId(user.uid);
+        SharedPreferencesUser().getUserId().then((value) => print(value));
       }
       return user;
     } on FirebaseAuthException catch (e) {
