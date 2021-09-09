@@ -12,13 +12,13 @@ class _CartCardState extends State<CartCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(8),
       margin: EdgeInsets.symmetric(vertical: 10),
-      height: 80,
+      height: 90,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withOpacity(0.20),
             spreadRadius: 0,
             blurRadius: 10,
             offset: Offset(0, 2), // changes position of shadow
@@ -32,7 +32,7 @@ class _CartCardState extends State<CartCard> {
           Expanded(
             flex: 2,
             child: Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(10),
               child: Image.asset('assets/images/cart/036-shopping cart.png'),
             ),
           ),
