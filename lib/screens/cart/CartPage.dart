@@ -11,7 +11,6 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   Container _generateHeader() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,11 +34,22 @@ class _CartPageState extends State<CartPage> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          padding: EdgeInsets.only(top: 60, left: 25, right: 25),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[_generateHeader(), CartCard(), CartCard()],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              _generateHeader(),
+              ListView.builder(
+                padding: EdgeInsets.only(top: 25),
+                primary: false,
+                shrinkWrap: true,
+                itemCount: 15,
+                itemBuilder: (BuildContext context, int index) {
+                  return CartCard();
+                },
+              )
+            ],
           ),
         );
       },
