@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/screens/cart/components/CartCard.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -34,11 +35,11 @@ class _CartPageState extends State<CartPage> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(top: 60),
+          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[_generateHeader()],
+            children: <Widget>[_generateHeader(), CartCard(), CartCard()],
           ),
         );
       },
