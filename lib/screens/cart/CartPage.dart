@@ -8,6 +8,27 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  Container _generateHeader() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Paniers",
+            style: Theme.of(context).textTheme.headline1,
+            textAlign: TextAlign.start,
+          ),
+          Text(
+            "Retrouvez les paniers que vous partagez avec vos amis.",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -17,7 +38,7 @@ class _CartPageState extends State<CartPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[Text("Cart")],
+            children: <Widget>[_generateHeader()],
           ),
         );
       },
