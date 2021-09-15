@@ -5,6 +5,7 @@ import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/menu/fab_bottom_app_bar.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
 import 'package:shophouse/screens/home/components/products.dart';
+import 'package:shophouse/services/Api/repositories/category/CategoryFetcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -100,6 +101,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    CategoryFetcher().getCategoryList().then((value) {});
     return LayoutBuilder(
       builder: (context, constraint) {
         return SingleChildScrollView(
