@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Category.dart' as category;
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/services/Api/repositories/category/CategoryFetcher.dart';
 
 class Categories extends StatefulWidget {
   const Categories({Key? key}) : super(key: key);
@@ -20,19 +22,19 @@ class _CategoriesState extends State<Categories> {
   ];
   int _selectedIndex = 0;
 
-  String _getIcon(int index) {
-    return categories[index]["icon"];
+  String _getIcon(int index, category.Categories listCategory) {
+    return listCategory.category[index].picture!;
   }
 
-  String _getLabel(int index) {
-    return categories[index]["label"];
+  String _getLabel(int index, category.Categories listCategory) {
+    return listCategory.category[index].label!;
   }
 
   bool _isSelected(index) {
     return index == _selectedIndex;
   }
 
-  Widget _generateCategoryCard(index) {
+  Widget _generateCategoryCard(index, category.Categories listCategory) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -69,11 +71,11 @@ class _CategoriesState extends State<Categories> {
                         _isSelected(index) ? Colors.white : Color(0xffF0F4F9),
                     shape: BoxShape.circle),
                 child: Image.asset(
-                  "assets/images/test/${_getIcon(index)}",
+                  "assets/images/test/${_getIcon(index, listCategory)}",
                 ),
               ),
               Text(
-                _getLabel(index),
+                _getLabel(index, listCategory),
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: _isSelected(index) ? Colors.white : secondaryColor),
               )
@@ -105,12 +107,31 @@ class _CategoriesState extends State<Categories> {
           Flexible(
             child: Container(
                 height: MediaQuery.of(context).size.height * 0.22,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return _generateCategoryCard(index);
+                child: FutureBuilder(
+                    future: CategoryFetcher().getCategoryList(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        if (snapshot.hasData && snapshot.data != null) {
+                          category.Categories listCategory =
+                              snapshot.data as category.Categories;
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: listCategory.category.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return _generateCategoryCard(
+                                    index, listCategory);
+                              });
+                        } else {
+                          return Center(
+                            child: Text("${snapshot.error}"),
+                          );
+                        }
+                      }
                     })),
           )
         ],
