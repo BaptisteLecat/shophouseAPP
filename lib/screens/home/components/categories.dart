@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -70,9 +71,8 @@ class _CategoriesState extends State<Categories> {
                     color:
                         _isSelected(index) ? Colors.white : Color(0xffF0F4F9),
                     shape: BoxShape.circle),
-                child: Image.asset(
-                  "assets/images/test/${_getIcon(index, listCategory)}",
-                ),
+                child: Image.memory(
+                    Base64Decoder().convert(_getIcon(index, listCategory))),
               ),
               Text(
                 _getLabel(index, listCategory),
