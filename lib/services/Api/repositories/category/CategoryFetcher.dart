@@ -10,4 +10,10 @@ class CategoryFetcher extends MainFetcher {
     print(response);
     return Categories.fromJson(response);
   }
+
+  Future<Category> getCategory(int id) async {
+    final response = await this.get("category/$id");
+    print(response);
+    return Category.fromJson(response);
+  }
 }
