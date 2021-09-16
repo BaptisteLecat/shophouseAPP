@@ -6,8 +6,8 @@ import 'package:shophouse/common/error/AppException.dart';
 
 class CategoryFetcher extends MainFetcher {
   Future<Categories> getCategoryList() async {
-    final response = await this.get("categoriesd");
+    final response = await this.get("categories");
     print(response);
-    return Categories.fromJson(jsonDecode(response));
+    return Categories.fromJson(response);
   }
 }

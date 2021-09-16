@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shophouse/common/error/api/ApiException.dart';
+import 'dart:convert';
 
 class MainFetcher {
   String userToken = "15sdf";
@@ -31,17 +32,17 @@ class MainFetcher {
   }
 
   dynamic _returnResponse(http.Response response) {
+    var returnedResponse = jsonDecode(response.body);
     switch (response.statusCode) {
       case 200:
         print("success");
-        return response.body.toString();
+        return returnedResponse;
       case 400:
-        throw BadRequestException(message: response.body.toString());
+        throw BadRequestException(message: returnedResponse["message"]);
       case 404:
-        throw BadRequestException(message: response.body.toString());
-      case 401:
+        throw BadRequestException(message: returnedResponse["message"]);
       case 403:
-        throw UnauthorisedException(message: response.body.toString());
+        throw UnauthorisedException(message: returnedResponse["message"]);
       case 500:
       default:
         throw FetchDataException(
