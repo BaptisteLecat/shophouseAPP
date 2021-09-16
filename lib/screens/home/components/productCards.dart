@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -101,7 +103,8 @@ class _ProductCardsState extends State<ProductCards> {
             children: [
               Expanded(
                 child: Container(
-                  child: Image.asset("assets/images/test/065-potato.png"),
+                  child: Image.memory(
+                      Base64Decoder().convert(widget.product.picture!)),
                 ),
               ),
               _generateBottomCard()
