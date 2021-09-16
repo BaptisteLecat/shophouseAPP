@@ -1,10 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/common/constant/colors.dart';
 
 class ProductCards extends StatefulWidget {
-  const ProductCards({Key? key}) : super(key: key);
+  Product product;
+  ProductCards({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductCardsState createState() => _ProductCardsState();
@@ -24,7 +26,7 @@ class _ProductCardsState extends State<ProductCards> {
   Widget _generateProductName() {
     return Container(
       child: Text(
-        "Concombre",
+        widget.product.label!,
         style: Theme.of(context).textTheme.headline5,
       ),
     );
