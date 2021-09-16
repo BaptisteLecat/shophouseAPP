@@ -14,11 +14,13 @@ class MainFetcher {
   Future<dynamic> get(String url, [Map<String, String>? headers]) async {
     var responseJson;
     try {
+      print(_urlBuilder(url));
       final response = await http.get(Uri.parse(_urlBuilder(url)),
-          headers: headers != null
+          headers: headers == null
               ? {
                   "Content-Type": "application/json",
-                  "Accept": "application/json"
+                  "Accept": "application/json",
+                  "X-AUTH-TOKEN": this.userToken
                 }
               : headers);
       responseJson = _returnResponse(response);
@@ -34,6 +36,8 @@ class MainFetcher {
         print("success");
         return response.body.toString();
       case 400:
+        throw BadRequestException(message: response.body.toString());
+      case 404:
         throw BadRequestException(message: response.body.toString());
       case 401:
       case 403:

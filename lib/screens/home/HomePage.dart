@@ -101,7 +101,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    CategoryFetcher().getCategoryList().then((value) {});
+    CategoryFetcher()
+        .getCategoryList()
+        .then((value) {})
+        .onError((error, stackTrace) {
+      print(error);
+    });
     return LayoutBuilder(
       builder: (context, constraint) {
         return SingleChildScrollView(
