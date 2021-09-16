@@ -6,11 +6,7 @@ import 'package:shophouse/Model/Category.dart';
 class CategoryFetcher extends MainFetcher {
   Future<Categories> getCategoryList() async {
     final response =
-        await http.get(Uri.parse(this.urlBuilder("categories")), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "x-auth-token": "${this.userToken}",
-    });
+        await this.get("categories");
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
