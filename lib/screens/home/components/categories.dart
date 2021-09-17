@@ -14,14 +14,13 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  List<Map> categories = [
-    {"label": "Légumes", "icon": "068-carrot.png"},
-    {"label": "Viandes", "icon": "030-beef-2.png"},
-    {"label": "Fruits", "icon": "076-cherry.png"},
-    {"label": "Féculents", "icon": "059-bread.png"},
-    {"label": "Sauces", "icon": "017-ketchup.png"},
-  ];
   int _selectedIndex = 0;
+  late Future<category.Categories> _categoriesData;
+
+  void initState() {
+    _categoriesData = CategoryFetcher().getCategoryList();
+    super.initState();
+  }
 
   String _getIcon(int index, category.Categories listCategory) {
     return listCategory.category[index].picture!;
@@ -108,7 +107,7 @@ class _CategoriesState extends State<Categories> {
             child: Container(
                 height: MediaQuery.of(context).size.height * 0.22,
                 child: FutureBuilder(
-                    future: CategoryFetcher().getCategoryList(),
+                    future: _categoriesData,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
