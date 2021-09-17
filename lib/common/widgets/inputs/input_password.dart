@@ -20,6 +20,7 @@ class _InputPasswordState extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.next,
       controller: widget.controller,
       obscureText: widget.hidePassword,

@@ -61,6 +61,7 @@ class _LoginFormState extends State<LoginForm> {
           Container(
             height: 60,
             child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               controller: widget.emailController,
               autofocus: true,

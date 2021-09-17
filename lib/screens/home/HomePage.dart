@@ -15,7 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey =
+      GlobalKey<FormState>(debugLabel: '_homeScreenkey');
 
   Widget _generateSearchBar() {
     return Center(

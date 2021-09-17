@@ -62,6 +62,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 child: Container(
                   height: 60,
                   child: TextFormField(
+                    keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     controller: widget.nameController,
                     autofocus: true,
@@ -82,6 +83,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 child: Container(
                   height: 60,
                   child: TextFormField(
+                    keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     controller: widget.firstNameController,
                     autofocus: true,
@@ -104,6 +106,7 @@ class _RegisterFormState extends State<RegisterForm> {
           Container(
             height: 60,
             child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               controller: widget.emailController,
               autofocus: true,
