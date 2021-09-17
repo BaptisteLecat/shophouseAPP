@@ -12,6 +12,38 @@ class ListProduct extends StatefulWidget {
 }
 
 class _ListProductState extends State<ListProduct> {
+  Widget _generateContent() {
+    return FittedBox(
+      fit: BoxFit.fitHeight,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FittedBox(
+              fit: BoxFit.fitHeight,
+              child: Text(
+                "Vous",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(color: primaryColor, fontWeight: FontWeight.w400),
+              )),
+          FittedBox(
+            fit: BoxFit.fitHeight,
+            child: Text(
+              "Tomate",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(fontWeight: FontWeight.w500),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,56 +69,21 @@ class _ListProductState extends State<ListProduct> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child:
-                        /*Image.memory(
+                    flex: 2,
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child:
+                            /*Image.memory(
                         Base64Decoder().convert(widget.cart.icon!))*/
-                        Container(
-                      color: Colors.green,
-                      height: 35,
-                      width: 35,
-                    ),
-                  ),
-                ),
+                            Container(
+                          color: Colors.green,
+                          height: 35,
+                          width: 35,
+                        ))),
                 SizedBox(
                   width: 10,
                 ),
-                Flexible(
-                  flex: 5,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FittedBox(
-                            fit: BoxFit.fitHeight,
-                            child: Text(
-                              "Vous",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                      color: primaryColor,
-                                      fontWeight: FontWeight.w400),
-                            )),
-                        FittedBox(
-                          fit: BoxFit.fitHeight,
-                          child: Text(
-                            "Tomate",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline4!
-                                .copyWith(fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                Flexible(flex: 5, child: _generateContent()),
                 Flexible(
                     flex: 3,
                     child: Container(
