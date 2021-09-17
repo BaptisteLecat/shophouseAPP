@@ -34,9 +34,9 @@ class Category {
     required this.picture,
   });
 
-  int id;
-  String label;
-  String picture;
+  int? id;
+  String? label;
+  String? picture;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],

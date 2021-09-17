@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/widgets/loading.dart';
+import 'package:shophouse/screens/RootPage.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
@@ -103,7 +104,7 @@ class _BodyState extends State<Body> {
                     });
                   } else {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => RootPage()));
                   }
                 }
               },

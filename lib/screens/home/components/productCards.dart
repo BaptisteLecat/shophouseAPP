@@ -1,10 +1,14 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/common/constant/colors.dart';
 
 class ProductCards extends StatefulWidget {
-  const ProductCards({Key? key}) : super(key: key);
+  Product product;
+  ProductCards({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductCardsState createState() => _ProductCardsState();
@@ -24,7 +28,7 @@ class _ProductCardsState extends State<ProductCards> {
   Widget _generateProductName() {
     return Container(
       child: Text(
-        "Concombre",
+        widget.product.label!,
         style: Theme.of(context).textTheme.headline5,
       ),
     );
@@ -99,7 +103,8 @@ class _ProductCardsState extends State<ProductCards> {
             children: [
               Expanded(
                 child: Container(
-                  child: Image.asset("assets/images/test/065-potato.png"),
+                  child: Image.memory(
+                      Base64Decoder().convert(widget.product.picture!)),
                 ),
               ),
               _generateBottomCard()

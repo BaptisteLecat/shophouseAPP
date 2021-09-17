@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Product.dart' as products;
 import 'package:shophouse/screens/home/components/productCards.dart';
+import 'package:shophouse/services/Api/repositories/product/ProductFetcher.dart';
 
 class Products extends StatefulWidget {
   const Products({Key? key}) : super(key: key);
@@ -26,28 +28,43 @@ class _ProductsState extends State<Products> {
           ],
         ),
         Container(
-          child: GridView.builder(
-              primary: false,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              padding:
-                  EdgeInsets.only(top: 10, bottom: 30, left: 20, right: 20),
-              itemCount: 30,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 20,
-                childAspectRatio: 0.80,
-              ),
-              itemBuilder: (context, index) => ProductCards()),
+          child: FutureBuilder(
+              future: ProductFetcher().getProductList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    products.Products listProducts =
+                        snapshot.data as products.Products;
+                    return GridView.builder(
+                        primary: false,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.only(
+                            top: 10, bottom: 30, left: 20, right: 20),
+                        itemCount: listProducts.product.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 20,
+                          childAspectRatio: 0.80,
+                        ),
+                        itemBuilder: (context, index) {
+                          return ProductCards(
+                              product: listProducts.product[index]);
+                        });
+                  } else {
+                    return Center(
+                      child: Text("${snapshot.error}"),
+                    );
+                  }
+                }
+              }),
         )
       ],
     ));
   }
 }
-
-/*
-
-
-        Flexible(
-            ),*/
