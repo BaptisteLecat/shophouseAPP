@@ -22,7 +22,7 @@ class _CartCardState extends State<CartCard> {
             opaque: true,
             transitionDuration: const Duration(milliseconds: 500),
             pageBuilder: (BuildContext context, _, __) {
-              return new CartPage();
+              return new CartPage(cart: widget.cart);
             },
             transitionsBuilder:
                 (_, Animation<double> animation, __, Widget child) {
