@@ -5,15 +5,40 @@ import 'package:shophouse/screens/cart/cart/components/ListProduct.dart';
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
-  Widget _generateHeader() {
+  Widget _generateHeader(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 25),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(color: Colors.red, height: 20, width: 20),
-          Text("Camping"),
-          Container(),
+          _generateBackButton(context),
+          Text(
+            "Camping",
+            style: Theme.of(context)
+                .textTheme
+                .headline1!
+                .copyWith(color: Colors.white, fontWeight: FontWeight.w700),
+          ),
+          Container()
         ],
+      ),
+    );
+  }
+
+  Widget _generateBackButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.all(12),
+        height: 45,
+        width: 45,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: Image.asset("assets/icons/ui/left-arrow.png"),
       ),
     );
   }
@@ -24,8 +49,9 @@ class CartPage extends StatelessWidget {
       backgroundColor: primaryColor,
       body: Column(
         children: [
-          Expanded(flex: 2, child: _generateHeader()),
-          Expanded(flex: 4, child: ListProduct()),
+          Expanded(flex: 2, child: _generateHeader(context)),
+          Expanded(flex: 1, child: Container()),
+          Expanded(flex: 7, child: ListProduct()),
         ],
       ),
     );
