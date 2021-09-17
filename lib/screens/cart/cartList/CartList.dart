@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Cart.dart' as carts;
-import 'package:shophouse/screens/cart/components/CartCard.dart';
+import 'package:shophouse/screens/cart/cartList/components/CartCard.dart';
 import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
 
-class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+class CartList extends StatefulWidget {
+  const CartList({Key? key}) : super(key: key);
 
   @override
-  _CartPageState createState() => _CartPageState();
+  _CartListState createState() => _CartListState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartListState extends State<CartList> {
   Container _generateHeader() {
     return Container(
       child: Column(
