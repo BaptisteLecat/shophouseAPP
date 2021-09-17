@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/common/constant/colors.dart';
 
 class CartCard extends StatefulWidget {
-  const CartCard({Key? key}) : super(key: key);
+  Cart cart;
+  CartCard({Key? key, required this.cart}) : super(key: key);
 
   @override
   _CartCardState createState() => _CartCardState();
@@ -33,7 +37,7 @@ class _CartCardState extends State<CartCard> {
             flex: 2,
             child: Padding(
               padding: EdgeInsets.all(10),
-              child: Image.asset('assets/images/cart/036-shopping cart.png'),
+              child: Image.memory(Base64Decoder().convert(widget.cart.icon!)),
             ),
           ),
           SizedBox(
@@ -51,7 +55,7 @@ class _CartCardState extends State<CartCard> {
                     FittedBox(
                         fit: BoxFit.fitHeight,
                         child: Text(
-                          "Vous",
+                          widget.cart.owner!.name!,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
@@ -62,7 +66,7 @@ class _CartCardState extends State<CartCard> {
                     FittedBox(
                       fit: BoxFit.fitHeight,
                       child: Text(
-                        "Camping",
+                        widget.cart.title!,
                         style: Theme.of(context)
                             .textTheme
                             .headline4!
@@ -72,7 +76,7 @@ class _CartCardState extends State<CartCard> {
                     FittedBox(
                         fit: BoxFit.fitHeight,
                         child: Text(
-                          "33 articles",
+                          "${widget.cart.products!.length}",
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
