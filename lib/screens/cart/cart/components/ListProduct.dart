@@ -92,16 +92,6 @@ class _ListProductState extends State<ListProduct> {
               ],
             ),
           ),
-          Container(
-            height: 50,
-            color: Colors.red[500],
-            child: const Center(child: Text('Entry B')),
-          ),
-          Container(
-            height: 50,
-            color: Colors.red[100],
-            child: const Center(child: Text('Entry C')),
-          ),
         ],
       ),
     );
