@@ -1,9 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Cart.dart';
+import 'package:shophouse/Model/Product.dart' as product;
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/cart/cart/components/ListProduct.dart';
+import 'package:shophouse/screens/home/components/products.dart';
+import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+class CartPage extends StatefulWidget {
+  Cart cart;
+  CartPage({Key? key, required this.cart}) : super(key: key);
+
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  late product.Products products;
+
+  void initState() {
+    super.initState();
+    _loadProductData();
+  }
+
+  void _loadProductData() async {
+    print(widget.cart.id!);
+    await CartFetcher()
+        .getCartProductList(int.parse(widget.cart.id!))
+        .then((value) {
+      widget.cart.products = value.product;
+    });
+  }
 
   Widget _generateHeader(BuildContext context) {
     return Container(
@@ -51,7 +77,11 @@ class CartPage extends StatelessWidget {
         children: [
           Expanded(flex: 2, child: _generateHeader(context)),
           Expanded(flex: 1, child: Container()),
-          Expanded(flex: 7, child: ListProduct()),
+          Expanded(
+              flex: 7,
+              child: ListProduct(
+                products: widget.cart.products,
+              )),
         ],
       ),
     );
