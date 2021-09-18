@@ -36,6 +36,7 @@ dependencies:
   flutter_spinkit: ^5.0.0
   shared_preferences: ^2.0.7
   http: ^0.13.3
+  nice_buttons: ^0.0.2
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,8 @@ flutter:
   assets:
     - assets/images/background/landing_bottom.svg
     - assets/images/background/landing_top.svg
+
+    - assets/images/illustrations/
 
     - assets/icons/
     - assets/icons/menu/
