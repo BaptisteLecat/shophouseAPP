@@ -7,21 +7,29 @@ class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<AppUser?> getCurrentUser() async {
-    return await SharedPreferencesUser().getUserId().then((uid) {
-      ///Temporary connection
-      if (uid == "fi2n5a3QGadpdblSHKF53ALiyuG3") {
-        print("uid: $uid");
-        AppUser user = AppUser(
-            uid: uid!,
-            name: "Lecat",
-            firstName: "Baptiste",
-            email: "baptiste.lecat44@gmail.com");
-        print(user.email);
-        return user;
-      } else {
-        return null;
+    dynamic user = null;
+    await SharedPreferencesUser()
+        .getStayConnected()
+        .then((stayConnected) async {
+      if (stayConnected != null) {
+        if (stayConnected) {
+          return await SharedPreferencesUser().getUserId().then((uid) {
+            ///Temporary connection
+            if (uid == "fi2n5a3QGadpdblSHKF53ALiyuG3") {
+              user = AppUser(
+                  uid: uid!,
+                  name: "Lecat",
+                  firstName: "Baptiste",
+                  email: "baptiste.lecat44@gmail.com");
+              return user;
+            } else {
+              return null;
+            }
+          });
+        }
       }
     });
+    return user;
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {
