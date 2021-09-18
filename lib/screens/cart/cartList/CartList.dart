@@ -35,39 +35,41 @@ class _CartListState extends State<CartList> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraint) {
-        return SingleChildScrollView(
+        return Container(
           padding: EdgeInsets.only(top: 60, left: 25, right: 25),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               _generateHeader(),
-              FutureBuilder(
-                  future: UserFetcher().getCarts(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      if (snapshot.hasData && snapshot.data != null) {
-                        carts.Carts listCarts = snapshot.data as carts.Carts;
-                        return ListView.builder(
-                          padding: EdgeInsets.only(top: 25),
-                          primary: false,
-                          shrinkWrap: true,
-                          itemCount: listCarts.cart.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return CartCard(cart: listCarts.cart[index]);
-                          },
+              Expanded(
+                child: FutureBuilder(
+                    future: UserFetcher().getCarts(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
                         );
                       } else {
-                        return Center(
-                          child: Text("${snapshot.error}"),
-                        );
+                        if (snapshot.hasData && snapshot.data != null) {
+                          carts.Carts listCarts = snapshot.data as carts.Carts;
+                          return ListView.builder(
+                            padding: EdgeInsets.only(top: 25),
+                            primary: false,
+                            shrinkWrap: true,
+                            itemCount: listCarts.cart.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CartCard(cart: listCarts.cart[index]);
+                            },
+                          );
+                        } else {
+                          return Center(
+                            child: Text("${snapshot.error}"),
+                          );
+                        }
                       }
-                    }
-                  })
+                    }),
+              )
             ],
           ),
         );
