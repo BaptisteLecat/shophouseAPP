@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Cart.dart' as carts;
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/common/widgets/modal/modalCreateCartForm.dart';
 import 'package:shophouse/screens/cart/cartList/components/CartCard.dart';
 import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
 import 'package:nice_buttons/nice_buttons.dart';
@@ -15,6 +16,13 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
+  late Future<carts.Carts> _cartsData;
+
+  void initState() {
+    _cartsData = UserFetcher().getCarts();
+    super.initState();
+  }
+
   Container _generateHeader() {
     return Container(
       child: Column(
@@ -33,6 +41,21 @@ class _CartListState extends State<CartList> {
         ],
       ),
     );
+  }
+
+  void _displayModal(BuildContext context) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        backgroundColor: Colors.white,
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+            child: ModalCreateCartForm(),
+          );
+        });
   }
 
   @override
@@ -63,8 +86,8 @@ class _CartListState extends State<CartList> {
                           borderThickness: 7,
                           stretch: true,
                           gradientOrientation: GradientOrientation.Horizontal,
-                          onTap: (finish) {
-                            print('On tap called');
+                          onTap: (value) {
+                            _displayModal(context);
                           },
                           child: Container(
                             padding: EdgeInsets.all(8),
@@ -123,7 +146,7 @@ class _CartListState extends State<CartList> {
               Expanded(
                 flex: 4,
                 child: FutureBuilder(
-                    future: UserFetcher().getCarts(),
+                    future: _cartsData,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
