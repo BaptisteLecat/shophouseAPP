@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 
 class QuantityInput extends StatefulWidget {
-  const QuantityInput({Key? key}) : super(key: key);
+  int quantity;
+  QuantityInput({Key? key, required this.quantity}) : super(key: key);
 
   @override
   _QuantityInputState createState() => _QuantityInputState();
@@ -27,7 +28,7 @@ class _QuantityInputState extends State<QuantityInput> {
             flex: 3,
             child: Center(
               child: Text(
-                "2",
+                "${widget.quantity}",
                 style: Theme.of(context).textTheme.headline5,
               ),
             ),

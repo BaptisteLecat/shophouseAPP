@@ -49,7 +49,9 @@ class _ListProductState extends State<ListProduct> {
           Flexible(
               flex: 3,
               child: Container(
-                child: QuantityInput(),
+                child: QuantityInput(
+                  quantity: 3,
+                ),
               ))
         ],
       ),
