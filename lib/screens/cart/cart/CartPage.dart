@@ -39,7 +39,7 @@ class _CartPageState extends State<CartPage> {
         children: [
           _generateBackButton(context),
           Text(
-            "Camping",
+            widget.cart.title!,
             style: Theme.of(context)
                 .textTheme
                 .headline1!
