@@ -96,7 +96,7 @@ class _CartCardState extends State<CartCard> {
                       FittedBox(
                           fit: BoxFit.fitHeight,
                           child: Text(
-                            "${widget.cart.products!.length}",
+                            "${widget.cart.products!.length} articles",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
