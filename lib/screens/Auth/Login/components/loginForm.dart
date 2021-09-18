@@ -6,11 +6,15 @@ class LoginForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  const LoginForm(
+  bool stayConnected = false;
+  ValueChanged<bool> checkBoxCallback;
+  LoginForm(
       {Key? key,
       required this.formKey,
       required this.emailController,
-      required this.passwordController})
+      required this.passwordController,
+      required this.stayConnected,
+      required this.checkBoxCallback})
       : super(key: key);
 
   @override
@@ -94,6 +98,34 @@ class _LoginFormState extends State<LoginForm> {
                       .headline6!
                       .copyWith(color: secondaryColor),
                 ),
+              )
+            ],
+          ),
+          Flex(
+            direction: Axis.horizontal,
+            children: [
+              FormField(
+                builder: (state) {
+                  return Checkbox(
+                      activeColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(color: inputBorder),
+                          borderRadius: BorderRadius.all(Radius.circular(6))),
+                      value: widget.stayConnected,
+                      onChanged: (value) {
+                        setState(() {
+                          widget.stayConnected = value!;
+                        });
+                        widget.checkBoxCallback(widget.stayConnected);
+                      });
+                },
+              ),
+              Text(
+                "Rester connecté",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(color: secondaryColor),
               )
             ],
           )

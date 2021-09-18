@@ -3,6 +3,7 @@ import 'package:shophouse/common/widgets/loading.dart';
 import 'package:shophouse/screens/RootPage.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
+import 'package:shophouse/services/Auth/SharedPreferences.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 import '../../../../services/auth/authentication.dart';
 import 'loginForm.dart';
@@ -15,6 +16,7 @@ class Body extends StatefulWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool stayConnected = false;
   bool loading = false;
   String error = "";
   Body({Key? key}) : super(key: key);
@@ -24,6 +26,13 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  ///This function will be given to the child widget. It will update the value troughout the function.
+  _updateStayConnectedState(bool stayConnected) {
+    setState(() {
+      widget.stayConnected = stayConnected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,16 +43,19 @@ class _BodyState extends State<Body> {
             margin: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
-                Flexible(flex: 3, child: _headerBuilder()),
+                Flexible(flex: 2, child: _headerBuilder()),
                 Flexible(
-                  flex: 5,
+                  flex: 6,
                   child: Flex(
                     children: [
                       Expanded(
                         child: LoginForm(
-                            formKey: widget.formKey,
-                            emailController: widget.emailController,
-                            passwordController: widget.passwordController),
+                          formKey: widget.formKey,
+                          emailController: widget.emailController,
+                          passwordController: widget.passwordController,
+                          stayConnected: widget.stayConnected,
+                          checkBoxCallback: _updateStayConnectedState,
+                        ),
                       ),
                       Center(
                         child: _errorMessage(widget.error),
@@ -53,7 +65,7 @@ class _BodyState extends State<Body> {
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
                 ),
-                Flexible(flex: 3, child: _footerBuilder()),
+                Flexible(flex: 2, child: _footerBuilder()),
               ],
             ),
           );
@@ -93,6 +105,11 @@ class _BodyState extends State<Body> {
                 if (widget.formKey.currentState?.validate() == true) {
                   var password = widget.passwordController.value.text;
                   var email = widget.emailController.value.text;
+
+                  if (widget.stayConnected) {
+                    await SharedPreferencesUser()
+                        .setStayConnected(widget.stayConnected);
+                  }
 
                   dynamic result = await widget._auth
                       .signInWithEmailAndPassword(email, password);
