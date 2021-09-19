@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Cart.dart' as carts;
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/common/widgets/modal/modalAddToCartForm.dart';
 import 'package:shophouse/common/widgets/modal/modalCreateCartForm.dart';
 import 'package:shophouse/screens/cart/cartList/components/CartCard.dart';
 import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
@@ -53,7 +54,7 @@ class _CartListState extends State<CartList> {
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-            child: ModalCreateCartForm(),
+            child: ModalAddToCartForm(), //ModalCreateCartForm(),
           );
         });
   }
