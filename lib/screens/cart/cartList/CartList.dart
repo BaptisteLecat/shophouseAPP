@@ -54,7 +54,7 @@ class _CartListState extends State<CartList> {
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-            child: ModalAddToCartForm(), //ModalCreateCartForm(),
+            child: ModalCreateCartForm(),
           );
         });
   }
