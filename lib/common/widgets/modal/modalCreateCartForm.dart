@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/buttons/cta_button.dart';
+import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 
 class ModalCreateCartForm extends StatefulWidget {
   const ModalCreateCartForm({Key? key}) : super(key: key);
@@ -88,8 +90,19 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: CTAButton(
-                onPressed: () {
-                  Navigator.pop(context);
+                onPressed: () async {
+                  if (this.formKey.currentState!.validate()) {
+                    await CartFetcher()
+                        .createCart(this.cartNameController.text)
+                        .then((value) {
+                      Navigator.pop(context);
+                    }).onError((error, stackTrace){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: errorMessageColor,
+                            content: Text('$error')));
+                    });
+                  }
                 },
                 content: Text(
                   "Valider",

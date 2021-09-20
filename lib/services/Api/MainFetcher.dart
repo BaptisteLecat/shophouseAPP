@@ -31,6 +31,26 @@ class MainFetcher {
     return responseJson;
   }
 
+    Future<dynamic> post(String url, {Map<String, String>? headers, Map<String, dynamic>? body}) async {
+    var responseJson;
+    try {
+      print(_urlBuilder(url));
+      final response = await http.post(Uri.parse(_urlBuilder(url)),
+          headers: headers == null
+              ? {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json",
+                  "X-AUTH-TOKEN": this.userToken
+                }
+              : headers, body: jsonEncode(body));
+      print(body);
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException(message: 'No Internet connection');
+    }
+    return responseJson;
+  }
+
   dynamic _returnResponse(http.Response response) {
     var returnedResponse = jsonDecode(response.body);
     switch (response.statusCode) {
