@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/constant/colors.dart';
 
 class InputNumber extends StatefulWidget {
   int value;
@@ -47,7 +48,13 @@ class _InputNumberState extends State<InputNumber> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("${widget.value}"),
+          Text(
+            "${widget.value}",
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: Colors.black),
+          ),
           Flex(
             direction: Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
