@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Cart.dart';
+import 'package:shophouse/Model/Product.dart';
+import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/buttons/cta_button.dart';
 import 'package:shophouse/common/widgets/inputs/InputNumber/InputNumber.dart';
+import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
+import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
+import 'package:collection/collection.dart';
 
 class ModalAddToCartForm extends StatefulWidget {
-  const ModalAddToCartForm({Key? key}) : super(key: key);
+  Product product;
+  ModalAddToCartForm({Key? key, required this.product}) : super(key: key);
 
   @override
   _ModalAddToCartFormState createState() => _ModalAddToCartFormState();
@@ -13,18 +20,35 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController cartNameController = TextEditingController();
   int quantity = 3;
-  List<String> cartList = [
-    'Android',
-    'IOS',
-    'Flutter',
-    'Node',
-    'Java',
-    'Python',
-    'PHP',
-  ];
+  late Future<Carts> _cartsData;
+  int _selectedValue = 0;
+  Carts? listCart;
+
+  void initState() {
+    _cartsData = UserFetcher().getCarts();
+    super.initState();
+  }
 
   void _updateQuantityState(int quantity) {
     this.quantity = quantity;
+  }
+
+  Future<List<DropdownMenuItem<int>>> _generateDropDownItem() async {
+    List<DropdownMenuItem<int>> listDropDownCart = [];
+    await _cartsData.then((listCart) {
+      this.listCart = listCart;
+      listCart.cart.forEachIndexed((index, cart) {
+        DropdownMenuItem<int> item = DropdownMenuItem<int>(
+          child: Text(cart.title!),
+          value: index,
+        );
+        listDropDownCart.add(item);
+      });
+    }).onError((error, stackTrace) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: errorMessageColor, content: Text('$error')));
+    });
+    return listDropDownCart;
   }
 
   InputDecoration _inputDecorationBuilder({required String hintText}) {
@@ -102,7 +126,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
   }
 
   Container _generateDropDown() {
-    String _value = this.cartList[0];
+    print(_generateDropDownItem());
     return Container(
         margin: EdgeInsets.symmetric(vertical: 20),
         child: Flex(
@@ -118,23 +142,38 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
             ),
             Container(
               height: 60,
-              child: DropdownButtonFormField<String>(
-                decoration: _inputDecorationBuilder(hintText: ""),
-                isExpanded: true,
-                hint: Text("Aucun panier"),
-                value: _value,
-                //elevation: 5,
-                style: TextStyle(color: Colors.black),
+              child: FutureBuilder(
+                future: _generateDropDownItem(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    return DropdownButtonFormField<int>(
+                      decoration: _inputDecorationBuilder(hintText: ""),
+                      isExpanded: true,
+                      hint: Text("Aucun panier"),
+                      value: _selectedValue,
+                      //elevation: 5,
+                      style: TextStyle(color: Colors.black),
 
-                items:
-                    this.cartList.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  _value = value!;
+                      items: snapshot.data as List<DropdownMenuItem<int>>,
+                      onChanged: (value) {
+                        _selectedValue = value!;
+                      },
+                    );
+                  } else {
+                    return DropdownButtonFormField<int>(
+                      decoration: _inputDecorationBuilder(hintText: ""),
+                      isExpanded: true,
+                      hint: Text("Aucun panier"),
+                      value: _selectedValue,
+                      //elevation: 5,
+                      style: TextStyle(color: Colors.black),
+
+                      items: [],
+                      onChanged: (value) {
+                        _selectedValue = value!;
+                      },
+                    );
+                  }
                 },
               ),
             )
@@ -162,7 +201,35 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                       child: Container(
                         height: 50,
                         child: CTAButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (this.formKey.currentState!.validate()) {
+                                if (this.listCart != null) {
+                                  await CartFetcher()
+                                      .addProductInCart(
+                                          cartId: int.parse(this
+                                              .listCart!
+                                              .cart[this._selectedValue]
+                                              .id!),
+                                          productId: widget.product.id!,
+                                          quantity: quantity)
+                                      .then((value) {
+                                    Navigator.pop(context);
+                                  }).onError((error, stackTrace) {
+                                    print(stackTrace);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            backgroundColor: errorMessageColor,
+                                            content: Text('$error')));
+                                  });
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        backgroundColor: errorMessageColor,
+                                        content:
+                                            Text('Aucun panier identifié.')));
+                              }
+                            },
                             content: Text(
                               "Valider",
                               style: Theme.of(context)
