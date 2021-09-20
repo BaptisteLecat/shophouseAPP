@@ -10,8 +10,18 @@ class CartFetcher extends MainFetcher {
   }
 
   Future<Product> createCart(String cartName) async {
-    final response = await this.post("carts", body: {"cartName" : cartName});
+    final response = await this.post("carts", body: {"cartName": cartName});
     print(response);
     return Product.fromJson(response);
+  }
+
+  Future<Products> addProductInCart(
+      {required int cartId,
+      required int productId,
+      required int quantity}) async {
+    final response = await this.post("cart/$cartId/product/$productId",
+        body: {"quantity": quantity.toString()});
+    print(response);
+    return Products.fromJson(response);
   }
 }
