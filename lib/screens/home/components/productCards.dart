@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/common/widgets/modal/modalAddToCartForm.dart';
 
 class ProductCards extends StatefulWidget {
   Product product;
@@ -16,13 +17,35 @@ class ProductCards extends StatefulWidget {
 
 class _ProductCardsState extends State<ProductCards> {
   Widget _generateAddCartInput() {
-    return Container(
-      height: 46,
-      width: 46,
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
-      child: Image.asset("assets/icons/shopping.png"),
+    return GestureDetector(
+      onTap: () {
+        _displayModal(context);
+      },
+      child: Container(
+        height: 46,
+        width: 46,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
+        child: Image.asset("assets/icons/shopping.png"),
+      ),
     );
+  }
+
+  void _displayModal(BuildContext context) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        backgroundColor: Colors.white,
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+            child: ModalAddToCartForm(
+              product: widget.product,
+            ),
+          );
+        });
   }
 
   Widget _generateProductName() {
