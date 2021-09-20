@@ -68,8 +68,7 @@ class MainFetcher {
       case 500:
       default:
         throw FetchDataException(
-            message:
-                'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
+            message: "${returnedResponse["message"]} : ${response.statusCode}");
     }
   }
 }
