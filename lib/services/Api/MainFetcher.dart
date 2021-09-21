@@ -4,15 +4,27 @@ import 'package:http/http.dart' as http;
 import 'package:shophouse/common/error/api/ApiException.dart';
 import 'dart:convert';
 
+import 'package:shophouse/services/Auth/SharedPreferences.dart';
+
 class MainFetcher {
-  String userToken = "15sdf";
+  static String userToken = "noToken";
   String apiUrl = "https://shophouse.alwaysdata.net";
 
   String _urlBuilder(String subUrl) {
     return "${this.apiUrl}/$subUrl";
   }
 
+  setUserToken() async {
+    await SharedPreferencesUser().getToken().then((value) {
+      print("test");
+      MainFetcher.userToken = value!;
+    }).onError((error, stackTrace) {
+      throw Exception("Aucun token fournit.");
+    });
+  }
+
   Future<dynamic> get(String url, [Map<String, String>? headers]) async {
+    print(MainFetcher.userToken);
     var responseJson;
     try {
       print(_urlBuilder(url));
@@ -21,7 +33,7 @@ class MainFetcher {
               ? {
                   "Content-Type": "application/json",
                   "Accept": "application/json",
-                  "X-AUTH-TOKEN": this.userToken
+                  "X-AUTH-TOKEN": MainFetcher.userToken
                 }
               : headers);
       responseJson = _returnResponse(response);
@@ -41,7 +53,7 @@ class MainFetcher {
               ? {
                   "Accept": "application/json",
                   "Content-Type": "application/x-www-form-urlencoded",
-                  "X-AUTH-TOKEN": this.userToken
+                  "X-AUTH-TOKEN": MainFetcher.userToken
                 }
               : headers,
           body: body,
@@ -63,7 +75,7 @@ class MainFetcher {
               ? {
                   "Accept": "application/json",
                   "Content-Type": "application/x-www-form-urlencoded",
-                  "X-AUTH-TOKEN": this.userToken
+                  "X-AUTH-TOKEN": MainFetcher.userToken
                 }
               : headers,
           body: jsonEncode(body),

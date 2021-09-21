@@ -2,6 +2,10 @@ import 'package:shophouse/services/Api/MainFetcher.dart';
 import 'package:shophouse/Model/Category.dart';
 
 class CategoryFetcher extends MainFetcher {
+  CategoryFetcher() {
+    this.setUserToken();
+  }
+
   Future<Categories> getCategoryList() async {
     final response = await this.get("categories");
     print(response);

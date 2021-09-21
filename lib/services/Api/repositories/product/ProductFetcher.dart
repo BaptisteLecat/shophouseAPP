@@ -3,6 +3,10 @@ import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/services/Api/MainFetcher.dart';
 
 class ProductFetcher extends MainFetcher {
+  ProductFetcher() {
+    this.setUserToken();
+  }
+
   Future<Products> getProductList() async {
     final response = await this.get("products");
     print(response);
