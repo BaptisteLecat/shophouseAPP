@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shophouse/Model/AppUser.dart';
 import 'package:shophouse/common/error/AuthException.dart';
+import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
 import 'SharedPreferences.dart';
 
 class AuthenticationService {
@@ -13,14 +14,14 @@ class AuthenticationService {
         .then((stayConnected) async {
       if (stayConnected != null) {
         if (stayConnected) {
-          return await SharedPreferencesUser().getUserId().then((uid) {
-            ///Temporary connection
-            if (uid == "fi2n5a3QGadpdblSHKF53ALiyuG3") {
-              user = AppUser(
-                  uid: uid!,
-                  name: "Lecat",
-                  firstName: "Baptiste",
-                  email: "baptiste.lecat44@gmail.com");
+          return await SharedPreferencesUser().getToken().then((token) async {
+            if (token != null) {
+              print(token);
+              await UserFetcher().whoAmI(token: token).then((appUser) {
+                user = appUser;
+              }).onError((error, stackTrace) {
+                return null;
+              });
               return user;
             } else {
               return null;
@@ -40,9 +41,9 @@ class AuthenticationService {
       if (!user!.emailVerified) {
         throw new FirebaseAuthException(code: "email-not-verified");
       } else {
-        ///Save user ID in shared_preferences
-        SharedPreferencesUser().setUserId(user.uid);
-        SharedPreferencesUser().getUserId().then((value) => print(value));
+        await UserFetcher().whoAmI(id: user.uid).then((appUser) {
+          SharedPreferencesUser().setToken(appUser.token);
+        });
       }
       return user;
     } on FirebaseAuthException catch (e) {
@@ -67,7 +68,8 @@ class AuthenticationService {
     return _auth.currentUser!.email;
   }
 
-  Future registerInWithEmailAndPassword(String email, String password) async {
+  Future registerInWithEmailAndPassword(
+      String email, String password, String name, String firstName) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -75,8 +77,8 @@ class AuthenticationService {
 
       if (user != null) {
         await user.sendEmailVerification();
+        await UserFetcher().register(user.uid, name, firstName, email);
       }
-      //TODO créer un nouveau user dans firestore
 
       return user;
     } catch (e) {
