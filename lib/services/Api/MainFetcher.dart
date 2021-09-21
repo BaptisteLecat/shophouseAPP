@@ -53,6 +53,28 @@ class MainFetcher {
     return responseJson;
   }
 
+  Future<dynamic> patch(String url,
+      {Map<String, String>? headers, Map<String, dynamic>? body}) async {
+    var responseJson;
+    try {
+      print(_urlBuilder(url));
+      final response = await http.patch(Uri.parse(_urlBuilder(url)),
+          headers: headers == null
+              ? {
+                  "Accept": "application/json",
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  "X-AUTH-TOKEN": this.userToken
+                }
+              : headers,
+          body: jsonEncode(body),
+          encoding: Utf8Codec());
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException(message: 'No Internet connection');
+    }
+    return responseJson;
+  }
+
   dynamic _returnResponse(http.Response response) {
     var returnedResponse = jsonDecode(response.body);
     switch (response.statusCode) {

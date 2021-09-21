@@ -32,7 +32,18 @@ class _CartPageState extends State<CartPage> {
 
   void _sendQuantityUpdates() {
     if (this.quantityIsUpdated) {
-      print(widget.cart.listProductsToJson());
+      CartFetcher().updateListProduct(cart: widget.cart).then((carts) {
+        this.quantityIsUpdated = false;
+        widget.cart = carts.cart[0];
+        setState(() {});
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: successMessageColor,
+            content: Text('La quantité des produits a été modifiée.')));
+      }).onError((error, stackTrace) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: errorMessageColor,
+            content: Text('$error')));
+      });
     }
   }
 
