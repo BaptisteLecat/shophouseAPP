@@ -128,9 +128,12 @@ class _BodyState extends State<Body> {
                   });
                   var password = widget.passwordController.value.text;
                   var email = widget.emailController.value.text;
+                  var name = widget.nameController.value.text;
+                  var firstname = widget.firstNameController.value.text;
 
                   dynamic result = await widget._auth
-                      .registerInWithEmailAndPassword(email, password);
+                      .registerInWithEmailAndPassword(
+                          email, password, name, firstname);
                   if (!(result is User)) {
                     setState(() {
                       widget.loading = false;
