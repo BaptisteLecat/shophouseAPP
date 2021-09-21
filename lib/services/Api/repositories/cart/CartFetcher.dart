@@ -1,3 +1,4 @@
+import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/services/Api/MainFetcher.dart';
 import 'package:shophouse/Model/Category.dart';
@@ -15,13 +16,12 @@ class CartFetcher extends MainFetcher {
     return Product.fromJson(response);
   }
 
-  Future<Products> addProductInCart(
+  Future<Carts> addProductInCart(
       {required int cartId,
       required int productId,
       required int quantity}) async {
     final response = await this.post("cart/$cartId/product/$productId",
         body: {"quantity": quantity.toString()});
-    print(response);
-    return Products.fromJson(response);
+    return Carts.fromJson(response);
   }
 }
