@@ -214,6 +214,12 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                                           quantity: quantity)
                                       .then((value) {
                                     Navigator.pop(context);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            backgroundColor:
+                                                successMessageColor,
+                                            content: Text(
+                                                'Le produit a été ajouté au panier!')));
                                   }).onError((error, stackTrace) {
                                     print(stackTrace);
                                     ScaffoldMessenger.of(context).showSnackBar(

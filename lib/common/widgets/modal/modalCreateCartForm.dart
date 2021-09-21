@@ -96,11 +96,13 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
                         .createCart(this.cartNameController.text)
                         .then((value) {
                       Navigator.pop(context);
-                    }).onError((error, stackTrace){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: errorMessageColor,
-                            content: Text('$error')));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: successMessageColor,
+                          content: Text('Votre panier a été créer avec succès!')));
+                    }).onError((error, stackTrace) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: errorMessageColor,
+                          content: Text('$error')));
                     });
                   }
                 },
