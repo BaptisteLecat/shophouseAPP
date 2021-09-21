@@ -1,19 +1,37 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/cart/cart/components/QuantityInput.dart';
 
 class ListProduct extends StatefulWidget {
+  ValueChanged<List<Product>?> listProductCallback;
   List<Product>? products;
-  ListProduct({Key? key, required this.products}) : super(key: key);
+  Cart cart;
+  ListProduct(
+      {Key? key,
+      required this.products,
+      required this.cart,
+      required this.listProductCallback})
+      : super(key: key);
 
   @override
   _ListProductState createState() => _ListProductState();
 }
 
 class _ListProductState extends State<ListProduct> {
+  ///This function will be given to the child widget. It will update the value troughout the function.
+  _updateProductQuantity(Product product) {
+    widget.products![_findIndexOfProduct(product)].quantity = product.quantity;
+    widget.listProductCallback(widget.products!);
+  }
+
+  int _findIndexOfProduct(Product queryProduct) {
+    return widget.products!.indexOf(queryProduct);
+  }
+
   Widget _generateContent(Product product) {
     return FittedBox(
       fit: BoxFit.fitHeight,
@@ -50,7 +68,8 @@ class _ListProductState extends State<ListProduct> {
               flex: 3,
               child: Container(
                 child: QuantityInput(
-                  quantity: 3,
+                  product: product,
+                  quantityCallback: _updateProductQuantity,
                 ),
               ))
         ],

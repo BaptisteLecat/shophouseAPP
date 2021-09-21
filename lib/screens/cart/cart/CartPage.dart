@@ -16,10 +16,24 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   late product.Products products;
+  bool quantityIsUpdated = false;
 
   void initState() {
     super.initState();
     _loadProductData();
+  }
+
+  ///This function will be given to the child widget. It will update the value troughout the function.
+  _updateProductList(List<product.Product>? listProduct) {
+    widget.cart.products = listProduct;
+    this.quantityIsUpdated = true;
+    setState(() {});
+  }
+
+  void _sendQuantityUpdates() {
+    if (this.quantityIsUpdated) {
+      print(widget.cart.listProductsToJson());
+    }
   }
 
   void _loadProductData() async {
@@ -76,11 +90,47 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         children: [
           Expanded(flex: 2, child: _generateHeader(context)),
-          Expanded(flex: 1, child: Container()),
+          Expanded(
+              flex: 1,
+              child: Container(
+                child: Visibility(
+                    visible: this.quantityIsUpdated,
+                    child: Flex(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      direction: Axis.horizontal,
+                      children: [
+                        TextButton(
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 36, vertical: 6)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.white),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ))),
+                            onPressed: () {
+                              _sendQuantityUpdates();
+                            },
+                            child: Text("Modifier les quantités",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(
+                                        color: successMessageColor,
+                                        fontWeight: FontWeight.w600)))
+                      ],
+                    )),
+              )),
           Expanded(
               flex: 7,
               child: ListProduct(
                 products: widget.cart.products,
+                cart: widget.cart,
+                listProductCallback: _updateProductList,
               )),
         ],
       ),

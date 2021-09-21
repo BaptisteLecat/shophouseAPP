@@ -67,4 +67,8 @@ class Cart {
         "family_id": familyId == null ? null : familyId,
         "owner": owner == null ? null : owner!.toJson(),
       };
+
+  Map<String, dynamic> listProductsToJson() => {
+        "list_products": List<dynamic>.from(products!.map((x) => x.toJson())),
+      };
 }

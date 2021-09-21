@@ -15,3 +15,4 @@ const inputBorder = Color(0xffC5CCDA);
 
 const errorMessageColor = Color(0xffE44747);
 const successMessageColor = Color(0xff6FA492);
+const validateColor = Color(0xff59AE05);
