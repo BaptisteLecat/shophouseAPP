@@ -86,13 +86,13 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            "Vous revoilà !",
+            "Ajouter un article",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
           SizedBox(height: 6),
           Text(
-            "Ravi de vous retrouver. Connectez-vous pour reprendre vos courses.",
+            "Indiquez la quantité et le panier dans lequel vous souhaitez ajouter l’article.",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline6,
           )

@@ -49,13 +49,13 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            "Vous revoilà !",
+            "Créer un panier",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
           SizedBox(height: 6),
           Text(
-            "Ravi de vous retrouver. Connectez-vous pour reprendre vos courses.",
+            "Commencez vos courses maintenant en créant un panier.",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline6,
           )
@@ -98,7 +98,8 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: successMessageColor,
-                          content: Text('Votre panier a été créer avec succès!')));
+                          content:
+                              Text('Votre panier a été créer avec succès!')));
                     }).onError((error, stackTrace) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: errorMessageColor,
