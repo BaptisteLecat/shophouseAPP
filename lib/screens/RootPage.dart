@@ -62,22 +62,29 @@ class _RootPageState extends State<RootPage> {
     return Scaffold(
         bottomNavigationBar: FABBottomAppBar(
           backgroundColor: Colors.white,
-          color: Colors.grey,
-          selectedColor: Colors.red,
+          color: Colors.black,
+          selectedColor: primaryColor,
           notchedShape: CircularNotchedRectangle(),
           onTabSelected: _selectedTab,
           items: [
             FABBottomAppBarItem(
                 iconData: AssetImage("assets/icons/menu/home.png"),
+                selectedIconData: AssetImage("assets/icons/menu/home_selected.png"),
                 text: 'Home'),
             FABBottomAppBarItem(
                 iconData: AssetImage("assets/icons/menu/shopping-cart.png"),
+                selectedIconData:
+                    AssetImage("assets/icons/menu/shopping-cart_selected.png"),
                 text: 'Cart'),
             FABBottomAppBarItem(
                 iconData: AssetImage("assets/icons/menu/family.png"),
+                selectedIconData:
+                    AssetImage("assets/icons/menu/family_selected.png"),
                 text: 'Family'),
             FABBottomAppBarItem(
                 iconData: AssetImage("assets/icons/menu/user.png"),
+                selectedIconData:
+                    AssetImage("assets/icons/menu/user_selected.png"),
                 text: 'Account'),
           ],
         ),

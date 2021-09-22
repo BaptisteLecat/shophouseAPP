@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class FABBottomAppBarItem {
-  FABBottomAppBarItem({required this.iconData, required this.text});
+  FABBottomAppBarItem(
+      {required this.iconData,
+      required this.selectedIconData,
+      required this.text});
   AssetImage iconData;
+  AssetImage selectedIconData;
   String text;
 }
 
@@ -85,6 +89,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     required ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    ImageProvider<Object>? icon = _selectedIndex == index ? item.selectedIconData : item.iconData;
     return Expanded(
       child: SizedBox(
         height: widget.height,
@@ -96,10 +101,10 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                ImageIcon(item.iconData, color: color, size: widget.iconSize),
+                ImageIcon(icon, color: color, size: widget.iconSize),
                 Text(
                   item.text,
-                  style: TextStyle(color: color),
+                  style: TextStyle(color: color, fontWeight: FontWeight.w500),
                 )
               ],
             ),
