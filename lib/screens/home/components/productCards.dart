@@ -24,7 +24,7 @@ class _ProductCardsState extends State<ProductCards> {
       child: Container(
         height: 46,
         width: 46,
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(6),
         decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
         child: Image.asset("assets/icons/shopping.png"),
       ),
@@ -61,7 +61,7 @@ class _ProductCardsState extends State<ProductCards> {
     return Container(
       padding: EdgeInsets.only(top: 5),
       child: Text(
-        "il y a 2 jours",
+        "2 jours",
         style: Theme.of(context).textTheme.bodyText1,
       ),
     );
@@ -120,7 +120,7 @@ class _ProductCardsState extends State<ProductCards> {
                   offset: Offset(0, 2), // changes position of shadow
                 ),
               ],
-              borderRadius: BorderRadius.all(Radius.circular(24)),
+              borderRadius: BorderRadius.all(Radius.circular(18)),
               color: Colors.white),
           child: Column(
             children: [
