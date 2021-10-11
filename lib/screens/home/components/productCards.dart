@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/modal/modalAddToCartForm.dart';
+import 'package:shophouse/screens/product/ProductPage.dart';
 
 class ProductCards extends StatefulWidget {
   Product product;
@@ -108,7 +109,24 @@ class _ProductCardsState extends State<ProductCards> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
+        onTap: () {
+                  Navigator.of(context).push(new PageRouteBuilder(
+              opaque: true,
+              transitionDuration: const Duration(milliseconds: 500),
+              pageBuilder: (BuildContext context, _, __) {
+                return new ProductPage();
+              },
+              transitionsBuilder:
+                  (_, Animation<double> animation, __, Widget child) {
+                return new SlideTransition(
+                  child: child,
+                  position: new Tween<Offset>(
+                    begin: Offset(2, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
+                );
+              }));
+        },
         child: Container(
           padding: EdgeInsets.only(top: 15, left: 6, right: 6, bottom: 6),
           decoration: BoxDecoration(

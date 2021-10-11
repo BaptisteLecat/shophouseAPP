@@ -8,6 +8,10 @@ const primaryColorLessOpacity = Color(0x21FDAB53);
 const secondaryColor = Color(0xff3D5382);
 const secondaryColorLessOpacity = Color(0x993D5382);
 
+const backgroundColorProduct = Color(0xffEDF6FF);
+
+const lightGreyColor = Color(0xffE8E6E6);
+
 const bodyTextColor = Color(0xffC3C3C3);
 
 const inputBackground = Color(0xffEEEEEE);
