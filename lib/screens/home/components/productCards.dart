@@ -114,7 +114,7 @@ class _ProductCardsState extends State<ProductCards> {
               opaque: true,
               transitionDuration: const Duration(milliseconds: 500),
               pageBuilder: (BuildContext context, _, __) {
-                return new ProductPage();
+                return new ProductPage(product: widget.product,);
               },
               transitionsBuilder:
                   (_, Animation<double> animation, __, Widget child) {

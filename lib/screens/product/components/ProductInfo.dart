@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/buttons/cta_button.dart';
 
 class ProductInfo extends StatefulWidget {
-  const ProductInfo({Key? key}) : super(key: key);
+  Product product;
+  ProductInfo({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductInfoState createState() => _ProductInfoState();
@@ -24,16 +26,19 @@ class _ProductInfoState extends State<ProductInfo> {
             ],
             borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
             color: Colors.white),
-        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 40),
+        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flex(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               direction: Axis.horizontal,
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                     height: 6,
                     width: 60,
@@ -43,29 +48,56 @@ class _ProductInfoState extends State<ProductInfo> {
               ],
             ),
             Text(
-              "Salade",
+              widget.product.label!,
               style: Theme.of(context).textTheme.headline3,
             ),
             Row(
               children: [
                 Container(
-                  child: Text("Description"),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: primaryColor, width: 2),
+                    ),
+                  ),
+                  child: Text("Description",
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                            fontSize: 16,
+                          )),
+                ),
+                SizedBox(
+                  width: 25,
                 ),
                 Container(
-                  child: Text("Détails"),
+                  child: Text(
+                    "Détails",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ],
             ),
-            Text(
-                "Une grande richesse en fibres: indispensable pour assurer un bon transit, détoxifier l’organisme, bien nourrir le microbiote (et empêcher la prolifération des bactéries pathogènes), ralentir la charge glycémique et amener rapidement à satiété.",
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      height: 1.9,
-                    )),
+            Container(
+              height: 160,
+              child: Text(
+                widget.product.description!,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(height: 1.9, overflow: TextOverflow.ellipsis),
+                maxLines: 6,
+              ),
+            ),
             Flex(
               direction: Axis.horizontal,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CTAButton(onPressed: () {}, content: Text("Ajouter au panier"))
+                CTAButton(
+                    onPressed: () {},
+                    content: Text(
+                      "Ajouter au panier",
+                      style: TextStyle(color: Colors.white),
+                    ))
               ],
             )
           ],
