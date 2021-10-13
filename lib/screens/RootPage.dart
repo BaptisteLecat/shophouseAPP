@@ -69,7 +69,8 @@ class _RootPageState extends State<RootPage> {
           items: [
             FABBottomAppBarItem(
                 iconData: AssetImage("assets/icons/menu/home.png"),
-                selectedIconData: AssetImage("assets/icons/menu/home_selected.png"),
+                selectedIconData:
+                    AssetImage("assets/icons/menu/home_selected.png"),
                 text: 'Home'),
             FABBottomAppBarItem(
                 iconData: AssetImage("assets/icons/menu/shopping-cart.png"),
@@ -102,6 +103,6 @@ class _RootPageState extends State<RootPage> {
             onPressed: () {},
           ),
         ),
-        body: displayedPage);
+        body: SafeArea(child: displayedPage));
   }
 }
