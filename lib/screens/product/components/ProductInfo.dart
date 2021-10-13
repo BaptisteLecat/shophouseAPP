@@ -81,10 +81,11 @@ class _ProductInfoState extends State<ProductInfo> {
               height: 160,
               child: Text(
                 widget.product.description!,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
-                    .copyWith(height: 1.9, overflow: TextOverflow.ellipsis),
+                    .copyWith(height: 1.9),
                 maxLines: 6,
               ),
             ),
