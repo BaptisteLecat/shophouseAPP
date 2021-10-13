@@ -103,7 +103,6 @@ class _HomePageState extends State<HomePage> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(top: 60),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

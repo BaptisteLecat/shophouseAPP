@@ -64,7 +64,7 @@ class _CartListState extends State<CartList> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return Container(
-          padding: EdgeInsets.only(top: 60, left: 25, right: 25),
+          padding: EdgeInsets.only(left: 25, right: 25),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
