@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Category.dart';
 import 'package:shophouse/Model/Product.dart' as products;
 import 'package:shophouse/screens/home/components/productCards.dart';
 import 'package:shophouse/services/Api/repositories/product/ProductFetcher.dart';
 
 class Products extends StatefulWidget {
-  const Products({Key? key}) : super(key: key);
+  Category? selectedCategory;
+  Products({Key? key, this.selectedCategory}) : super(key: key);
 
   @override
   _ProductsState createState() => _ProductsState();
@@ -29,7 +31,10 @@ class _ProductsState extends State<Products> {
         ),
         Container(
           child: FutureBuilder(
-              future: ProductFetcher().getProductList(),
+              future: ProductFetcher().getProductList(
+                  categoryId: (widget.selectedCategory != null)
+                      ? widget.selectedCategory!.id
+                      : null),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(

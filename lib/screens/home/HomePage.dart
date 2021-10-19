@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shophouse/Model/Category.dart' as category;
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
 import 'package:shophouse/screens/home/components/products.dart';
@@ -15,6 +16,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> formKey =
       GlobalKey<FormState>(debugLabel: '_homeScreenkey');
+  category.Category? selectedCategory;
+
+  void _updateSelectedCategory(category.Category category) {
+    setState(() {
+      this.selectedCategory = category;
+    });
+  }
 
   Widget _generateSearchBar() {
     return Center(
@@ -115,8 +123,12 @@ class _HomePageState extends State<HomePage> {
                 fit: FlexFit.loose,
                 child: _generateSearchBar(),
               ),
-              Categories(),
-              Products()
+              Categories(
+                updateCategory: _updateSelectedCategory,
+              ),
+              Products(
+                selectedCategory: this.selectedCategory,
+              )
             ],
           ),
         );

@@ -7,8 +7,9 @@ class ProductFetcher extends MainFetcher {
     this.setUserToken();
   }
 
-  Future<Products> getProductList() async {
-    final response = await this.get("products");
+  Future<Products> getProductList({int? categoryId}) async {
+    String filter = (categoryId != null) ? "?categoryId=$categoryId" : "";
+    final response = await this.get("products$filter");
     print(response);
     return Products.fromJson(response);
   }

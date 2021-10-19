@@ -7,7 +7,8 @@ import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/services/Api/repositories/category/CategoryFetcher.dart';
 
 class Categories extends StatefulWidget {
-  const Categories({Key? key}) : super(key: key);
+  final ValueChanged<category.Category> updateCategory;
+  const Categories({Key? key, required this.updateCategory}) : super(key: key);
 
   @override
   _CategoriesState createState() => _CategoriesState();
@@ -39,6 +40,7 @@ class _CategoriesState extends State<Categories> {
       onTap: () {
         setState(() {
           _selectedIndex = index;
+          widget.updateCategory(listCategory.category[_selectedIndex]);
         });
       },
       child: Padding(
