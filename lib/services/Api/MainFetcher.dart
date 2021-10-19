@@ -33,7 +33,7 @@ class MainFetcher {
               ? {
                   "Content-Type": "application/json",
                   "Accept": "application/json",
-                  "X-AUTH-TOKEN": MainFetcher.userToken
+                  "Authorization": "Bearer ${MainFetcher.userToken}"
                 }
               : headers);
       responseJson = _returnResponse(response);
@@ -53,7 +53,7 @@ class MainFetcher {
               ? {
                   "Accept": "application/json",
                   "Content-Type": "application/x-www-form-urlencoded",
-                  "X-AUTH-TOKEN": MainFetcher.userToken
+                  "Authorization": "Bearer ${MainFetcher.userToken}"
                 }
               : headers,
           body: body,
@@ -75,7 +75,7 @@ class MainFetcher {
               ? {
                   "Accept": "application/json",
                   "Content-Type": "application/x-www-form-urlencoded",
-                  "X-AUTH-TOKEN": MainFetcher.userToken
+                  "Authorization": "Bearer ${MainFetcher.userToken}"
                 }
               : headers,
           body: jsonEncode(body),
