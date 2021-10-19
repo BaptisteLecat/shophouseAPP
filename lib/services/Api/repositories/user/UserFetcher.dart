@@ -13,9 +13,11 @@ class UserFetcher extends MainFetcher {
     return Carts.fromJson(response);
   }
 
-  Future<AppUser> whoAmI({String? id, String? token}) async {
-    final response = await this
-        .post("login", body: (id != null) ? {"id": id} : {"token": token});
+  Future<AppUser> whoAmI({String? id, String? email, String? token}) async {
+    final response = await this.post("login",
+        body: (id != null && email != null)
+            ? {"id": id, "email": email}
+            : {"token": token});
     print(response);
     return AppUser.fromJson(response);
   }

@@ -41,7 +41,9 @@ class AuthenticationService {
       if (!user!.emailVerified) {
         throw new FirebaseAuthException(code: "email-not-verified");
       } else {
-        await UserFetcher().whoAmI(id: user.uid).then((appUser) {
+        await UserFetcher()
+            .whoAmI(id: user.uid, email: user.email)
+            .then((appUser) {
           SharedPreferencesUser().setToken(appUser.token);
         });
       }
