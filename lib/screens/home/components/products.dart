@@ -44,23 +44,37 @@ class _ProductsState extends State<Products> {
                   if (snapshot.hasData && snapshot.data != null) {
                     products.Products listProducts =
                         snapshot.data as products.Products;
-                    return GridView.builder(
-                        primary: false,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.only(
-                            top: 10, bottom: 30, left: 20, right: 20),
-                        itemCount: listProducts.product.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 20,
-                          childAspectRatio: 0.80,
+                    if (listProducts.product.length < 1) {
+                      return Container(
+                        height: 140,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Aucun produit pour cette catégorie.")
+                          ],
                         ),
-                        itemBuilder: (context, index) {
-                          return ProductCards(
-                              product: listProducts.product[index]);
-                        });
+                      );
+                    } else {
+                      return GridView.builder(
+                          primary: false,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: 30, left: 20, right: 20),
+                          itemCount: listProducts.product.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 20,
+                            childAspectRatio: 0.80,
+                          ),
+                          itemBuilder: (context, index) {
+                            return ProductCards(
+                                product: listProducts.product[index]);
+                          });
+                    }
                   } else {
                     return Center(
                       child: Text("${snapshot.error}"),

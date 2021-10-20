@@ -17,6 +17,7 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> {
   int _selectedIndex = 0;
   late Future<category.Categories> _categoriesData;
+  bool startInit = true;
 
   void initState() {
     _categoriesData = CategoryFetcher().getCategoryList();
@@ -72,8 +73,11 @@ class _CategoriesState extends State<Categories> {
                     color:
                         _isSelected(index) ? Colors.white : Color(0xffF0F4F9),
                     shape: BoxShape.circle),
-                child: Image.memory(
-                    Base64Decoder().convert(_getIcon(index, listCategory))),
+                child: (index > 0)
+                    ? Image.memory(
+                        Base64Decoder().convert(_getIcon(index, listCategory)))
+                    : Image.asset(
+                        "assets/images/illustrations/shopping-cart.png"),
               ),
               Text(
                 _getLabel(index, listCategory),
@@ -119,6 +123,13 @@ class _CategoriesState extends State<Categories> {
                         if (snapshot.hasData && snapshot.data != null) {
                           category.Categories listCategory =
                               snapshot.data as category.Categories;
+                          if (this.startInit) {
+                            listCategory.category.insert(
+                                0,
+                                category.Category(
+                                    id: null, label: "Tout", picture: "all"));
+                            this.startInit = false;
+                          }
                           return ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
