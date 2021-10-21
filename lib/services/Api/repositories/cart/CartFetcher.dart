@@ -14,10 +14,10 @@ class CartFetcher extends MainFetcher {
     return Products.fromJson(response);
   }
 
-  Future<Product> createCart(String cartName) async {
+  Future<Carts> createCart(String cartName) async {
     final response = await this.post("carts", body: {"cartName": cartName});
     print(response);
-    return Product.fromJson(response);
+    return Carts.fromJson(response);
   }
 
   Future<Carts> addProductInCart(

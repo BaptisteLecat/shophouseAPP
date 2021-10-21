@@ -8,7 +8,9 @@ import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 
 class CartPage extends StatefulWidget {
   Cart cart;
-  CartPage({Key? key, required this.cart}) : super(key: key);
+  bool isCreated;
+  CartPage({Key? key, required this.cart, this.isCreated = false})
+      : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();
@@ -21,6 +23,10 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     super.initState();
     _loadProductData();
+  }
+
+  void dispose() {
+    super.dispose();
   }
 
   ///This function will be given to the child widget. It will update the value troughout the function.
@@ -41,8 +47,7 @@ class _CartPageState extends State<CartPage> {
             content: Text('La quantité des produits a été modifiée.')));
       }).onError((error, stackTrace) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: errorMessageColor,
-            content: Text('$error')));
+            backgroundColor: errorMessageColor, content: Text('$error')));
       });
     }
   }
@@ -96,6 +101,13 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isCreated) {
+      Future.delayed(const Duration(seconds: 1), () {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: successMessageColor,
+            content: Text('Votre panier a été créer avec succès!')));
+      });
+    }
     return Scaffold(
       backgroundColor: primaryColor,
       body: Column(

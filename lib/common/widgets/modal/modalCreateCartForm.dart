@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/buttons/cta_button.dart';
+import 'package:shophouse/screens/cart/cart/CartPage.dart';
 import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 
 class ModalCreateCartForm extends StatefulWidget {
@@ -13,6 +14,11 @@ class ModalCreateCartForm extends StatefulWidget {
 class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController cartNameController = TextEditingController();
+
+  @override
+  dispose() {
+    super.dispose();
+  }
 
   InputDecoration _inputDecorationBuilder({required String hintText}) {
     return InputDecoration(
@@ -94,13 +100,29 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
                   if (this.formKey.currentState!.validate()) {
                     await CartFetcher()
                         .createCart(this.cartNameController.text)
-                        .then((value) {
+                        .then((cartList) async {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: successMessageColor,
-                          content:
-                              Text('Votre panier a été créer avec succès!')));
+                      await Navigator.of(context).push(new PageRouteBuilder(
+                          opaque: true,
+                          transitionDuration: const Duration(milliseconds: 500),
+                          pageBuilder: (BuildContext context, _, __) {
+                            return new CartPage(
+                              cart: cartList.cart[0],
+                              isCreated: true,
+                            );
+                          },
+                          transitionsBuilder: (_, Animation<double> animation,
+                              __, Widget child) {
+                            return new SlideTransition(
+                              child: child,
+                              position: new Tween<Offset>(
+                                begin: Offset(2, 0),
+                                end: Offset.zero,
+                              ).animate(animation),
+                            );
+                          }));
                     }).onError((error, stackTrace) {
+                      print(error);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: errorMessageColor,
                           content: Text('$error')));

@@ -24,6 +24,10 @@ class _CartListState extends State<CartList> {
     super.initState();
   }
 
+  void dispose() {
+    super.dispose();
+  }
+
   Container _generateHeader() {
     return Container(
       child: Column(
