@@ -48,8 +48,8 @@ class _CartListState extends State<CartList> {
     );
   }
 
-  void _displayModal(BuildContext context) {
-    showModalBottomSheet(
+  void _displayModal(BuildContext context) async {
+    await showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
         backgroundColor: Colors.white,
@@ -60,7 +60,11 @@ class _CartListState extends State<CartList> {
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
             child: ModalCreateCartForm(),
           );
-        });
+        }).then((value) {
+      setState(() {
+        _cartsData = UserFetcher().getCarts();
+      });
+    });
   }
 
   @override

@@ -84,7 +84,8 @@ class _CartPageState extends State<CartPage> {
   Widget _generateBackButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
+        int count = 0;
+        Navigator.of(context).popUntil((_) => count++ >= 1);
       },
       child: Container(
         padding: EdgeInsets.all(12),
