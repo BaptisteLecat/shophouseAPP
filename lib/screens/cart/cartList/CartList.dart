@@ -78,7 +78,7 @@ class _CartListState extends State<CartList> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Container(
                     padding: EdgeInsets.only(bottom: 10),
                     child: Column(
@@ -153,7 +153,7 @@ class _CartListState extends State<CartList> {
                     ),
                   )),
               Expanded(
-                flex: 4,
+                flex: 5,
                 child: FutureBuilder(
                     future: _cartsData,
                     builder: (context, snapshot) {
