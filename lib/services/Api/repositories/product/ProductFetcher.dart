@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/services/Api/MainFetcher.dart';
 

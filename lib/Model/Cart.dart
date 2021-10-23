@@ -2,7 +2,6 @@
 //
 //     final carts = cartsFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:shophouse/Model/Owner.dart';

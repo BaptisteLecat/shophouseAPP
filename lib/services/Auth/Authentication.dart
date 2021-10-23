@@ -8,7 +8,7 @@ class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<AppUser?> getCurrentUser() async {
-    dynamic user = null;
+    dynamic user;
     await SharedPreferencesUser()
         .getStayConnected()
         .then((stayConnected) async {

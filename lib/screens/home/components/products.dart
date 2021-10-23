@@ -14,6 +14,11 @@ class Products extends StatefulWidget {
 
 class _ProductsState extends State<Products> {
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         child: Column(
@@ -25,7 +30,7 @@ class _ProductsState extends State<Products> {
                 "Produits",
                 style: Theme.of(context).textTheme.headline3,
               ),
-              margin: EdgeInsets.only(left: 20),
+              margin: const EdgeInsets.only(left: 20),
             )
           ],
         ),
@@ -60,7 +65,7 @@ class _ProductsState extends State<Products> {
                           primary: false,
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                               top: 10, bottom: 30, left: 20, right: 20),
                           itemCount: listProducts.product.length,
                           gridDelegate:

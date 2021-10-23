@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:math' as math;
 
 class ScreenLoader extends StatefulWidget {
   const ScreenLoader({Key? key}) : super(key: key);
@@ -18,7 +16,7 @@ class _ScreenLoaderState extends State<ScreenLoader>
   void initState() {
     super.initState();
     animController = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
 

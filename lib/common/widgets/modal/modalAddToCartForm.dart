@@ -9,8 +9,8 @@ import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
 import 'package:collection/collection.dart';
 
 class ModalAddToCartForm extends StatefulWidget {
-  Product product;
-  ModalAddToCartForm({Key? key, required this.product}) : super(key: key);
+  final Product product;
+  const ModalAddToCartForm({Key? key, required this.product}) : super(key: key);
 
   @override
   _ModalAddToCartFormState createState() => _ModalAddToCartFormState();
@@ -62,14 +62,14 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
         fontWeight: FontWeight.w400,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xffC5CCDA),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xff3D5382),
@@ -90,7 +90,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             "Indiquez la quantité et le panier dans lequel vous souhaitez ajouter l’article.",
             textAlign: TextAlign.start,
@@ -111,7 +111,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
           "Quantité",
           style: Theme.of(context).textTheme.headline5,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Container(
@@ -128,7 +128,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
   Container _generateDropDown() {
     print(_generateDropDownItem());
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin: const EdgeInsets.symmetric(vertical: 20),
         child: Flex(
           crossAxisAlignment: CrossAxisAlignment.start,
           direction: Axis.vertical,
@@ -137,7 +137,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
               "Panier",
               style: Theme.of(context).textTheme.headline5,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
@@ -149,7 +149,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                     return DropdownButtonFormField<int>(
                       decoration: _inputDecorationBuilder(hintText: ""),
                       isExpanded: true,
-                      hint: Text("Aucun panier"),
+                      hint: const Text("Aucun panier"),
                       value: _selectedValue,
                       //elevation: 5,
                       style: TextStyle(color: Colors.black),
@@ -163,7 +163,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                     return DropdownButtonFormField<int>(
                       decoration: _inputDecorationBuilder(hintText: ""),
                       isExpanded: true,
-                      hint: Text("Aucun panier"),
+                      hint: const Text("Aucun panier"),
                       value: _selectedValue,
                       //elevation: 5,
                       style: TextStyle(color: Colors.black),
@@ -218,7 +218,7 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                                         SnackBar(
                                             backgroundColor:
                                                 successMessageColor,
-                                            content: Text(
+                                            content: const Text(
                                                 'Le produit a été ajouté au panier!')));
                                   }).onError((error, stackTrace) {
                                     print(stackTrace);
@@ -232,8 +232,8 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         backgroundColor: errorMessageColor,
-                                        content:
-                                            Text('Aucun panier identifié.')));
+                                        content: const Text(
+                                            'Aucun panier identifié.')));
                               }
                             },
                             content: Text(

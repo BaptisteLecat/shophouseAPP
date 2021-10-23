@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -9,14 +8,19 @@ import 'package:shophouse/common/widgets/modal/modalAddToCartForm.dart';
 import 'package:shophouse/screens/product/ProductPage.dart';
 
 class ProductCards extends StatefulWidget {
-  Product product;
-  ProductCards({Key? key, required this.product}) : super(key: key);
+  final Product product;
+  const ProductCards({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductCardsState createState() => _ProductCardsState();
 }
 
 class _ProductCardsState extends State<ProductCards> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Widget _generateAddCartInput() {
     return GestureDetector(
       onTap: () {
@@ -25,8 +29,9 @@ class _ProductCardsState extends State<ProductCards> {
       child: Container(
         height: 46,
         width: 46,
-        padding: EdgeInsets.all(6),
-        decoration: BoxDecoration(color: primaryColor, shape: BoxShape.circle),
+        padding: const EdgeInsets.all(6),
+        decoration:
+            const BoxDecoration(color: primaryColor, shape: BoxShape.circle),
         child: Image.asset("assets/icons/shopping.png"),
       ),
     );
@@ -35,7 +40,8 @@ class _ProductCardsState extends State<ProductCards> {
   void _displayModal(BuildContext context) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(25.0))),
         backgroundColor: Colors.white,
         context: context,
         isScrollControlled: true,
@@ -60,7 +66,7 @@ class _ProductCardsState extends State<ProductCards> {
 
   Widget _generateTimeProduct() {
     return Container(
-      padding: EdgeInsets.only(top: 5),
+      padding: const EdgeInsets.only(top: 5),
       child: Text(
         "2 jours",
         style: Theme.of(context).textTheme.bodyText1,
@@ -110,11 +116,13 @@ class _ProductCardsState extends State<ProductCards> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-                  Navigator.of(context).push(new PageRouteBuilder(
+          Navigator.of(context).push(new PageRouteBuilder(
               opaque: true,
               transitionDuration: const Duration(milliseconds: 500),
               pageBuilder: (BuildContext context, _, __) {
-                return new ProductPage(product: widget.product,);
+                return new ProductPage(
+                  product: widget.product,
+                );
               },
               transitionsBuilder:
                   (_, Animation<double> animation, __, Widget child) {

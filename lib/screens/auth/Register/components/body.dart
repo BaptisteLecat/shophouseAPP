@@ -45,12 +45,11 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return widget.loading
         ? Loading()
         : Container(
             height: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 25),
+            margin: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
                 Flexible(flex: 2, child: _headerBuilder()),

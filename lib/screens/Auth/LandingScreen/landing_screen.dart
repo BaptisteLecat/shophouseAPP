@@ -7,7 +7,7 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     return Scaffold(
-      body: Body(),
+      body: const Body(),
     );
   }
 }

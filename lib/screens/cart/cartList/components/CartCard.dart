@@ -6,14 +6,19 @@ import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/cart/cart/CartPage.dart';
 
 class CartCard extends StatefulWidget {
-  Cart cart;
-  CartCard({Key? key, required this.cart}) : super(key: key);
+  final Cart cart;
+  const CartCard({Key? key, required this.cart}) : super(key: key);
 
   @override
   _CartCardState createState() => _CartCardState();
 }
 
 class _CartCardState extends State<CartCard> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,22 +27,22 @@ class _CartCardState extends State<CartCard> {
             opaque: true,
             transitionDuration: const Duration(milliseconds: 500),
             pageBuilder: (BuildContext context, _, __) {
-              return new CartPage(cart: widget.cart);
+              return CartPage(cart: widget.cart);
             },
             transitionsBuilder:
                 (_, Animation<double> animation, __, Widget child) {
-              return new SlideTransition(
+              return SlideTransition(
                 child: child,
-                position: new Tween<Offset>(
-                  begin: Offset(2, 0),
+                position: Tween<Offset>(
+                  begin: const Offset(2, 0),
                   end: Offset.zero,
                 ).animate(animation),
               );
             }));
       },
       child: Container(
-        padding: EdgeInsets.all(8),
-        margin: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         height: 90,
         decoration: BoxDecoration(
           boxShadow: [
@@ -45,22 +50,22 @@ class _CartCardState extends State<CartCard> {
               color: Colors.black.withOpacity(0.20),
               spreadRadius: 0,
               blurRadius: 10,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: Row(
           children: [
             Expanded(
               flex: 2,
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Image.memory(Base64Decoder().convert(widget.cart.icon!)),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Flexible(

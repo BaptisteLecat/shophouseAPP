@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Category.dart' as category;
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/ScreenLoader.dart';
+import 'package:shophouse/common/widgets/layout/header.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
 import 'package:shophouse/screens/home/components/products.dart';
 
@@ -48,6 +49,11 @@ class _HomePageState extends State<HomePage> {
     if (widget.fromAuth) {
       startTimer();
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void _updateSelectedCategory(category.Category category) {
@@ -117,27 +123,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container _generateHeader() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Parcourez",
-            style: Theme.of(context).textTheme.headline1,
-            textAlign: TextAlign.start,
-          ),
-          Text(
-            "Faites votre liste et sélectionnez les produits dont vous avez besoin.",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return (this.showLoader)
@@ -151,7 +136,10 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Flexible(
                       fit: FlexFit.loose,
-                      child: _generateHeader(),
+                      child: const Header(
+                          title: "Parcourez",
+                          content:
+                              "Faites votre liste et sélectionnez les produits dont vous avez besoin."),
                     ),
                     Flexible(
                       fit: FlexFit.loose,
@@ -170,15 +158,3 @@ class _HomePageState extends State<HomePage> {
           );
   }
 }
-
-
-/*
-Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Expanded(flex: 3, child: _generateHeader()),
-          Expanded(flex: 2, child: _generateSearchBar()),
-          Expanded(flex: 4, child: Categories()),
-          Expanded(flex: 5, child: Products())
-        ],
-      )*/

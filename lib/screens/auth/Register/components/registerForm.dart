@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/auth/Login/components/passwordHandler.dart';
 import 'package:shophouse/screens/auth/Register/components/CGU.dart';
 
 class RegisterForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-  TextEditingController nameController = TextEditingController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  ValueChanged<String> errorCodeCallback;
-  ValueChanged<bool> checkBoxCallback;
+  final TextEditingController nameController;
+  final TextEditingController firstNameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final ValueChanged<String> errorCodeCallback;
+  final ValueChanged<bool> checkBoxCallback;
   bool isAcceptedCGU;
   RegisterForm(
       {Key? key,
@@ -76,7 +75,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Expanded(
@@ -99,7 +98,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           /** Section for the Email */
@@ -121,11 +120,11 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           /** End Section Email */
 
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           PasswordHandler(passwordController: widget.passwordController),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           CGU(
@@ -149,14 +148,14 @@ class _RegisterFormState extends State<RegisterForm> {
         fontWeight: FontWeight.w400,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xffC5CCDA),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xff3D5382),

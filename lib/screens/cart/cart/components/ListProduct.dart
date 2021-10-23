@@ -3,14 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/Model/Product.dart';
-import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/cart/cart/components/QuantityInput.dart';
 
 class ListProduct extends StatefulWidget {
-  ValueChanged<List<Product>?> listProductCallback;
-  List<Product>? products;
-  Cart cart;
-  ListProduct(
+  final ValueChanged<List<Product>?> listProductCallback;
+  final List<Product>? products;
+  final Cart cart;
+  const ListProduct(
       {Key? key,
       required this.products,
       required this.cart,
@@ -57,10 +56,10 @@ class _ListProductState extends State<ListProduct> {
           Expanded(
               flex: 2,
               child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child:
                       Image.memory(Base64Decoder().convert(product.picture!)))),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Flexible(flex: 5, child: _generateContent(product)),
@@ -90,7 +89,7 @@ class _ListProductState extends State<ListProduct> {
               color: Colors.black.withOpacity(0.15),
               spreadRadius: 0,
               blurRadius: 6,
-              offset: Offset(0, -2), // changes position of shadow
+              offset: const Offset(0, -2), // changes position of shadow
             ),
           ],
         ),

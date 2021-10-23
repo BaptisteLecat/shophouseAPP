@@ -42,7 +42,7 @@ class Body extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Text(
@@ -81,7 +81,7 @@ class Body extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           TextButton(

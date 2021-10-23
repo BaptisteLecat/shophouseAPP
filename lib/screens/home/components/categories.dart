@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Category.dart' as category;
-import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/screens/home/components/categoryCard.dart';
 import 'package:shophouse/services/Api/repositories/category/CategoryFetcher.dart';
 
 class Categories extends StatefulWidget {
@@ -17,6 +14,7 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> {
   int _selectedIndex = 0;
   late Future<category.Categories> _categoriesData;
+  category.Categories listCategory = category.Categories(category: []);
   bool startInit = true;
 
   void initState() {
@@ -24,71 +22,18 @@ class _CategoriesState extends State<Categories> {
     super.initState();
   }
 
-  String _getIcon(int index, category.Categories listCategory) {
-    return listCategory.category[index].picture!;
+  @override
+  void dispose() {
+    super.dispose();
   }
 
-  String _getLabel(int index, category.Categories listCategory) {
-    return listCategory.category[index].label!;
+  void selectCategory(int index) {
+    _selectedIndex = index;
+    widget.updateCategory(listCategory.category[_selectedIndex]);
   }
 
   bool _isSelected(index) {
     return index == _selectedIndex;
-  }
-
-  Widget _generateCategoryCard(index, category.Categories listCategory) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-          widget.updateCategory(listCategory.category[_selectedIndex]);
-        });
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 20),
-        child: Container(
-          width: 88,
-          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(34)),
-            color: _isSelected(index) ? primaryColor : Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 8,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          margin: EdgeInsets.symmetric(horizontal: 8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                height: 64,
-                width: 64,
-                decoration: BoxDecoration(
-                    color:
-                        _isSelected(index) ? Colors.white : Color(0xffF0F4F9),
-                    shape: BoxShape.circle),
-                child: (index > 0)
-                    ? Image.memory(
-                        Base64Decoder().convert(_getIcon(index, listCategory)))
-                    : Image.asset(
-                        "assets/images/illustrations/shopping-cart.png"),
-              ),
-              Text(
-                _getLabel(index, listCategory),
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: _isSelected(index) ? Colors.white : secondaryColor),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -105,7 +50,7 @@ class _CategoriesState extends State<Categories> {
                   "Catégories",
                   style: Theme.of(context).textTheme.headline3,
                 ),
-                margin: EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.only(left: 20),
               )
             ],
           ),
@@ -121,7 +66,7 @@ class _CategoriesState extends State<Categories> {
                         );
                       } else {
                         if (snapshot.hasData && snapshot.data != null) {
-                          category.Categories listCategory =
+                          this.listCategory =
                               snapshot.data as category.Categories;
                           if (this.startInit) {
                             listCategory.category.insert(
@@ -135,8 +80,14 @@ class _CategoriesState extends State<Categories> {
                               scrollDirection: Axis.horizontal,
                               itemCount: listCategory.category.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return _generateCategoryCard(
-                                    index, listCategory);
+                                return CategoryCard(
+                                    key: Key(index.toString()),
+                                    itemIndex: index,
+                                    categoryObject:
+                                        this.listCategory.category[index],
+                                    isSelected: this._isSelected(index),
+                                    selectedCategoryCallBack:
+                                        this.selectCategory);
                               });
                         } else {
                           return Center(

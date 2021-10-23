@@ -31,14 +31,14 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
         fontWeight: FontWeight.w400,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xffC5CCDA),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xff3D5382),
@@ -59,7 +59,7 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             "Commencez vos courses maintenant en créant un panier.",
             textAlign: TextAlign.start,
@@ -76,7 +76,7 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(vertical: 20),
+            margin: const EdgeInsets.symmetric(vertical: 20),
             height: 60,
             child: TextFormField(
               keyboardType: TextInputType.text,
@@ -116,7 +116,7 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
                             return new SlideTransition(
                               child: child,
                               position: new Tween<Offset>(
-                                begin: Offset(2, 0),
+                                begin: const Offset(2, 0),
                                 end: Offset.zero,
                               ).animate(animation),
                             );

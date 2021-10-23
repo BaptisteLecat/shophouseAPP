@@ -1,7 +1,6 @@
 import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/Model/Product.dart';
 import 'package:shophouse/services/Api/MainFetcher.dart';
-import 'package:shophouse/Model/Category.dart';
 
 class CartFetcher extends MainFetcher {
   CartFetcher() {
