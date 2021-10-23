@@ -16,7 +16,6 @@ class _HeaderState extends State<Header> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
