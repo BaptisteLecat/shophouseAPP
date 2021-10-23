@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shophouse/common/widgets/ScreenLoader.dart';
 import 'package:shophouse/common/widgets/loading.dart';
 import 'package:shophouse/screens/RootPage.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
@@ -31,6 +32,11 @@ class _BodyState extends State<Body> {
     setState(() {
       widget.stayConnected = stayConnected;
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -120,8 +126,12 @@ class _BodyState extends State<Body> {
                           AuthException.generateExceptionMessage(result);
                     });
                   } else {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => RootPage()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RootPage(
+                                  fromAuth: true,
+                                )));
                   }
                 }
               },

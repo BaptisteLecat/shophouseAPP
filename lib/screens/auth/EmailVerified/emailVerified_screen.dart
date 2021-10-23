@@ -43,8 +43,10 @@ class _EmailVerifiedScreenState extends State<EmailVerifiedScreen> {
     await auth.reloadUser();
     if (auth.emailIsVerified()) {
       timer.cancel();
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => RootPage()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => RootPage(
+                fromAuth: true,
+              )));
     }
   }
 }

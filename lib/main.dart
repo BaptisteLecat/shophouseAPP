@@ -16,6 +16,8 @@ import 'package:shophouse/screens/Auth/LandingScreen/landing_screen.dart';
 import 'package:shophouse/common/theme.dart';
 import 'package:shophouse/services/Auth/Authentication.dart';
 
+import 'common/widgets/ScreenLoader.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

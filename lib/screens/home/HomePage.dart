@@ -1,13 +1,16 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Category.dart' as category;
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/common/widgets/ScreenLoader.dart';
 import 'package:shophouse/screens/home/components/categories.dart';
 import 'package:shophouse/screens/home/components/products.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  bool fromAuth;
+  HomePage({Key? key, this.fromAuth = false}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -17,6 +20,35 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> formKey =
       GlobalKey<FormState>(debugLabel: '_homeScreenkey');
   category.Category? selectedCategory;
+  bool showLoader = false;
+  late Timer timer;
+
+  startTimer() {
+    setState(() {
+      showLoader = true;
+    });
+    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (timer.tick == 1) {
+        cancelTimer();
+        setState(() {
+          showLoader = false;
+        });
+      }
+    });
+  }
+
+  cancelTimer() {
+    timer.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.fromAuth);
+    if (widget.fromAuth) {
+      startTimer();
+    }
+  }
 
   void _updateSelectedCategory(category.Category category) {
     setState(() {
@@ -108,32 +140,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraint) {
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Flexible(
-                fit: FlexFit.loose,
-                child: _generateHeader(),
-              ),
-              Flexible(
-                fit: FlexFit.loose,
-                child: _generateSearchBar(),
-              ),
-              Categories(
-                updateCategory: _updateSelectedCategory,
-              ),
-              Products(
-                selectedCategory: this.selectedCategory,
-              )
-            ],
-          ),
-        );
-      },
-    );
+    return (this.showLoader)
+        ? ScreenLoader()
+        : LayoutBuilder(
+            builder: (context, constraint) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: _generateHeader(),
+                    ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: _generateSearchBar(),
+                    ),
+                    Categories(
+                      updateCategory: _updateSelectedCategory,
+                    ),
+                    Products(
+                      selectedCategory: this.selectedCategory,
+                    )
+                  ],
+                ),
+              );
+            },
+          );
   }
 }
 
