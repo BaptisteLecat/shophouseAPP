@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nice_buttons/nice_buttons.dart';
+import 'package:shophouse/Model/Family.dart';
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/screens/family/cart/CartPage.dart';
 
 class FamilyButton extends StatefulWidget {
   final String btnName;
-  const FamilyButton({Key? key, required this.btnName}) : super(key: key);
+  final FamilyClass family;
+  const FamilyButton({Key? key, required this.btnName, required this.family})
+      : super(key: key);
 
   @override
   _FamilyButtonState createState() => _FamilyButtonState();
@@ -26,7 +30,24 @@ class _FamilyButtonState extends State<FamilyButton> {
             borderThickness: 0,
             stretch: true,
             gradientOrientation: GradientOrientation.Horizontal,
-            onTap: (value) {},
+            onTap: (value) {
+              Navigator.of(context).push(new PageRouteBuilder(
+                  opaque: true,
+                  transitionDuration: const Duration(milliseconds: 500),
+                  pageBuilder: (BuildContext context, _, __) {
+                    return CartPage(cartId: int.parse(widget.family.cartId));
+                  },
+                  transitionsBuilder:
+                      (_, Animation<double> animation, __, Widget child) {
+                    return SlideTransition(
+                      child: child,
+                      position: Tween<Offset>(
+                        begin: const Offset(2, 0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                    );
+                  }));
+            },
             child: Padding(
               padding: EdgeInsets.all(12),
               child: Flex(
