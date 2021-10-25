@@ -1,73 +1,54 @@
 // To parse this JSON data, do
 //
-//     final carts = cartsFromJson(jsonString);
+//     final family = familyFromJson(jsonString);
 
 import 'dart:convert';
 
+import 'package:shophouse/Model/Member.dart';
 import 'package:shophouse/Model/Owner.dart';
 import 'package:shophouse/Model/Product.dart';
 
-Carts cartsFromJson(String str) => Carts.fromJson(json.decode(str));
+Family familyFromJson(String str) => Family.fromJson(json.decode(str));
 
-String cartsToJson(Carts data) => json.encode(data.toJson());
+String familyToJson(Family data) => json.encode(data.toJson());
 
-class Carts {
-  Carts({
-    required this.cart,
-  });
-
-  List<Cart> cart;
-
-  factory Carts.fromJson(Map<String, dynamic> json) => Carts(
-        cart: List<Cart>.from(json["cart"].map((x) => Cart.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "cart": List<dynamic>.from(cart.map((x) => x.toJson())),
-      };
-}
-
-class Cart {
-  Cart({
+class Family {
+  Family({
     required this.id,
     required this.title,
     required this.icon,
-    required this.listMembers,
     required this.products,
-    required this.familyId,
     required this.owner,
+    required this.members,
+    required this.familyId,
   });
 
-  String? id;
-  String? title;
-  String? icon;
-  List<dynamic>? listMembers;
-  List<Product>? products;
-  String? familyId;
-  Owner? owner;
+  int id;
+  String title;
+  String icon;
+  List<Product> products;
+  Owner owner;
+  List<Member>? members;
+  int? familyId;
 
-  factory Cart.fromJson(Map<String, dynamic> json) => Cart(
+  factory Family.fromJson(Map<String, dynamic> json) => Family(
         id: json["id"],
         title: json["title"],
         icon: json["icon"],
-        listMembers: List<dynamic>.from(json["list_members"].map((x) => x)),
         products: List<Product>.from(
-            json["list_products"].map((x) => Product.fromJson(x))),
-        familyId: json["family_id"] == null ? null : json["family_id"],
-        owner: json["owner"] == null ? null : Owner.fromJson(json["owner"]),
+            json["products"].map((x) => Product.fromJson(x))),
+        owner: Owner.fromJson(json["owner"]),
+        members: json["members"] != null ? List<Member>.from(json["members"].map((x) => x)) : null,
+        familyId: json["familyId"] != null ? json["familyId"] : null,
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
         "icon": icon,
-        "list_members": List<dynamic>.from(listMembers!.map((x) => x)),
-        "list_products": List<dynamic>.from(products!.map((x) => x.toJson())),
-        "family_id": familyId == null ? null : familyId,
-        "owner": owner == null ? null : owner!.toJson(),
-      };
-
-  Map<String, dynamic> listProductsToJson() => {
-        "list_products": List<dynamic>.from(products!.map((x) => x.toJson())),
+        "products": List<dynamic>.from(products.map((x) => x.toJson())),
+        "owner": owner.toJson(),
+        "members": members != null ? List<Member>.from(members!.map((x) => x)) : null,
+        "familyId": familyId != null ? familyId : null,
       };
 }

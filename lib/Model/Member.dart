@@ -1,17 +1,23 @@
-class ListMember {
-  ListMember({
+import 'dart:convert';
+
+Member productFromJson(String str) => Member.fromJson(json.decode(str));
+
+String productToJson(Member data) => json.encode(data.toJson());
+
+class Member {
+  Member({
     required this.id,
     required this.name,
     required this.firstName,
     required this.email,
   });
 
-  String id;
+  int id;
   String name;
   String firstName;
   String email;
 
-  factory ListMember.fromJson(Map<String, dynamic> json) => ListMember(
+  factory Member.fromJson(Map<String, dynamic> json) => Member(
         id: json["id"],
         name: json["name"],
         firstName: json["firstName"],
