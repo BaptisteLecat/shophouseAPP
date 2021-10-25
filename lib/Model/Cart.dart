@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final family = familyFromJson(jsonString);
+//     final cart = cartFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -8,19 +8,19 @@ import 'package:shophouse/Model/Member.dart';
 import 'package:shophouse/Model/Owner.dart';
 import 'package:shophouse/Model/Product.dart';
 
-Family familyFromJson(String str) => Family.fromJson(json.decode(str));
+Cart cartFromJson(String str) => Cart.fromJson(json.decode(str));
 
-String familyToJson(Family data) => json.encode(data.toJson());
+String cartToJson(Cart data) => json.encode(data.toJson());
 
-class Family {
-  Family({
+class Cart {
+  Cart({
     required this.id,
     required this.title,
     required this.icon,
     required this.products,
     required this.owner,
     required this.members,
-    required this.familyId,
+    required this.cartId,
   });
 
   int id;
@@ -29,9 +29,9 @@ class Family {
   List<Product> products;
   Owner owner;
   List<Member>? members;
-  int? familyId;
+  int? cartId;
 
-  factory Family.fromJson(Map<String, dynamic> json) => Family(
+  factory Cart.fromJson(Map<String, dynamic> json) => Cart(
         id: json["id"],
         title: json["title"],
         icon: json["icon"],
@@ -39,7 +39,7 @@ class Family {
             json["products"].map((x) => Product.fromJson(x))),
         owner: Owner.fromJson(json["owner"]),
         members: json["members"] != null ? List<Member>.from(json["members"].map((x) => x)) : null,
-        familyId: json["familyId"] != null ? json["familyId"] : null,
+        cartId: json["cartId"] != null ? json["cartId"] : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +49,6 @@ class Family {
         "products": List<dynamic>.from(products.map((x) => x.toJson())),
         "owner": owner.toJson(),
         "members": members != null ? List<Member>.from(members!.map((x) => x)) : null,
-        "familyId": familyId != null ? familyId : null,
+        "cartId": cartId != null ? cartId : null,
       };
 }
