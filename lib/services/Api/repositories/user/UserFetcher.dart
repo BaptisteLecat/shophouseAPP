@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shophouse/Model/AppUser.dart';
 import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/services/Api/MainFetcher.dart';
@@ -7,10 +9,10 @@ class UserFetcher extends MainFetcher {
     this.setUserToken();
   }
 
-  Future<Carts> getCarts() async {
+  Future<List<Cart>> getCarts() async {
     final response = await this.get("user/carts");
     print(response);
-    return Carts.fromJson(response);
+    return List<Cart>.from(json.decode(response)["carts"].map((x) => Cart.fromJson(x)));
   }
 
   Future<AppUser> whoAmI({String? id, String? email, String? token}) async {
