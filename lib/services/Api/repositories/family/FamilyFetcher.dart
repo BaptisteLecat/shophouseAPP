@@ -19,9 +19,9 @@ class FamilyFetcher extends MainFetcher {
     return Family.fromJson(response);
   }
 
-  Future<Carts> getFamilyCart({required int familyId}) async {
+  Future<Cart> getFamilyCart({required int familyId}) async {
     final response = await this.get("family/$familyId/cart");
     print(response);
-    return Carts.fromJson(response);
+    return Cart.fromJson(response);
   }
 }

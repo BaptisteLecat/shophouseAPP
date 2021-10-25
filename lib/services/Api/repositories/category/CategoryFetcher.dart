@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/services/Api/MainFetcher.dart';
 import 'package:shophouse/Model/Category.dart';
 
@@ -6,10 +9,11 @@ class CategoryFetcher extends MainFetcher {
     this.setUserToken();
   }
 
-  Future<Categories> getCategoryList() async {
+  Future<List<Category>> getCategoryList() async {
     final response = await this.get("categories");
     print(response);
-    return Categories.fromJson(response);
+    return List<Category>.from(
+        json.decode(response)["categories"].map((x) => Cart.fromJson(x)));
   }
 
   Future<Category> getCategory(int id) async {
