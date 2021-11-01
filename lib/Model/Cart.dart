@@ -38,7 +38,9 @@ class Cart {
         products: List<Product>.from(
             json["products"].map((x) => Product.fromJson(x))),
         owner: Owner.fromJson(json["owner"]),
-        members: json["members"] != null ? List<Member>.from(json["members"].map((x) => x)) : null,
+        members: json["members"] != null
+            ? List<Member>.from(json["members"].map((x) => x))
+            : null,
         cartId: json["cartId"] != null ? json["cartId"] : null,
       );
 
@@ -48,7 +50,12 @@ class Cart {
         "icon": icon,
         "products": List<dynamic>.from(products.map((x) => x.toJson())),
         "owner": owner.toJson(),
-        "members": members != null ? List<Member>.from(members!.map((x) => x)) : null,
+        "members":
+            members != null ? List<Member>.from(members!.map((x) => x)) : null,
         "cartId": cartId != null ? cartId : null,
+      };
+
+  Map<String, dynamic> listProductsToJson() => {
+        "products": List<dynamic>.from(products.map((x) => x.toJson())),
       };
 }

@@ -31,11 +31,11 @@ class CartFetcher extends MainFetcher {
     return Cart.fromJson(response);
   }
 
-  Future<Carts> updateListProduct({required Cart cart}) async {
+  Future<Cart> updateListProduct({required Cart cart}) async {
     final response = await this.patch(
       "cart/${cart.id}/products",
       body: cart.listProductsToJson(),
     );
-    return Carts.fromJson(response);
+    return Cart.fromJson(response);
   }
 }
