@@ -2,6 +2,7 @@
 //
 //     final family = familyFromJson(jsonString);
 
+import 'package:shophouse/Model/Cart.dart';
 import 'package:shophouse/Model/Member.dart';
 import 'dart:convert';
 
@@ -29,6 +30,7 @@ class Family {
   List<Product> products;
   Owner owner;
   int cartId;
+  Cart? cart;
   List<dynamic> members;
 
   factory Family.fromJson(Map<String, dynamic> json) => Family(

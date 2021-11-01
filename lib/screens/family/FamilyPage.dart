@@ -56,11 +56,10 @@ class _FamilyPageState extends State<FamilyPage> {
                             children: [
                               FamilyButton(
                                 btnName: "familyCart",
-                                family: family.family,
+                                family: family,
                               ),
                               FamilyButton(
-                                  btnName: "familyPlanning",
-                                  family: family.family),
+                                  btnName: "familyPlanning", family: family),
                             ],
                           );
                         } else {

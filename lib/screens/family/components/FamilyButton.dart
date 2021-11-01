@@ -6,7 +6,7 @@ import 'package:shophouse/screens/family/cart/CartPage.dart';
 
 class FamilyButton extends StatefulWidget {
   final String btnName;
-  final FamilyClass family;
+  final Family family;
   const FamilyButton({Key? key, required this.btnName, required this.family})
       : super(key: key);
 
@@ -35,7 +35,7 @@ class _FamilyButtonState extends State<FamilyButton> {
                   opaque: true,
                   transitionDuration: const Duration(milliseconds: 500),
                   pageBuilder: (BuildContext context, _, __) {
-                    return CartPage(cartId: int.parse(widget.family.cartId));
+                    return CartPage(family: widget.family);
                   },
                   transitionsBuilder:
                       (_, Animation<double> animation, __, Widget child) {

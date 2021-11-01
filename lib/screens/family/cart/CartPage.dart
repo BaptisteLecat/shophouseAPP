@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Cart.dart';
+import 'package:shophouse/Model/Family.dart';
 import 'package:shophouse/Model/Product.dart' as product;
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/cart/cart/components/ListProduct.dart';
@@ -7,21 +8,19 @@ import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 import 'package:shophouse/services/Api/repositories/family/FamilyFetcher.dart';
 
 class CartPage extends StatefulWidget {
-  final int cartId;
-  const CartPage({Key? key, required this.cartId}) : super(key: key);
+  final Family family;
+  const CartPage({Key? key, required this.family}) : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
-  late Cart cart;
-  late product.Products products;
   bool quantityIsUpdated = false;
 
   void initState() {
     super.initState();
-    _loadProductData();
+    _loadFamilyCartData();
   }
 
   void dispose() {
@@ -31,17 +30,18 @@ class _CartPageState extends State<CartPage> {
   ///This function will be given to the child widget. It will update the value troughout the function.
   _updateProductList(List<product.Product>? listProduct) {
     setState(() {
-      widget.cart.products = listProduct;
+      if (listProduct != null && widget.family.cart != null) {
+        widget.family.cart!.products = listProduct;
+      }
       this.quantityIsUpdated = true;
     });
   }
 
   void _sendQuantityUpdates() {
     if (this.quantityIsUpdated) {
-      CartFetcher().updateListProduct(cart: widget.cart).then((carts) {
+      CartFetcher().updateListProduct(cart: widget.family.cart!).then((carts) {
         setState(() {
           this.quantityIsUpdated = false;
-          cart = carts.cart[0];
         });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: successMessageColor,
@@ -53,11 +53,11 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
-  void _loadProductData() async {
-    await CartFetcher()
-        .getCartProductList(int.parse(widget.cart.id!))
-        .then((value) {
-      widget.cart.products = value.product;
+  void _loadFamilyCartData() async {
+    await FamilyFetcher()
+        .getFamilyCart(familyId: widget.family.id)
+        .then((cart) {
+      widget.family.cart = cart;
     });
   }
 
@@ -69,7 +69,7 @@ class _CartPageState extends State<CartPage> {
         children: [
           _generateBackButton(context),
           Text(
-            widget.cart.title!,
+            widget.family.cart!.title,
             style: Theme.of(context)
                 .textTheme
                 .headline1!
@@ -105,7 +105,7 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: FutureBuilder(
-          future: FamilyFetcher().getFamilyCart(familyId: ),
+          future: FamilyFetcher().getFamilyCart(familyId: widget.family.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -113,8 +113,7 @@ class _CartPageState extends State<CartPage> {
               );
             } else {
               if (snapshot.hasData && snapshot.data != null) {
-                Carts carts = snapshot.data as Carts;
-                this.cart = carts.cart;
+                wi.cart = snapshot.data as Cart;
 
                 return Column(
                   children: [
@@ -159,8 +158,8 @@ class _CartPageState extends State<CartPage> {
                     Expanded(
                         flex: 7,
                         child: ListProduct(
-                          products: widget.cart.products,
-                          cart: widget.cart,
+                          products: this.cart.products,
+                          cart: this.cart,
                           listProductCallback: _updateProductList,
                         )),
                   ],
