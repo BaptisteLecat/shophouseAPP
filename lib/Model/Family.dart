@@ -19,6 +19,7 @@ class Family {
     required this.icon,
     required this.products,
     required this.owner,
+    required this.cartId,
     required this.members,
   });
 
@@ -27,6 +28,7 @@ class Family {
   String icon;
   List<Product> products;
   Owner owner;
+  int cartId;
   List<dynamic> members;
 
   factory Family.fromJson(Map<String, dynamic> json) => Family(
@@ -36,6 +38,7 @@ class Family {
         products: List<Product>.from(
             json["products"].map((x) => Product.fromJson(x))),
         owner: Owner.fromJson(json["owner"]),
+        cartId: json["cartId"],
         members: List<dynamic>.from(json["members"].map((x) => x)),
       );
 
@@ -45,6 +48,7 @@ class Family {
         "icon": icon,
         "products": List<dynamic>.from(products.map((x) => x.toJson())),
         "owner": owner.toJson(),
+        "cartId": cartId,
         "members": List<dynamic>.from(members.map((x) => x)),
       };
 }
