@@ -13,8 +13,8 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   int _selectedIndex = 0;
-  late Future<category.Categories> _categoriesData;
-  category.Categories listCategory = category.Categories(category: []);
+  late Future<List<category.Category>> _categoriesData;
+  List<category.Category> listCategory = [];
   bool startInit = true;
 
   void initState() {
@@ -29,7 +29,7 @@ class _CategoriesState extends State<Categories> {
 
   void selectCategory(int index) {
     _selectedIndex = index;
-    widget.updateCategory(listCategory.category[_selectedIndex]);
+    widget.updateCategory(listCategory[_selectedIndex]);
   }
 
   bool _isSelected(index) {
@@ -67,24 +67,23 @@ class _CategoriesState extends State<Categories> {
                       } else {
                         if (snapshot.hasData && snapshot.data != null) {
                           this.listCategory =
-                              snapshot.data as category.Categories;
+                              snapshot.data as List<category.Category>;
                           if (this.startInit) {
-                            listCategory.category.insert(
+                            listCategory.insert(
                                 0,
                                 category.Category(
-                                    id: null, label: "Tout", picture: "all"));
+                                    id: 0, label: "Tout", picture: "all"));
                             this.startInit = false;
                           }
                           return ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: listCategory.category.length,
+                              itemCount: listCategory.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return CategoryCard(
                                     key: Key(index.toString()),
                                     itemIndex: index,
-                                    categoryObject:
-                                        this.listCategory.category[index],
+                                    categoryObject: this.listCategory[index],
                                     isSelected: this._isSelected(index),
                                     selectedCategoryCallBack:
                                         this.selectCategory);

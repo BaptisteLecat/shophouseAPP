@@ -58,7 +58,7 @@ class _ProductCardsState extends State<ProductCards> {
   Widget _generateProductName() {
     return Container(
       child: Text(
-        widget.product.label!,
+        widget.product.label,
         style: Theme.of(context).textTheme.headline5,
       ),
     );

@@ -47,9 +47,9 @@ class _ProductsState extends State<Products> {
                   );
                 } else {
                   if (snapshot.hasData && snapshot.data != null) {
-                    products.Products listProducts =
-                        snapshot.data as products.Products;
-                    if (listProducts.product.length < 1) {
+                    List<products.Product> listProducts =
+                        snapshot.data as List<products.Product>;
+                    if (listProducts.length < 1) {
                       return Container(
                         height: 140,
                         child: Column(
@@ -67,7 +67,7 @@ class _ProductsState extends State<Products> {
                           physics: NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.only(
                               top: 10, bottom: 30, left: 20, right: 20),
-                          itemCount: listProducts.product.length,
+                          itemCount: listProducts.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
@@ -76,8 +76,7 @@ class _ProductsState extends State<Products> {
                             childAspectRatio: 0.80,
                           ),
                           itemBuilder: (context, index) {
-                            return ProductCards(
-                                product: listProducts.product[index]);
+                            return ProductCards(product: listProducts[index]);
                           });
                     }
                   } else {

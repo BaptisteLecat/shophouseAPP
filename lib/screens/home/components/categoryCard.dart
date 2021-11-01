@@ -28,11 +28,11 @@ class _CategoryCardState extends State<CategoryCard> {
   }
 
   String _getIcon() {
-    return widget.categoryObject.picture!;
+    return widget.categoryObject.picture;
   }
 
   String _getLabel() {
-    return widget.categoryObject.label!;
+    return widget.categoryObject.label;
   }
 
   @override
