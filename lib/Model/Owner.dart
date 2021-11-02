@@ -1,14 +1,15 @@
 import 'dart:convert';
 
-List<Owner> listOwnerFromJson(String str) =>
-    List<Owner>.from(json.decode(str).map((x) => Owner.fromJson(x)));
+List<Owner> listOwnerFromJson(dynamic str) =>
+    List<Owner>.from(str.map((x) => Owner.fromJson(x)));
 
 String listOwnerToJson(List<Owner> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-Owner ownerFromJson(String str) => Owner.fromJson(json.decode(str));
+Owner ownerFromJson(dynamic str) => Owner.fromJson(str);
 
 String ownerToJson(Owner data) => json.encode(data.toJson());
+
 class Owner {
   Owner({
     required this.id,

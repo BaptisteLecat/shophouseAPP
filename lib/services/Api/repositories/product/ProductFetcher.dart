@@ -13,8 +13,7 @@ class ProductFetcher extends MainFetcher {
     String filter = (categoryId != null) ? "?categoryId=$categoryId" : "";
     final response = await this.get("products$filter");
     print(response);
-    return List<Product>.from(
-        json.decode(response)["products"].map((x) => Cart.fromJson(x)));
+    return listProductFromJson(response);
   }
 
   Future<Product> getProduct(int id) async {

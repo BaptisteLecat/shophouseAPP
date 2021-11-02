@@ -72,7 +72,7 @@ class _CategoriesState extends State<Categories> {
                             listCategory.insert(
                                 0,
                                 category.Category(
-                                    id: 0, label: "Tout", picture: "all"));
+                                    id: null, label: "Tout", picture: "all"));
                             this.startInit = false;
                           }
                           return ListView.builder(

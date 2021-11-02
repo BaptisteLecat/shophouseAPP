@@ -48,6 +48,8 @@ class _CartPageState extends State<CartPage> {
             backgroundColor: successMessageColor,
             content: const Text('La quantité des produits a été modifiée.')));
       }).onError((error, stackTrace) {
+        print(error);
+        print(stackTrace);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: errorMessageColor, content: Text('$error')));
       });
@@ -104,56 +106,53 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
-      body: Column(
-                  children: [
-                    Expanded(flex: 2, child: _generateHeader(context)),
-                    Expanded(
-                        flex: 1,
-                        child: Container(
-                          child: Visibility(
-                              visible: this.quantityIsUpdated,
-                              child: Flex(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                direction: Axis.horizontal,
-                                children: [
-                                  TextButton(
-                                      style: ButtonStyle(
-                                          padding: MaterialStateProperty.all(
-                                              EdgeInsets.symmetric(
-                                                  horizontal: 36, vertical: 6)),
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.white),
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ))),
-                                      onPressed: () {
-                                        _sendQuantityUpdates();
-                                      },
-                                      child: Text("Modifier les quantités",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6!
-                                              .copyWith(
-                                                  color: successMessageColor,
-                                                  fontWeight: FontWeight.w600)))
-                                ],
-                              )),
-                        )),
-                    Expanded(
-                        flex: 7,
-                        child: ListProduct(
-                          products: widget.family.cart!.products,
-                          cart: widget.family.cart!,
-                          listProductCallback: _updateProductList,
-                        )),
-                  ],
-                )
-    );
+        backgroundColor: primaryColor,
+        body: Column(
+          children: [
+            Expanded(flex: 2, child: _generateHeader(context)),
+            Expanded(
+                flex: 1,
+                child: Container(
+                  child: Visibility(
+                      visible: this.quantityIsUpdated,
+                      child: Flex(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        direction: Axis.horizontal,
+                        children: [
+                          TextButton(
+                              style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      EdgeInsets.symmetric(
+                                          horizontal: 36, vertical: 6)),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ))),
+                              onPressed: () {
+                                _sendQuantityUpdates();
+                              },
+                              child: Text("Modifier les quantités",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
+                                          color: successMessageColor,
+                                          fontWeight: FontWeight.w600)))
+                        ],
+                      )),
+                )),
+            Expanded(
+                flex: 7,
+                child: ListProduct(
+                  products: widget.family.cart!.products,
+                  cart: widget.family.cart!,
+                  listProductCallback: _updateProductList,
+                )),
+          ],
+        ));
   }
 }

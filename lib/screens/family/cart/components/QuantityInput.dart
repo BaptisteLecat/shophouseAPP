@@ -21,7 +21,7 @@ class QuantityInput extends StatefulWidget {
 
 class _QuantityInputState extends State<QuantityInput> {
   void _decrement() {
-    int quantity = widget.product.quantity;
+    int quantity = widget.product.quantity!;
     if (quantity - 1 >= widget.minValue) {
       widget.product.quantity = quantity - 1;
       widget.quantityCallback(widget.product);
@@ -30,7 +30,7 @@ class _QuantityInputState extends State<QuantityInput> {
   }
 
   void _increment() {
-    int quantity = widget.product.quantity;
+    int quantity = widget.product.quantity!;
     if (quantity + 1 >= widget.minValue) {
       widget.product.quantity = quantity + 1;
       widget.quantityCallback(widget.product);

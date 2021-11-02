@@ -12,7 +12,7 @@ class UserFetcher extends MainFetcher {
   Future<List<Cart>> getCarts() async {
     final response = await this.get("user/carts");
     print(response);
-    return List<Cart>.from(json.decode(response)["carts"].map((x) => Cart.fromJson(x)));
+    return listCartFromJson(response);
   }
 
   Future<AppUser> whoAmI({String? id, String? email, String? token}) async {

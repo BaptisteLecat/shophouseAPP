@@ -8,13 +8,13 @@ import 'package:shophouse/Model/Member.dart';
 import 'package:shophouse/Model/Owner.dart';
 import 'package:shophouse/Model/Product.dart';
 
-List<Cart> listCartFromJson(String str) =>
-    List<Cart>.from(json.decode(str).map((x) => Cart.fromJson(x)));
+List<Cart> listCartFromJson(dynamic str) =>
+    List<Cart>.from(str.map((x) => Cart.fromJson(x)));
 
 String listCartToJson(List<Cart> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-Cart cartFromJson(String str) => Cart.fromJson(json.decode(str));
+Cart cartFromJson(dynamic str) => Cart.fromJson(str);
 
 String cartToJson(Cart data) => json.encode(data.toJson());
 
@@ -45,7 +45,7 @@ class Cart {
             json["products"].map((x) => Product.fromJson(x))),
         owner: Owner.fromJson(json["owner"]),
         members: json["members"] != null
-            ? List<Member>.from(json["members"].map((x) => x))
+            ? List<Member>.from(json["members"].map((x) => Member.fromJson(x)))
             : null,
         cartId: json["cartId"] != null ? json["cartId"] : null,
       );
@@ -61,7 +61,5 @@ class Cart {
         "cartId": cartId != null ? cartId : null,
       };
 
-  Map<String, dynamic> listProductsToJson() => {
-        "products": List<dynamic>.from(products.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> listProductsToJson() => listProductsToJson();
 }

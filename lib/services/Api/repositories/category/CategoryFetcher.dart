@@ -12,8 +12,7 @@ class CategoryFetcher extends MainFetcher {
   Future<List<Category>> getCategoryList() async {
     final response = await this.get("categories");
     print(response);
-    return List<Category>.from(
-        json.decode(response)["categories"].map((x) => Cart.fromJson(x)));
+    return listCategoryFromJson(response);
   }
 
   Future<Category> getCategory(int id) async {

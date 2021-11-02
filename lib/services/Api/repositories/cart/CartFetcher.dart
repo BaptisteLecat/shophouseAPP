@@ -12,8 +12,7 @@ class CartFetcher extends MainFetcher {
   Future<List<Product>> getCartProductList(int id) async {
     final response = await this.get("cart/$id/products");
     print(response);
-    return List<Product>.from(
-        json.decode(response)["products"].map((x) => Cart.fromJson(x)));
+    return listProductFromJson(response);
   }
 
   Future<Cart> createCart(String cartName) async {
@@ -32,6 +31,7 @@ class CartFetcher extends MainFetcher {
   }
 
   Future<Cart> updateListProduct({required Cart cart}) async {
+    print(cart.listProductsToJson());
     final response = await this.patch(
       "cart/${cart.id}/products",
       body: cart.listProductsToJson(),

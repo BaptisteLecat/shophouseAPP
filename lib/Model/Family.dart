@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:shophouse/Model/Owner.dart';
 import 'package:shophouse/Model/Product.dart';
 
-Family familyFromJson(String str) => Family.fromJson(json.decode(str));
+Family familyFromJson(dynamic str) => Family.fromJson(str);
 
 String familyToJson(Family data) => json.encode(data.toJson());
 

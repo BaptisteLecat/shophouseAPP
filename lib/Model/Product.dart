@@ -6,16 +6,15 @@ import 'dart:convert';
 
 import 'package:shophouse/Model/Category.dart';
 
-List<Product> listProductFromJson(String str) =>
-    List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
+List<Product> listProductFromJson(dynamic str) =>
+    List<Product>.from(str.map((x) => Product.fromJson(x)));
 
 String listProductToJson(List<Product> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-Product productFromJson(String str) => Product.fromJson(json.decode(str));
+Product productFromJson(dynamic str) => Product.fromJson(str);
 
 String productToJson(Product data) => json.encode(data.toJson());
-
 
 class Product {
   Product({
@@ -32,7 +31,7 @@ class Product {
   String description;
   String picture;
   Category category;
-  int quantity;
+  int? quantity;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
@@ -40,7 +39,7 @@ class Product {
         description: json["description"],
         picture: json["picture"],
         category: Category.fromJson(json["category"]),
-        quantity: json["quantity"],
+        quantity: (json["quantity"] != null) ? json["quantity"] : null,
       );
 
   Map<String, dynamic> toJson() => {
