@@ -39,9 +39,10 @@ class _CartPageState extends State<CartPage> {
 
   void _sendQuantityUpdates() {
     if (this.quantityIsUpdated) {
-      CartFetcher().updateListProduct(cart: widget.family.cart!).then((carts) {
+      CartFetcher().updateListProduct(cart: widget.family.cart!).then((cart) {
         setState(() {
           this.quantityIsUpdated = false;
+          widget.family.cart = cart;
         });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: successMessageColor,
