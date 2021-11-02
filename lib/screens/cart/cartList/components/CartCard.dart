@@ -80,7 +80,7 @@ class _CartCardState extends State<CartCard> {
                       FittedBox(
                           fit: BoxFit.fitHeight,
                           child: Text(
-                            widget.cart.owner.name,
+                            widget.cart.owner!.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!

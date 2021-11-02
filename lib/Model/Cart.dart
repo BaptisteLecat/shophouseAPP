@@ -27,15 +27,17 @@ class Cart {
     required this.owner,
     required this.members,
     required this.cartId,
+    required this.familyId,
   });
 
   int id;
   String title;
   String icon;
   List<Product> products;
-  Owner owner;
+  Owner? owner;
   List<Member>? members;
   int? cartId;
+  int? familyId;
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
         id: json["id"],
@@ -43,11 +45,12 @@ class Cart {
         icon: json["icon"],
         products: List<Product>.from(
             json["products"].map((x) => Product.fromJson(x))),
-        owner: Owner.fromJson(json["owner"]),
+        owner: (json["owner"] != null) ? Owner.fromJson(json["owner"]) : null,
         members: json["members"] != null
             ? List<Member>.from(json["members"].map((x) => Member.fromJson(x)))
             : null,
         cartId: json["cartId"] != null ? json["cartId"] : null,
+        familyId: json["familyId"] != null ? json["familyId"] : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,9 +58,10 @@ class Cart {
         "title": title,
         "icon": icon,
         "products": List<dynamic>.from(products.map((x) => x.toJson())),
-        "owner": owner.toJson(),
+        "owner": owner != null ? owner!.toJson() : null,
         "members":
             members != null ? List<Member>.from(members!.map((x) => x)) : null,
         "cartId": cartId != null ? cartId : null,
+        "familyId": familyId != null ? familyId : null,
       };
 }
