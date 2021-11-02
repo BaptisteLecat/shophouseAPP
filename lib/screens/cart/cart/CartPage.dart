@@ -17,7 +17,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   late Cart cart;
-  late product.Products products;
+  late List<product.Product> products;
   bool quantityIsUpdated = false;
 
   void initState() {
@@ -31,7 +31,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   ///This function will be given to the child widget. It will update the value troughout the function.
-  _updateProductList(List<product.Product>? listProduct) {
+  _updateProductList(List<product.Product> listProduct) {
     setState(() {
       widget.cart.products = listProduct;
       this.quantityIsUpdated = true;
@@ -43,7 +43,7 @@ class _CartPageState extends State<CartPage> {
       CartFetcher().updateListProduct(cart: widget.cart).then((carts) {
         setState(() {
           this.quantityIsUpdated = false;
-          cart = carts.cart[0];
+          this.cart = cart;
         });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: successMessageColor,
@@ -57,9 +57,9 @@ class _CartPageState extends State<CartPage> {
 
   void _loadProductData() async {
     await CartFetcher()
-        .getCartProductList(int.parse(widget.cart.id!))
-        .then((value) {
-      widget.cart.products = value.product;
+        .getCartProductList(widget.cart.id)
+        .then((listProduct) {
+      widget.cart.products = listProduct;
     });
   }
 
@@ -71,7 +71,7 @@ class _CartPageState extends State<CartPage> {
         children: [
           _generateBackButton(context),
           Text(
-            widget.cart.title!,
+            widget.cart.title,
             style: Theme.of(context)
                 .textTheme
                 .headline1!

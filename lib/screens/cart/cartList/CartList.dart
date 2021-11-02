@@ -17,7 +17,7 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
-  late Future<carts.Carts> _cartsData;
+  late Future<List<carts.Cart>> _cartsData;
 
   void initState() {
     _cartsData = UserFetcher().getCarts();
@@ -147,14 +147,14 @@ class _CartListState extends State<CartList> {
                         );
                       } else {
                         if (snapshot.hasData && snapshot.data != null) {
-                          carts.Carts listCarts = snapshot.data as carts.Carts;
+                          List<carts.Cart> listCarts = snapshot.data as List<carts.Cart>;
                           return ListView.builder(
                             padding: const EdgeInsets.only(top: 0),
                             primary: false,
                             shrinkWrap: true,
-                            itemCount: listCarts.cart.length,
+                            itemCount: listCarts.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return CartCard(cart: listCarts.cart[index]);
+                              return CartCard(cart: listCarts[index]);
                             },
                           );
                         } else {
