@@ -37,7 +37,7 @@ class _ListProductState extends State<ListProduct> {
       child: FittedBox(
         fit: BoxFit.fitHeight,
         child: Text(
-          product.label!,
+          product.label,
           style: Theme.of(context)
               .textTheme
               .headline4!
@@ -58,7 +58,7 @@ class _ListProductState extends State<ListProduct> {
               child: Padding(
                   padding: const EdgeInsets.all(10),
                   child:
-                      Image.memory(Base64Decoder().convert(product.picture!)))),
+                      Image.memory(Base64Decoder().convert(product.picture)))),
           const SizedBox(
             width: 10,
           ),

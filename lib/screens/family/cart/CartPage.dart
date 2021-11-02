@@ -104,18 +104,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: FutureBuilder(
-          future: FamilyFetcher().getFamilyCart(familyId: widget.family.id),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              if (snapshot.hasData && snapshot.data != null) {
-                wi.cart = snapshot.data as Cart;
-
-                return Column(
+      body: Column(
                   children: [
                     Expanded(flex: 2, child: _generateHeader(context)),
                     Expanded(
@@ -158,19 +147,12 @@ class _CartPageState extends State<CartPage> {
                     Expanded(
                         flex: 7,
                         child: ListProduct(
-                          products: this.cart.products,
-                          cart: this.cart,
+                          products: widget.family.cart!.products,
+                          cart: widget.family.cart!,
                           listProductCallback: _updateProductList,
                         )),
                   ],
-                );
-              } else {
-                return Center(
-                  child: Text("${snapshot.error}"),
-                );
-              }
-            }
-          }),
+                )
     );
   }
 }
