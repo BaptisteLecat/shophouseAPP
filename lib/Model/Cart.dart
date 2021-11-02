@@ -60,6 +60,4 @@ class Cart {
             members != null ? List<Member>.from(members!.map((x) => x)) : null,
         "cartId": cartId != null ? cartId : null,
       };
-
-  Map<String, dynamic> listProductsToJson() => listProductsToJson();
 }

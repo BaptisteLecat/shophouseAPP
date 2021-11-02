@@ -15,7 +15,7 @@ String familyToJson(Family data) => json.encode(data.toJson());
 class Family {
   Family({
     required this.id,
-    required this.title,
+    required this.name,
     required this.icon,
     required this.products,
     required this.owner,
@@ -24,30 +24,34 @@ class Family {
   });
 
   int id;
-  String title;
-  String icon;
-  List<Product> products;
+  String name;
+  String? icon;
+  List<Product>? products;
   Owner owner;
-  int cartId;
+  int? cartId;
   Cart? cart;
   List<dynamic> members;
 
   factory Family.fromJson(Map<String, dynamic> json) => Family(
         id: json["id"],
-        title: json["title"],
-        icon: json["icon"],
-        products: List<Product>.from(
-            json["products"].map((x) => Product.fromJson(x))),
+        name: json["name"],
+        icon: (json["icon"] != null) ? json["icon"] : null,
+        products: (json["products"] != null)
+            ? List<Product>.from(
+                json["products"].map((x) => Product.fromJson(x)))
+            : null,
         owner: Owner.fromJson(json["owner"]),
-        cartId: json["cartId"],
+        cartId: (json["cartId"] != null) ? json["cartId"] : null,
         members: List<dynamic>.from(json["members"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "title": title,
+        "name": name,
         "icon": icon,
-        "products": List<dynamic>.from(products.map((x) => x.toJson())),
+        "products": (this.products != null)
+            ? List<dynamic>.from(products!.map((x) => x.toJson()))
+            : null,
         "owner": owner.toJson(),
         "cartId": cartId,
         "members": List<dynamic>.from(members.map((x) => x)),

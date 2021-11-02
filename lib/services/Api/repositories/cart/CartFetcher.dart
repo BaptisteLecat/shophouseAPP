@@ -31,10 +31,9 @@ class CartFetcher extends MainFetcher {
   }
 
   Future<Cart> updateListProduct({required Cart cart}) async {
-    print(cart.listProductsToJson());
     final response = await this.patch(
       "cart/${cart.id}/products",
-      body: cart.listProductsToJson(),
+      body: cart.products,
     );
     return Cart.fromJson(response);
   }

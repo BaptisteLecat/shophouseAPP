@@ -66,7 +66,7 @@ class MainFetcher {
   }
 
   Future<dynamic> patch(String url,
-      {Map<String, String>? headers, Map<String, dynamic>? body}) async {
+      {Map<String, String>? headers, dynamic body}) async {
     var responseJson;
     try {
       print(_urlBuilder(url));
