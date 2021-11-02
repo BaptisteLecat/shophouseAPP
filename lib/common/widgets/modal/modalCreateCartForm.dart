@@ -100,14 +100,14 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
                   if (this.formKey.currentState!.validate()) {
                     await CartFetcher()
                         .createCart(this.cartNameController.text)
-                        .then((cartList) async {
+                        .then((cart) async {
                       Navigator.pop(context);
                       await Navigator.of(context).push(new PageRouteBuilder(
                           opaque: true,
                           transitionDuration: const Duration(milliseconds: 500),
                           pageBuilder: (BuildContext context, _, __) {
                             return new CartPage(
-                              cart: cartList.cart[0],
+                              cart: cart,
                               isCreated: true,
                             );
                           },

@@ -20,9 +20,9 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController cartNameController = TextEditingController();
   int quantity = 3;
-  late Future<Carts> _cartsData;
+  late Future<List<Cart>> _cartsData;
   int _selectedValue = 0;
-  Carts? listCart;
+  List<Cart>? listCart;
 
   void initState() {
     _cartsData = UserFetcher().getCarts();
@@ -37,9 +37,9 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
     List<DropdownMenuItem<int>> listDropDownCart = [];
     await _cartsData.then((listCart) {
       this.listCart = listCart;
-      listCart.cart.forEachIndexed((index, cart) {
+      listCart.forEachIndexed((index, cart) {
         DropdownMenuItem<int> item = DropdownMenuItem<int>(
-          child: Text(cart.title!),
+          child: Text(cart.title),
           value: index,
         );
         listDropDownCart.add(item);
@@ -206,11 +206,11 @@ class _ModalAddToCartFormState extends State<ModalAddToCartForm> {
                                 if (this.listCart != null) {
                                   await CartFetcher()
                                       .addProductInCart(
-                                          cartId: int.parse(this
+                                          cartId: this
                                               .listCart!
-                                              .cart[this._selectedValue]
-                                              .id!),
-                                          productId: widget.product.id!,
+                                              [this._selectedValue]
+                                              .id,
+                                          productId: widget.product.id,
                                           quantity: quantity)
                                       .then((value) {
                                     Navigator.pop(context);
