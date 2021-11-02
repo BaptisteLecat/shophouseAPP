@@ -153,7 +153,7 @@ class _ProductCardsState extends State<ProductCards> {
               Expanded(
                 child: Container(
                   child: Image.memory(
-                      Base64Decoder().convert(widget.product.picture!)),
+                      Base64Decoder().convert(widget.product.picture)),
                 ),
               ),
               _generateBottomCard()

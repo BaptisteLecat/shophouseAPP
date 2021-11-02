@@ -62,7 +62,7 @@ class _CartCardState extends State<CartCard> {
               flex: 2,
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Image.memory(Base64Decoder().convert(widget.cart.icon!)),
+                child: Image.memory(Base64Decoder().convert(widget.cart.icon)),
               ),
             ),
             const SizedBox(
@@ -80,7 +80,7 @@ class _CartCardState extends State<CartCard> {
                       FittedBox(
                           fit: BoxFit.fitHeight,
                           child: Text(
-                            widget.cart.owner!.name!,
+                            widget.cart.owner.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
@@ -91,7 +91,7 @@ class _CartCardState extends State<CartCard> {
                       FittedBox(
                         fit: BoxFit.fitHeight,
                         child: Text(
-                          widget.cart.title!,
+                          widget.cart.title,
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
@@ -101,7 +101,7 @@ class _CartCardState extends State<CartCard> {
                       FittedBox(
                           fit: BoxFit.fitHeight,
                           child: Text(
-                            "${widget.cart.products!.length} articles",
+                            "${widget.cart.products.length} articles",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!

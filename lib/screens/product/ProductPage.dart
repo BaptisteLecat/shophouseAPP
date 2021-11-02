@@ -68,7 +68,7 @@ class _ProductPageState extends State<ProductPage> {
                       //height: MediaQuery.of(context).size.width * 0.5,
                       width: MediaQuery.of(context).size.width * 0.60,
                       child: Image.memory(
-                          Base64Decoder().convert(widget.product.picture!)),
+                          Base64Decoder().convert(widget.product.picture)),
                     ),
                   )
                 ],

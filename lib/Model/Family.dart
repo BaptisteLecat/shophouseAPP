@@ -3,7 +3,6 @@
 //     final family = familyFromJson(jsonString);
 
 import 'package:shophouse/Model/Cart.dart';
-import 'package:shophouse/Model/Member.dart';
 import 'dart:convert';
 
 import 'package:shophouse/Model/Owner.dart';

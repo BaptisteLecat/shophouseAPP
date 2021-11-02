@@ -49,7 +49,7 @@ class _ProductInfoState extends State<ProductInfo> {
               ],
             ),
             Text(
-              widget.product.label!,
+              widget.product.label,
               style: Theme.of(context).textTheme.headline3,
             ),
             Row(
@@ -81,7 +81,7 @@ class _ProductInfoState extends State<ProductInfo> {
             Container(
               height: 160,
               child: Text(
-                widget.product.description!,
+                widget.product.description,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme

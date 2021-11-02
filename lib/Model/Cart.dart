@@ -8,6 +8,12 @@ import 'package:shophouse/Model/Member.dart';
 import 'package:shophouse/Model/Owner.dart';
 import 'package:shophouse/Model/Product.dart';
 
+List<Cart> listCartFromJson(String str) =>
+    List<Cart>.from(json.decode(str).map((x) => Cart.fromJson(x)));
+
+String listCartToJson(List<Cart> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 Cart cartFromJson(String str) => Cart.fromJson(json.decode(str));
 
 String cartToJson(Cart data) => json.encode(data.toJson());
