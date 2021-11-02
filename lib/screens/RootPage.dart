@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/menu/fab_bottom_app_bar.dart';
@@ -7,11 +5,11 @@ import 'package:shophouse/screens/account/AccountPage.dart';
 import 'package:shophouse/screens/cart/cartList/CartList.dart';
 import 'package:shophouse/screens/family/FamilyPage.dart';
 import 'package:shophouse/screens/home/HomePage.dart';
-import 'package:shophouse/screens/home/components/categories.dart';
-import 'package:shophouse/screens/home/components/products.dart';
+import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
 
 class RootPage extends StatefulWidget {
-  const RootPage({Key? key}) : super(key: key);
+  bool fromAuth;
+  RootPage({Key? key, this.fromAuth = false}) : super(key: key);
 
   @override
   _RootPageState createState() => _RootPageState();
@@ -33,7 +31,9 @@ class _RootPageState extends State<RootPage> {
     Widget page = HomePage();
     switch (_lastSelected) {
       case 0:
-        page = HomePage();
+        page = HomePage(
+          fromAuth: widget.fromAuth,
+        );
         break;
       case 1:
         page = CartList();
@@ -45,8 +45,14 @@ class _RootPageState extends State<RootPage> {
         page = AccountPage();
         break;
       default:
-        page = HomePage();
+        page = HomePage(
+          fromAuth: widget.fromAuth,
+        );
     }
+
+    setState(() {
+      widget.fromAuth = false;
+    });
 
     return page;
   }
@@ -55,6 +61,7 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
     displayedPage = _getDisplayedPage();
+    UserFetcher();
   }
 
   @override

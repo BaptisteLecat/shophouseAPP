@@ -1,26 +1,27 @@
 // To parse this JSON data, do
 //
-//     final cart = cartFromJson(jsonString);
+//     final family = familyFromJson(jsonString);
 
+import 'package:shophouse/Model/Cart.dart';
+import 'package:shophouse/Model/Member.dart';
 import 'dart:convert';
 
-import 'package:shophouse/Model/Member.dart';
 import 'package:shophouse/Model/Owner.dart';
 import 'package:shophouse/Model/Product.dart';
 
-Cart cartFromJson(String str) => Cart.fromJson(json.decode(str));
+Family familyFromJson(String str) => Family.fromJson(json.decode(str));
 
-String cartToJson(Cart data) => json.encode(data.toJson());
+String familyToJson(Family data) => json.encode(data.toJson());
 
-class Cart {
-  Cart({
+class Family {
+  Family({
     required this.id,
     required this.title,
     required this.icon,
     required this.products,
     required this.owner,
-    required this.members,
     required this.cartId,
+    required this.members,
   });
 
   int id;
@@ -28,20 +29,19 @@ class Cart {
   String icon;
   List<Product> products;
   Owner owner;
-  List<Member>? members;
-  int? cartId;
+  int cartId;
+  Cart? cart;
+  List<dynamic> members;
 
-  factory Cart.fromJson(Map<String, dynamic> json) => Cart(
+  factory Family.fromJson(Map<String, dynamic> json) => Family(
         id: json["id"],
         title: json["title"],
         icon: json["icon"],
         products: List<Product>.from(
             json["products"].map((x) => Product.fromJson(x))),
         owner: Owner.fromJson(json["owner"]),
-        members: json["members"] != null
-            ? List<Member>.from(json["members"].map((x) => x))
-            : null,
-        cartId: json["cartId"] != null ? json["cartId"] : null,
+        cartId: json["cartId"],
+        members: List<dynamic>.from(json["members"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,12 +50,7 @@ class Cart {
         "icon": icon,
         "products": List<dynamic>.from(products.map((x) => x.toJson())),
         "owner": owner.toJson(),
-        "members":
-            members != null ? List<Member>.from(members!.map((x) => x)) : null,
-        "cartId": cartId != null ? cartId : null,
-      };
-
-  Map<String, dynamic> listProductsToJson() => {
-        "products": List<dynamic>.from(products.map((x) => x.toJson())),
+        "cartId": cartId,
+        "members": List<dynamic>.from(members.map((x) => x)),
       };
 }

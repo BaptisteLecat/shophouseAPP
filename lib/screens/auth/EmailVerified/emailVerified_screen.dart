@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shophouse/screens/RootPage.dart';
-import 'package:shophouse/screens/home/HomePage.dart';
 import 'package:shophouse/services/Auth/Authentication.dart';
 
 class EmailVerifiedScreen extends StatefulWidget {
@@ -43,8 +41,10 @@ class _EmailVerifiedScreenState extends State<EmailVerifiedScreen> {
     await auth.reloadUser();
     if (auth.emailIsVerified()) {
       timer.cancel();
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => RootPage()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => RootPage(
+                fromAuth: true,
+              )));
     }
   }
 }

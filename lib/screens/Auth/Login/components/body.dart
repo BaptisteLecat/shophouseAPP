@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shophouse/common/widgets/loading.dart';
 import 'package:shophouse/screens/RootPage.dart';
 import 'package:shophouse/screens/auth/Register/register_screen.dart';
-import 'package:shophouse/screens/home/HomePage.dart';
 import 'package:shophouse/services/Auth/SharedPreferences.dart';
 import '../../../../common/widgets/buttons/cta_button.dart';
 import '../../../../services/auth/authentication.dart';
@@ -34,13 +33,17 @@ class _BodyState extends State<Body> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return widget.loading
         ? Loading()
         : Container(
             height: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 25),
+            margin: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
                 Flexible(flex: 2, child: _headerBuilder()),
@@ -83,7 +86,7 @@ class _BodyState extends State<Body> {
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             "Ravi de vous retrouver. Connectez-vous pour reprendre vos courses.",
             textAlign: TextAlign.start,
@@ -120,8 +123,12 @@ class _BodyState extends State<Body> {
                           AuthException.generateExceptionMessage(result);
                     });
                   } else {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => RootPage()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RootPage(
+                                  fromAuth: true,
+                                )));
                   }
                 }
               },

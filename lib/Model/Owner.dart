@@ -4,8 +4,8 @@ class Owner {
     required this.name,
   });
 
-  String? id;
-  String? name;
+  int id;
+  String name;
 
   factory Owner.fromJson(Map<String, dynamic> json) => Owner(
         id: json["id"],

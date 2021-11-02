@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/buttons/cta_button.dart';
+import 'package:shophouse/screens/cart/cart/CartPage.dart';
 import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 
 class ModalCreateCartForm extends StatefulWidget {
@@ -14,6 +15,11 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController cartNameController = TextEditingController();
 
+  @override
+  dispose() {
+    super.dispose();
+  }
+
   InputDecoration _inputDecorationBuilder({required String hintText}) {
     return InputDecoration(
       filled: true,
@@ -25,14 +31,14 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
         fontWeight: FontWeight.w400,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xffC5CCDA),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xff3D5382),
@@ -53,7 +59,7 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             "Commencez vos courses maintenant en créant un panier.",
             textAlign: TextAlign.start,
@@ -70,7 +76,7 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(vertical: 20),
+            margin: const EdgeInsets.symmetric(vertical: 20),
             height: 60,
             child: TextFormField(
               keyboardType: TextInputType.text,
@@ -94,13 +100,29 @@ class _ModalCreateCartFormState extends State<ModalCreateCartForm> {
                   if (this.formKey.currentState!.validate()) {
                     await CartFetcher()
                         .createCart(this.cartNameController.text)
-                        .then((value) {
+                        .then((cartList) async {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: successMessageColor,
-                          content:
-                              Text('Votre panier a été créer avec succès!')));
+                      await Navigator.of(context).push(new PageRouteBuilder(
+                          opaque: true,
+                          transitionDuration: const Duration(milliseconds: 500),
+                          pageBuilder: (BuildContext context, _, __) {
+                            return new CartPage(
+                              cart: cartList.cart[0],
+                              isCreated: true,
+                            );
+                          },
+                          transitionsBuilder: (_, Animation<double> animation,
+                              __, Widget child) {
+                            return new SlideTransition(
+                              child: child,
+                              position: new Tween<Offset>(
+                                begin: const Offset(2, 0),
+                                end: Offset.zero,
+                              ).animate(animation),
+                            );
+                          }));
                     }).onError((error, stackTrace) {
+                      print(error);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: errorMessageColor,
                           content: Text('$error')));

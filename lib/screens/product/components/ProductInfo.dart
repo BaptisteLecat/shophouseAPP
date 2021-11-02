@@ -4,8 +4,8 @@ import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/buttons/cta_button.dart';
 
 class ProductInfo extends StatefulWidget {
-  Product product;
-  ProductInfo({Key? key, required this.product}) : super(key: key);
+  final Product product;
+  const ProductInfo({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductInfoState createState() => _ProductInfoState();
@@ -21,10 +21,11 @@ class _ProductInfoState extends State<ProductInfo> {
                 color: Colors.black.withOpacity(0.15),
                 spreadRadius: 0,
                 blurRadius: 6,
-                offset: Offset(0, -2), // changes position of shadow
+                offset: const Offset(0, -2), // changes position of shadow
               ),
             ],
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(25.0)),
             color: Colors.white),
         padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
         child: Column(
@@ -42,7 +43,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 Container(
                     height: 6,
                     width: 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: lightGreyColor,
                         borderRadius: BorderRadius.all(Radius.circular(2)))),
               ],
@@ -54,9 +55,9 @@ class _ProductInfoState extends State<ProductInfo> {
             Row(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: primaryColor, width: 2),
+                  decoration: const BoxDecoration(
+                    border: const Border(
+                      bottom: const BorderSide(color: primaryColor, width: 2),
                     ),
                   ),
                   child: Text("Description",

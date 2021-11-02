@@ -6,8 +6,8 @@ import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/product/components/ProductInfo.dart';
 
 class ProductPage extends StatefulWidget {
-  Product product;
-  ProductPage({Key? key, required this.product}) : super(key: key);
+  final Product product;
+  const ProductPage({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -23,7 +23,7 @@ class _ProductPageState extends State<ProductPage> {
           Expanded(
             flex: 4,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
               child: Column(
                 children: [
                   Expanded(
@@ -37,8 +37,8 @@ class _ProductPageState extends State<ProductPage> {
                           child: Container(
                             height: 40,
                             width: 40,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle, color: Colors.white),
                             child: Image.asset(
                               "assets/icons/ui/left-arrow.png",
@@ -53,7 +53,7 @@ class _ProductPageState extends State<ProductPage> {
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.black.withOpacity(0.25),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 4),
                             ],
                           ),

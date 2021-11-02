@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
-import 'package:shophouse/common/error/AuthException.dart';
 
 class CGU extends StatefulWidget {
   bool isAcceptedCGU;
-  ValueChanged<bool> checkBoxCallback;
-  ValueChanged<String> errorCodeCallback;
+  final ValueChanged<bool> checkBoxCallback;
+  final ValueChanged<String> errorCodeCallback;
   CGU(
       {Key? key,
       required this.isAcceptedCGU,
@@ -34,7 +33,8 @@ class _CGUState extends State<CGU> {
                       activeColor: primaryColor,
                       shape: RoundedRectangleBorder(
                           side: BorderSide(color: inputBorder),
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6))),
                       value: widget.isAcceptedCGU,
                       onChanged: (value) {
                         setState(() {
@@ -58,13 +58,13 @@ class _CGUState extends State<CGU> {
                   text: TextSpan(
                       style: Theme.of(context).textTheme.bodyText1,
                       children: [
-                TextSpan(text: "J'accepte les "),
+                const TextSpan(text: "J'accepte les "),
                 TextSpan(
                     text: "Conditions d'Utilisations ",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         color: primaryColor,
                         decoration: TextDecoration.underline)),
-                TextSpan(text: "et la "),
+                const TextSpan(text: "et la "),
                 TextSpan(
                     text: "Politique de Confidentialité.",
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(

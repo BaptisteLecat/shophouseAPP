@@ -40,14 +40,14 @@ class _LoginFormState extends State<LoginForm> {
         fontWeight: FontWeight.w400,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xffC5CCDA),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           width: 1.5,
           color: const Color(0xff3D5382),
@@ -78,11 +78,11 @@ class _LoginFormState extends State<LoginForm> {
               decoration: _inputDecorationBuilder(hintText: 'Email'),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           PasswordHandler(passwordController: widget.passwordController),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Flex(
@@ -110,7 +110,8 @@ class _LoginFormState extends State<LoginForm> {
                       activeColor: primaryColor,
                       shape: RoundedRectangleBorder(
                           side: BorderSide(color: inputBorder),
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6))),
                       value: widget.stayConnected,
                       onChanged: (value) {
                         setState(() {

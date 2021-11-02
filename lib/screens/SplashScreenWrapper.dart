@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/AppUser.dart';
+import 'package:shophouse/common/widgets/ScreenLoader.dart';
 import 'package:shophouse/screens/RootPage.dart';
 import 'package:shophouse/screens/auth/LandingScreen/landing_screen.dart';
 import 'package:shophouse/services/Auth/Authentication.dart';
@@ -23,11 +24,13 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
             if (snapshot.data!.uid == null) {
               returnedWidget = LandingScreen();
             } else {
-              returnedWidget = RootPage();
+              returnedWidget = RootPage(
+                fromAuth: true,
+              );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            returnedWidget = Center(
-              child: CircularProgressIndicator(),
+            returnedWidget = Scaffold(
+              body: ScreenLoader(),
             );
           } else {
             returnedWidget = LandingScreen();

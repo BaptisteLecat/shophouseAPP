@@ -3,8 +3,8 @@ import 'package:shophouse/common/widgets/buttons/hidePassword_button.dart';
 import 'package:shophouse/common/widgets/inputs/input_password.dart';
 
 class PasswordHandler extends StatefulWidget {
-  TextEditingController passwordController;
-  PasswordHandler({Key? key, required this.passwordController})
+  final TextEditingController passwordController;
+  const PasswordHandler({Key? key, required this.passwordController})
       : super(key: key);
 
   @override
@@ -13,7 +13,6 @@ class PasswordHandler extends StatefulWidget {
 
 class _PasswordHandlerState extends State<PasswordHandler> {
   bool hidePassword = true;
-
   late HidePasswordButton hidePasswordButton;
 
   @override
@@ -21,6 +20,11 @@ class _PasswordHandlerState extends State<PasswordHandler> {
     super.initState();
     hidePasswordButton =
         HidePasswordButton(callback: this._updatePasswordState);
+  }
+
+  @override
+  dispose() {
+    super.dispose();
   }
 
   ///This function will be given to the child widget. It will update the value troughout the function.
@@ -54,7 +58,7 @@ class _PasswordHandlerState extends State<PasswordHandler> {
                         hidePassword: this.hidePassword,
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Flexible(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shophouse/common/constant/colors.dart';
 
 class InputNumber extends StatefulWidget {
   int value;

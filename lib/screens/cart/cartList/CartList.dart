@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shophouse/Model/Cart.dart' as carts;
 import 'package:shophouse/common/constant/colors.dart';
-import 'package:shophouse/common/widgets/modal/modalAddToCartForm.dart';
+import 'package:shophouse/common/widgets/layout/header.dart';
 import 'package:shophouse/common/widgets/modal/modalCreateCartForm.dart';
 import 'package:shophouse/screens/cart/cartList/components/CartCard.dart';
 import 'package:shophouse/services/Api/repositories/user/UserFetcher.dart';
@@ -24,39 +24,28 @@ class _CartListState extends State<CartList> {
     super.initState();
   }
 
-  Container _generateHeader() {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Paniers",
-            style: Theme.of(context).textTheme.headline1,
-            textAlign: TextAlign.start,
-          ),
-          Text(
-            "Retrouvez vos paniers et partagez les avec vos amis.",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        ],
-      ),
-    );
+  void dispose() {
+    super.dispose();
   }
 
-  void _displayModal(BuildContext context) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+  void _displayModal(BuildContext context) async {
+    await showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(25.0))),
         backgroundColor: Colors.white,
         context: context,
         isScrollControlled: true,
         builder: (BuildContext context) {
-          return Padding(
+          return const Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-            child: ModalCreateCartForm(),
+            child: const ModalCreateCartForm(),
           );
-        });
+        }).then((value) {
+      setState(() {
+        _cartsData = UserFetcher().getCarts();
+      });
+    });
   }
 
   @override
@@ -64,7 +53,7 @@ class _CartListState extends State<CartList> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return Container(
-          padding: EdgeInsets.only(left: 25, right: 25),
+          padding: const EdgeInsets.only(left: 25, right: 25),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -72,12 +61,15 @@ class _CartListState extends State<CartList> {
               Expanded(
                   flex: 3,
                   child: Container(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _generateHeader(),
-                        SizedBox(height: 10),
+                        const Header(
+                            title: "Paniers",
+                            content:
+                                "Retrouvez vos paniers et partagez les avec vos amis."),
+                        const SizedBox(height: 10),
                         NiceButtons(
                           height: 110,
                           startColor: primaryColorDarker1,
@@ -91,7 +83,7 @@ class _CartListState extends State<CartList> {
                             _displayModal(context);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             child: Flex(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               direction: Axis.horizontal,
@@ -145,7 +137,7 @@ class _CartListState extends State<CartList> {
                     ),
                   )),
               Expanded(
-                flex: 4,
+                flex: 5,
                 child: FutureBuilder(
                     future: _cartsData,
                     builder: (context, snapshot) {
@@ -157,7 +149,7 @@ class _CartListState extends State<CartList> {
                         if (snapshot.hasData && snapshot.data != null) {
                           carts.Carts listCarts = snapshot.data as carts.Carts;
                           return ListView.builder(
-                            padding: EdgeInsets.only(top: 0),
+                            padding: const EdgeInsets.only(top: 0),
                             primary: false,
                             shrinkWrap: true,
                             itemCount: listCarts.cart.length,

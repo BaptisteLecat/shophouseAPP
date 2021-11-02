@@ -13,7 +13,7 @@ class _AccountPageState extends State<AccountPage> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(top: 60),
+          padding: const EdgeInsets.only(top: 60),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
