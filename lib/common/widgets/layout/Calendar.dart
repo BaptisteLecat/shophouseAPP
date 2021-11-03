@@ -9,75 +9,99 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  Map<int, List<String>> dayWeekNumbersForMonth = {
+    0: ["27", "4", "11", "18", "25"],
+    1: ["28", "5", "12", "19", "26"],
+    2: ["29", "6", "13", "20", "27"],
+    3: ["30", "7", "14", "21", "28"],
+    4: ["1", "8", "15", "22", "29"],
+    5: ["2", "9", "16", "23", "30"],
+    6: ["3", "10", "17", "24", "31"],
+  };
+
+  get const_weekDayLabel => null;
+
+  Text _weekHeader(String text) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.headline6!.copyWith(
+          color: primaryColor, fontSize: 14, fontWeight: FontWeight.w600),
+    );
+  }
+
+  Text _weekDay(String text) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          color: bodyTextColor2, fontSize: 14, fontWeight: FontWeight.w600),
+    );
+  }
+
+  List<Widget> _dayWeekNumbersForMonthList(
+      Map<int, List<String>> dayWeekNumbersForMonth) {
+    List<Text> dayNumbersWidget;
+    List<Widget> weekDayWidget = [];
+
+    dayWeekNumbersForMonth.forEach((weekdayIndex, dayNumberList) {
+      //Reset list of dayNumbers.
+      dayNumbersWidget = [];
+      //First adding the header day title.
+      dayNumbersWidget.add(_weekHeader(const_weekDayLabel[weekdayIndex]));
+      //Loop on the daysNumber of this weekDay for this month.
+      dayNumberList.asMap().forEach((index, dayNumber) {
+        dayNumbersWidget.add(_weekDay(dayNumber));
+      });
+      //Adding this weekDay column of dayNumbers to the list of weekDayWidget will be returned.
+      weekDayWidget.add(Expanded(
+          child: Column(
+              children: dayNumbersWidget,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly)));
+    });
+
+    return weekDayWidget;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         height: 200,
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+            borderRadius: BorderRadius.all(Radius.circular(12))),
         child: Flex(
           direction: Axis.vertical,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
+              flex: 1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Octobre 2021"),
-                  Container(height: 10, width: 10, color: primaryColor),
-                  Container(height: 10, width: 10, color: primaryColor)
+                  Text(
+                    "Octobre 2021",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  Row(
+                    children: [
+                      Container(height: 10, width: 10, color: primaryColor),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(height: 10, width: 10, color: primaryColor)
+                    ],
+                  )
                 ],
               ),
             ),
             Expanded(
-              child: Column(
+              flex: 3,
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text("Lun"),
-                        Text("Mar"),
-                        Text("Mer"),
-                        Text("Jeu"),
-                        Text("Ven"),
-                        Text("Sam"),
-                        Text("Dim"),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text("27"),
-                        Text("28"),
-                        Text("29"),
-                        Text("30"),
-                        Text("01"),
-                        Text("02"),
-                        Text("03"),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text("04"),
-                        Text("05"),
-                        Text("06"),
-                        Text("07"),
-                        Text("08"),
-                        Text("09"),
-                        Text("10"),
-                      ],
-                    ),
-                  ),
-                ],
+                children: _dayWeekNumbersForMonthList(dayWeekNumbersForMonth),
               ),
             )
           ],
