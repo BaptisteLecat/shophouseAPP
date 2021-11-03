@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.0.7
   http: ^0.13.3
   nice_buttons: ^0.0.2
+  dart_date: ^1.1.0
 
 dev_dependencies:
   flutter_test:
