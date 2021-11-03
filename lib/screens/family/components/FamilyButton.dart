@@ -3,6 +3,7 @@ import 'package:nice_buttons/nice_buttons.dart';
 import 'package:shophouse/Model/Family.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/screens/family/cart/CartPage.dart';
+import 'package:shophouse/screens/family/planning/PlanningPage.dart';
 
 class FamilyButton extends StatefulWidget {
   final String btnName;
@@ -120,7 +121,24 @@ class _FamilyButtonState extends State<FamilyButton> {
             borderThickness: 0,
             stretch: true,
             gradientOrientation: GradientOrientation.Horizontal,
-            onTap: (value) {},
+            onTap: (value) {
+              Navigator.of(context).push(new PageRouteBuilder(
+                  opaque: true,
+                  transitionDuration: const Duration(milliseconds: 500),
+                  pageBuilder: (BuildContext context, _, __) {
+                    return PlanningPage(family: widget.family);
+                  },
+                  transitionsBuilder:
+                      (_, Animation<double> animation, __, Widget child) {
+                    return SlideTransition(
+                      child: child,
+                      position: Tween<Offset>(
+                        begin: const Offset(2, 0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                    );
+                  }));
+            },
             child: Padding(
               padding: EdgeInsets.all(12),
               child: Flex(
