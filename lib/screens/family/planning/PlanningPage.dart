@@ -17,7 +17,6 @@ class PlanningPage extends StatefulWidget {
 }
 
 class _PlanningPageState extends State<PlanningPage> {
-
   void initState() {
     super.initState();
   }
@@ -29,11 +28,13 @@ class _PlanningPageState extends State<PlanningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: primaryColor,
-            body: Column(
-              children: [
-                Calendar()
-              ],
-            ));
+        backgroundColor: primaryColor,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Calendar()],
+          ),
+        ));
   }
 }

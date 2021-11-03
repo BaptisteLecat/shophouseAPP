@@ -14,6 +14,7 @@ const backgroundColorProduct = Color(0xffEDF6FF);
 const lightGreyColor = Color(0xffE8E6E6);
 
 const bodyTextColor = Color(0xffC3C3C3);
+const bodyTextColor2 = Color(0xffCBCBCB);
 
 const inputBackground = Color(0xffEEEEEE);
 const inputBorder = Color(0xffC5CCDA);
