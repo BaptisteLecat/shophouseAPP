@@ -33,7 +33,7 @@ class _PlanningPageState extends State<PlanningPage> {
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Calendar()],
+            children: [CalendarWidget()],
           ),
         ));
   }

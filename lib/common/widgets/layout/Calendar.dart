@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
+import 'package:shophouse/common/constant/data.dart';
+import 'package:shophouse/services/Utils/FamilyCalendar/Calendar.dart';
+import 'package:shophouse/services/Utils/FamilyCalendar/Day.dart';
 
-class Calendar extends StatefulWidget {
-  const Calendar({Key? key}) : super(key: key);
+class CalendarWidget extends StatefulWidget {
+  const CalendarWidget({Key? key}) : super(key: key);
 
   @override
-  _CalendarState createState() => _CalendarState();
+  _CalendarWidgetState createState() => _CalendarWidgetState();
 }
 
-class _CalendarState extends State<Calendar> {
-  Map<int, List<String>> dayWeekNumbersForMonth = {
+class _CalendarWidgetState extends State<CalendarWidget> {
+  /*Map<int, List<String>> dayWeekNumbersForMonth = {
     0: ["27", "4", "11", "18", "25"],
     1: ["28", "5", "12", "19", "26"],
     2: ["29", "6", "13", "20", "27"],
@@ -17,9 +20,8 @@ class _CalendarState extends State<Calendar> {
     4: ["1", "8", "15", "22", "29"],
     5: ["2", "9", "16", "23", "30"],
     6: ["3", "10", "17", "24", "31"],
-  };
-
-  get const_weekDayLabel => null;
+  };*/
+  Map<int, List<Day>> dayWeekNumbersForMonth = Calendar().generateCalendar();
 
   Text _weekHeader(String text) {
     return Text(
@@ -38,7 +40,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   List<Widget> _dayWeekNumbersForMonthList(
-      Map<int, List<String>> dayWeekNumbersForMonth) {
+      Map<int, List<Day>> dayWeekNumbersForMonth) {
     List<Text> dayNumbersWidget;
     List<Widget> weekDayWidget = [];
 
@@ -46,10 +48,10 @@ class _CalendarState extends State<Calendar> {
       //Reset list of dayNumbers.
       dayNumbersWidget = [];
       //First adding the header day title.
-      dayNumbersWidget.add(_weekHeader(const_weekDayLabel[weekdayIndex]));
+      dayNumbersWidget.add(_weekHeader(const_weekDayLabel[weekdayIndex - 1]));
       //Loop on the daysNumber of this weekDay for this month.
-      dayNumberList.asMap().forEach((index, dayNumber) {
-        dayNumbersWidget.add(_weekDay(dayNumber));
+      dayNumberList.asMap().forEach((index, day) {
+        dayNumbersWidget.add(_weekDay(day.getDayNumber().toString()));
       });
       //Adding this weekDay column of dayNumbers to the list of weekDayWidget will be returned.
       weekDayWidget.add(Expanded(
