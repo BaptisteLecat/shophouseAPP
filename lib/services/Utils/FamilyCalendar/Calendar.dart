@@ -1,7 +1,6 @@
 import 'package:dart_date/dart_date.dart';
-import 'package:shophouse/common/constant/data.dart';
 import 'package:shophouse/services/Utils/FamilyCalendar/Day.dart';
-import 'dart:developer';
+import 'package:jiffy/jiffy.dart';
 
 class Calendar {
   int? givedMonth;
@@ -12,6 +11,33 @@ class Calendar {
   Calendar({this.givedMonth, this.givedYear}) {
     this.refDate = DateTime.now();
     this.monthDays = [];
+    this.init();
+  }
+
+  int getMonth() {
+    return this.refDate.month;
+  }
+
+  int getYear() {
+    return this.refDate.year;
+  }
+
+  void nextMonth() {
+    this.refDate = Jiffy(this.refDate).add(months: 1).dateTime;
+  }
+
+  void previousMonth() {
+  this.refDate = Jiffy(this.refDate).subtract(months: 1).dateTime;
+  }
+
+  set setMonth(int givedMonth) {
+    this.givedMonth = givedMonth;
+    this.init();
+  }
+
+  set setYear(int givedYear) {
+    this.givedYear = givedYear;
+    this.init();
   }
 
   void init() {
@@ -41,8 +67,9 @@ class Calendar {
         this.findFirstWeekDayOfMonth() - DateTime.monday;
     if (numberOfDayBeforeStartMonth > 0) {
       DateTime decrementedDate = this.refDate.startOfMonth;
-      for (var i = numberOfDayBeforeStartMonth; i > 0; i++) {
+      for (var i = numberOfDayBeforeStartMonth; i > 0; i--) {
         decrementedDate = decrementedDate.subtract(Duration(days: 1));
+        print(decrementedDate.toString());
         monthDays.add(Day(date: decrementedDate, meals: []));
       }
     }
@@ -55,12 +82,14 @@ class Calendar {
       DateTime incrementedDate = this.refDate.endOfMonth;
       for (var i = 0; i < numberOfDayAfterEndMonth; i++) {
         incrementedDate = incrementedDate.add(Duration(days: 1));
+        print(incrementedDate.toString());
         monthDays.add(Day(date: incrementedDate, meals: []));
       }
     }
   }
 
   void hydrateListDay() {
+    this.monthDays = [];
     hydrateListDayWithPreviousMonthDays();
 
     DateTime incrementedDate = this.refDate.startOfMonth;
@@ -70,6 +99,7 @@ class Calendar {
         i <= this.refDate.endOfMonth.day;
         i++) {
       incrementedDate = incrementedDate.add(Duration(days: 1));
+      print(incrementedDate.toString());
       monthDays.add(Day(date: incrementedDate, meals: []));
     }
 
@@ -78,25 +108,18 @@ class Calendar {
 
   Map<int, List<Day>> generateCalendar() {
     Map<int, List<Day>> calendar = {
-      1 : [],
-      2 : [],
-      3 : [],
-      4 : [],
-      5 : [],
-      6 : [],
-      7 : [],
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
     };
 
     hydrateListDay();
     monthDays.forEach((day) {
-      if (calendar.containsKey(day.date.weekday)) {
-        print("test");
         calendar[day.date.weekday]!.add(day);
-      } else {
-        print("testtest");
-        List<Day> days = [day];
-        calendar[day.date.weekday] = days;
-      }
     });
 
     calendar.forEach((key, value) {
