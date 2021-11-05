@@ -12,16 +12,18 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  /*Map<int, List<String>> dayWeekNumbersForMonth = {
-    0: ["27", "4", "11", "18", "25"],
-    1: ["28", "5", "12", "19", "26"],
-    2: ["29", "6", "13", "20", "27"],
-    3: ["30", "7", "14", "21", "28"],
-    4: ["1", "8", "15", "22", "29"],
-    5: ["2", "9", "16", "23", "30"],
-    6: ["3", "10", "17", "24", "31"],
-  };*/
-  Map<int, List<Day>> dayWeekNumbersForMonth = Calendar().generateCalendar();
+  Calendar calendar = Calendar();
+  Map<int, List<Day>> dayWeekNumbersForMonth = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _generateCalendar();
+  }
+
+  void _generateCalendar() {
+    this.dayWeekNumbersForMonth = calendar.generateCalendar();
+  }
 
   Text _weekHeader(String text) {
     return Text(
@@ -31,11 +33,29 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     );
   }
 
-  Text _weekDay(String text) {
+  Text _weekDay(Day day) {
     return Text(
-      text,
+      day.getDayNumber().toString(),
       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-          color: bodyTextColor2, fontSize: 14, fontWeight: FontWeight.w600),
+          color: (day.isCurrentMonth(this.calendar.getMonth()))
+              ? secondaryColorLessOpacity
+              : bodyTextColor2,
+          fontSize: 14,
+          fontWeight: FontWeight.w600),
+    );
+  }
+
+  String getMonth() {
+    return const_monthLabel[calendar.getMonth() - 1];
+  }
+
+  Text _displayDate() {
+    return Text(
+      "${this.getMonth()} ${calendar.getYear()}",
+      style: Theme.of(context)
+          .textTheme
+          .headline5!
+          .copyWith(fontWeight: FontWeight.w600),
     );
   }
 
@@ -51,7 +71,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       dayNumbersWidget.add(_weekHeader(const_weekDayLabel[weekdayIndex - 1]));
       //Loop on the daysNumber of this weekDay for this month.
       dayNumberList.asMap().forEach((index, day) {
-        dayNumbersWidget.add(_weekDay(day.getDayNumber().toString()));
+        dayNumbersWidget.add(_weekDay(day));
       });
       //Adding this weekDay column of dayNumbers to the list of weekDayWidget will be returned.
       weekDayWidget.add(Expanded(
@@ -66,7 +86,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 200,
+        height: 250,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -80,20 +100,32 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Octobre 2021",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(fontWeight: FontWeight.w600),
-                  ),
+                  _displayDate(),
                   Row(
                     children: [
-                      Container(height: 10, width: 10, color: primaryColor),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            calendar.previousMonth();
+                            _generateCalendar();
+                          });
+                        },
+                        child: Container(
+                            height: 10, width: 10, color: primaryColor),
+                      ),
                       SizedBox(
                         width: 10,
                       ),
-                      Container(height: 10, width: 10, color: primaryColor)
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            calendar.nextMonth();
+                            _generateCalendar();
+                          });
+                        },
+                        child: Container(
+                            height: 10, width: 10, color: primaryColor),
+                      ),
                     ],
                   )
                 ],
