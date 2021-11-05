@@ -17,7 +17,7 @@ class Day {
     return this.date.day;
   }
 
-  bool isCurrentMonth(){
-    return (this.date.month == DateTime.now().month);
+  bool isCurrentMonth(int month){
+    return (this.date.month == month);
   }
 }
