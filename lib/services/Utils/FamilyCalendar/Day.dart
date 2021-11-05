@@ -19,6 +19,9 @@ class Day {
   }
 
   bool isCurrentDay() {
-    return (this.date.day == DateTime.now().day);
+    DateTime currentDate = DateTime.now();
+    return (this.date.year == currentDate.year &&
+        this.date.month == currentDate.month &&
+        this.date.day == currentDate.day);
   }
 }
