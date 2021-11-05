@@ -1,23 +1,24 @@
 import 'package:shophouse/Model/Meal.dart';
 
 class Day {
-  /*int weekDayIndex;
-  String dayNumber;
-  bool isCurrentMonth;*/
   DateTime date;
   List<Meal> meals;
 
   Day({required this.date, required this.meals});
 
-  int getWeekDayIndex(){
+  int getWeekDayIndex() {
     return this.date.weekday;
   }
 
-  int getDayNumber(){
+  int getDayNumber() {
     return this.date.day;
   }
 
-  bool isCurrentMonth(int month){
+  bool isGivedMonth(int month) {
     return (this.date.month == month);
+  }
+
+  bool isCurrentDay() {
+    return (this.date.day == DateTime.now().day);
   }
 }

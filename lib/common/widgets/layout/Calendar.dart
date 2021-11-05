@@ -37,7 +37,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     return Text(
       day.getDayNumber().toString(),
       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-          color: (day.isCurrentMonth(this.calendar.getMonth()))
+          color: (day.isGivedMonth(this.calendar.getMonth()))
               ? secondaryColorLessOpacity
               : bodyTextColor2,
           fontSize: 14,
