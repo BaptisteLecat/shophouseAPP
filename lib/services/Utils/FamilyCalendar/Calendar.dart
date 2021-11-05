@@ -64,6 +64,8 @@ class Calendar {
     hydrateListDayWithPreviousMonthDays();
 
     DateTime incrementedDate = this.refDate.startOfMonth;
+    //Adding first the first day of month.
+    monthDays.add(Day(date: incrementedDate, meals: []));
     for (var i = this.refDate.startOfMonth.day + 1;
         i <= this.refDate.endOfMonth.day;
         i++) {
@@ -75,7 +77,15 @@ class Calendar {
   }
 
   Map<int, List<Day>> generateCalendar() {
-    Map<int, List<Day>> calendar = {};
+    Map<int, List<Day>> calendar = {
+      1 : [],
+      2 : [],
+      3 : [],
+      4 : [],
+      5 : [],
+      6 : [],
+      7 : [],
+    };
 
     hydrateListDay();
     monthDays.forEach((day) {
@@ -87,6 +97,10 @@ class Calendar {
         List<Day> days = [day];
         calendar[day.date.weekday] = days;
       }
+    });
+
+    calendar.forEach((key, value) {
+      print(key);
     });
 
     return calendar;
