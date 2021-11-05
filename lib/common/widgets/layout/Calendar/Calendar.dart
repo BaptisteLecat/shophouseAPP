@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/constant/data.dart';
+import 'package:shophouse/common/widgets/layout/Calendar/components/weekday/WeekDay_default.dart';
+import 'package:shophouse/common/widgets/layout/Calendar/components/weekday/weekDay_current.dart';
 import 'package:shophouse/services/Utils/FamilyCalendar/Calendar.dart';
 import 'package:shophouse/services/Utils/FamilyCalendar/Day.dart';
 
@@ -29,20 +33,19 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     return Text(
       text,
       style: Theme.of(context).textTheme.headline6!.copyWith(
-          color: primaryColor, fontSize: 14, fontWeight: FontWeight.w600),
+          color: primaryColor, fontSize: 16, fontWeight: FontWeight.w600),
     );
   }
 
-  Text _weekDay(Day day) {
-    return Text(
-      day.getDayNumber().toString(),
-      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-          color: (day.isGivedMonth(this.calendar.getMonth()))
-              ? secondaryColorLessOpacity
-              : bodyTextColor2,
-          fontSize: 14,
-          fontWeight: FontWeight.w600),
-    );
+  Widget _weekDay(Day day) {
+    Widget returnedWidget;
+    if (day.isCurrentDay()) {
+      returnedWidget = WeekDayCurrent(day: day);
+    } else {
+      returnedWidget = WeekDayDefault(
+          day: day, isGivedMonth: (day.isGivedMonth(this.calendar.getMonth())));
+    }
+    return returnedWidget;
   }
 
   String getMonth() {
@@ -61,7 +64,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   List<Widget> _dayWeekNumbersForMonthList(
       Map<int, List<Day>> dayWeekNumbersForMonth) {
-    List<Text> dayNumbersWidget;
+    List<Widget> dayNumbersWidget;
     List<Widget> weekDayWidget = [];
 
     dayWeekNumbersForMonth.forEach((weekdayIndex, dayNumberList) {
@@ -86,8 +89,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 250,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        height: 240,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(12))),
@@ -95,38 +98,57 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           direction: Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(
+            Flexible(
               flex: 1,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _displayDate(),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            calendar.previousMonth();
-                            _generateCalendar();
-                          });
-                        },
-                        child: Container(
-                            height: 10, width: 10, color: primaryColor),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            calendar.nextMonth();
-                            _generateCalendar();
-                          });
-                        },
-                        child: Container(
-                            height: 10, width: 10, color: primaryColor),
-                      ),
-                    ],
+                  Container(
+                    width: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              calendar.previousMonth();
+                              _generateCalendar();
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(6),
+                            child:
+                                Image.asset("assets/icons/ui/arrow-left.png"),
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            height: 30,
+                            width: 30,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              calendar.nextMonth();
+                              _generateCalendar();
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(6),
+                            child:
+                                Image.asset("assets/icons/ui/arrow-right.png"),
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            height: 30,
+                            width: 30,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
