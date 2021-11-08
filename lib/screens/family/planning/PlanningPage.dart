@@ -5,6 +5,7 @@ import 'package:shophouse/Model/Product.dart' as product;
 import 'package:shophouse/common/constant/colors.dart';
 import 'package:shophouse/common/widgets/layout/Calendar/Calendar.dart';
 import 'package:shophouse/screens/cart/cart/components/ListProduct.dart';
+import 'package:shophouse/screens/family/planning/components/PlanningCard.dart';
 import 'package:shophouse/services/Api/repositories/cart/CartFetcher.dart';
 import 'package:shophouse/services/Api/repositories/family/FamilyFetcher.dart';
 
@@ -28,12 +29,12 @@ class _PlanningPageState extends State<PlanningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: primaryColor,
+        backgroundColor: backgroundColorPlanning,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [CalendarWidget()],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [CalendarWidget(), PlanningCard()],
           ),
         ));
   }

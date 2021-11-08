@@ -92,6 +92,14 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         height: 240,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.20),
+                spreadRadius: 0,
+                blurRadius: 10,
+                offset: const Offset(0, 2), // changes position of shadow
+              ),
+            ],
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(12))),
         child: Flex(
