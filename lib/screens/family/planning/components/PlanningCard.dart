@@ -47,15 +47,23 @@ class _PlanningCardState extends State<PlanningCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          color: Colors.white,
-                          height: 10,
-                          width: 30,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4))),
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          height: 5,
+                          width: 34,
                         ),
                         Container(
-                          color: Colors.white,
-                          height: 10,
-                          width: 60,
-                        )
+                          decoration: BoxDecoration(
+                              color: Color(0xffFFC88C),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4))),
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          height: 5,
+                          width: 34,
+                        ),
                       ],
                     ),
                     alignment: Alignment.topRight,
